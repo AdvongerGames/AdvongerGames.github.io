@@ -1,0 +1,198 @@
+@font-face {
+ font-family: 'Rise of Kingdom';
+ src: url('../fonts/Rise of Kingdom.ttf');}
+
+ body, html {
+     margin: 0;
+     padding: 0;
+     background-color: #302f42;
+     font-family: 'Roboto Slab', serif;
+     color: #e1e0f1;
+     font-size: 24px;
+}
+
+ .banner {
+     position: relative;
+     background-image: url('../images/RealmsOfMadnessBanner.png');
+     background-size: cover;
+     background-position: center;
+     height: 600px; /* Adjust height as needed */
+     display: flex;
+     justify-content: center;
+     align-items: flex-start;
+ }
+
+ header {
+     position: absolute;
+     top: 0;
+     left: 0;
+     height: 60px;
+     width: 100%;
+     background-image: url('../images/headerBG.png');
+     text-align: left;
+     box-sizing: border-box;
+ }
+
+ header h1 {
+   font-family: 'Rise of Kingdom', sans-serif;
+     margin: 0;
+     font-size: 24px; /* Adjust font size as needed */
+     position: absolute;
+     top: 50%;
+     left: 30px;
+     transform: translateY(-50%);
+ }
+
+
+ .header-icons {
+     margin-top: 10px;
+     position: absolute;
+     top: 50%;
+     right: 30px;
+     transform: translateY(-50%);
+ }
+
+ .header-icons a {
+     display: inline-block;
+     margin-left: 10px;
+ }
+
+ .header-icons a:hover img {
+     opacity: 0.7; /* Adjust opacity on hover as needed */
+ }
+.banner p {
+  position: absolute;
+  bottom: 100px; /* Adjust distance from bottom as needed */
+  text-align: center;
+}
+ .steam-btn {
+    position: absolute;
+    bottom: 20px; /* Adjust distance from bottom as needed */
+    text-align: center;
+    width: 100%;
+}
+
+.steam-btn img {
+  width: 263px; /* Adjust icon size as needed */
+  height: 112px;
+}
+
+.steam-btn:hover img {
+    content: url('../images/Steam-hover.png');
+}
+.content {
+   margin: 0 auto; /* Centering the content horizontally */
+}
+.text {
+   max-width: 900px; /* Limiting width to 800px */
+   margin: 0 auto; /* Centering the content horizontally */
+   padding:0 20px;
+}
+.text a {
+  color: #e1e0f1;
+  text-decoration: underline;
+  font-style: italic;
+}
+
+p {margin-bottom: 30px;}
+h1,h2 {text-transform: uppercase; font-weight: normal}
+h3 {text-transform: none; font-size: 34px; font-weight: normal}
+h2 {font-size: 34px; text-align: center;}
+
+.italic {
+            font-style: italic;
+            font-size: 28px;
+}
+.bold {font-weight: bold; font-size: 28px;}
+.uppercase {text-transform: uppercase; font-size: 28px;}
+.full-width-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+}
+.limited-width-image {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  margin: 0 auto;
+}
+.img2Next {
+  max-width: 50%; /* Adjust the width of the image */
+  flex: 0 0 auto; /* Allow the image to shrink or grow based on the available space */
+  margin: 10px;
+}
+/* Flex container for the section */
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 80px;
+            overflow: hidden;
+        }
+
+        /* Style for the image */
+        .image {
+            max-width: 30%; /* Adjust the width of the image */
+            flex: 0 0 auto; /* Allow the image to shrink or grow based on the available space */
+            margin: 10px;
+
+        }
+
+        /* Style for the text block */
+        .text-block {
+            max-width: 50%; /* Adjust the width of the text block */
+            padding: 0 40px; /* Add some padding to the text block */
+            flex: 0 0 auto; /* Allow the text block to shrink or grow based on the available space */
+            text-align: left;
+        }
+        .text-block h2 {text-align: left;}
+
+        /* Clearfix to prevent overlapping of content */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Change the flex direction to stack elements vertically */
+                text-align: center; /* Center-align the content */
+            }
+            .banner{height: 480px;}
+
+            .image,
+            .img2Next,
+            .text-block {
+                max-width: 100%; /* Make both image and text block take full width on smaller screens */
+            }
+             header h1 {max-width: 60%; margin-top: 10px}
+          }
+.footer-line {
+  width: 100%; /* Set the width to 100% to make it full-width */
+  border: none; /* Remove default border */
+  height: 2px; /* Set the height of the line */
+  background-color: #e1e0f1; /* Set the color of the line */
+  margin-top: 80px; /* Add some margin for spacing */
+}
+footer {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* Style for the image-links */
+        .footer-icons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-icon {
+            margin: 20px 40px 20px;
+        }
+        .footer-icons a:hover img {
+            opacity: 0.7; /* Adjust opacity on hover as needed */
+        }
