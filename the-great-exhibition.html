@@ -211,45 +211,66 @@ body.tge {
 /* the relic room — everything laid out in the open, no drawers */
 .tge .relic-row {
   margin: 70px auto 0;
-  max-width: 1100px;
+  max-width: 1180px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: clamp(24px, 3vw, 40px);
+  grid-template-columns: minmax(0, 1.22fr) minmax(300px, .78fr);
+  gap: clamp(18px, 2.2vw, 30px);
+  align-items: stretch;
 }
 .tge .relic {
-  text-align: center;
-  padding: clamp(20px, 2.6vw, 32px) clamp(18px, 2.4vw, 28px);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  text-align: left;
+  min-height: 100%;
+  padding: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,220,150,.08), transparent 60%),
-    linear-gradient(#241a0e, #171006);
+    radial-gradient(ellipse 70% 65% at 50% 0%, rgba(255,220,150,.1), transparent 60%),
+    linear-gradient(155deg, #241a0e, #171006 66%);
   border: 1px solid rgba(201,163,92,.35);
   box-shadow: 0 24px 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(232,201,135,.12);
   transition: transform .6s cubic-bezier(.2,.6,.2,1), border-color .6s;
 }
+.tge .relic.is-feature { grid-row: span 2; }
 .tge .relic:hover { transform: translateY(-6px); border-color: rgba(201,163,92,.6); }
 .tge .relic img {
-  width: min(180px, 62%);
-  aspect-ratio: 1; object-fit: cover;
-  margin: 0 auto;
-  border: 1px solid rgba(201,163,92,.5);
-  box-shadow: 0 12px 30px rgba(0,0,0,.6);
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid rgba(201,163,92,.38);
+  box-shadow: 0 14px 36px rgba(0,0,0,.55);
+  filter: saturate(.95) contrast(1.04);
 }
+.tge .relic.is-feature img {
+  height: clamp(320px, 38vw, 500px);
+  aspect-ratio: auto;
+}
+.tge .relic figcaption { padding: clamp(18px, 2.2vw, 28px); }
 .tge .relic .find-no {
-  display: block; margin-top: 20px;
+  display: block;
   font-family: var(--display); font-size: 10px;
   letter-spacing: .4em; text-transform: uppercase;
   color: var(--brass-dim);
 }
 .tge .relic p {
-  margin-top: 10px;
+  margin-top: 12px;
   font-style: italic; font-size: 18px;
   color: rgba(240,225,190,.88);
 }
+.tge .relic.is-feature p { font-size: clamp(18px, 1.45vw, 22px); }
 .tge .relic-footnote {
   margin: 44px auto 0; max-width: 560px;
   text-align: center;
   font-style: italic; font-size: 17px;
   color: rgba(226,201,143,.5);
+}
+@media (max-width: 900px) {
+  .tge .relic-row { grid-template-columns: minmax(0, 1fr); }
+  .tge .relic.is-feature { grid-row: auto; }
+  .tge .relic.is-feature img { height: auto; aspect-ratio: 16 / 9; }
 }
 
 /* acquisitions (steam) */
@@ -350,22 +371,22 @@ body.tge {
     <div class="rule"></div>
   </div>
   <div class="relic-row reveal d1">
-    <figure class="relic">
-      <img src="The%20Great%20Exhibition/shortcut_icon.png" alt="The pyramid entrance at full sun" loading="lazy">
+    <figure class="relic is-feature">
+      <img src="The%20Great%20Exhibition/screenshot_1.png" alt="An explorer standing before a sealed temple entrance" loading="lazy">
       <figcaption>
         <span class="find-no">Temple Exploration</span>
         <p>Venture into long-forgotten tombs, avoid lethal traps, solve puzzles, and search for artifacts worthy of the museum.</p>
       </figcaption>
     </figure>
     <figure class="relic">
-      <img src="The%20Great%20Exhibition/app_icon.jpg" alt="The Great Exhibition app icon" loading="lazy">
+      <img src="The%20Great%20Exhibition/screenshot_7.png" alt="A museum hall filled with curated artifact displays" loading="lazy">
       <figcaption>
         <span class="find-no">Museum Collection</span>
         <p>Arrange displays for prestige, gather artifact sets to raise their value, and attract the attention of world-renowned explorers.</p>
       </figcaption>
     </figure>
     <figure class="relic">
-      <img src="The%20Great%20Exhibition/screenshot_3.png" alt="The excavation site" loading="lazy">
+      <img src="The%20Great%20Exhibition/screenshot_5.png" alt="A hidden jungle chamber containing an ancient artifact" loading="lazy">
       <figcaption>
         <span class="find-no">Expeditions and Mysteries</span>
         <p>Buy specialized equipment, finance expeditions to unexplored lands, and piece together the stories behind lost civilizations.</p>
@@ -404,8 +425,8 @@ body.tge {
 <script>
 /* gallery: the viewing plate */
 (() => {
-  const tags = ['Museum Interior','Temple Approach','Artifact Hunt','Collection Display','Ancient Site',
-                'Expedition View','Puzzle Space','Museum Progress','Deep Tomb'];
+  const tags = ['Museum Interior','Temple Approach','Traps','Storage','Ancient Perils',
+                'Curiosity X','The Great Exhibition','Sunny Day','Exhibit Hall'];
   const src = i => `The%20Great%20Exhibition/screenshot_${i + 1}.png`;
   const img = document.getElementById('plate-img');
   const cap = document.getElementById('plate-caption');

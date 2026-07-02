@@ -260,6 +260,28 @@ body.rom .vignette {
   border: 1px solid rgba(169,143,214,.4);
   background: linear-gradient(#1c1430, #120c22);
 }
+.rom .courtier .voice,
+.rom .ally .voice {
+  margin-top: 8px;
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-indent: .18em;
+  text-transform: uppercase;
+  color: rgba(216,205,236,.7);
+}
+.rom .courtier .voice span,
+.rom .ally .voice span {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--serif);
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: 0;
+  text-indent: 0;
+  text-transform: none;
+  color: rgba(238,229,252,.9);
+}
 .rom .courtier .epithet {
   margin-top: 7px;
   font-size: 15px; font-style: italic;
@@ -330,6 +352,12 @@ body.rom .vignette {
   background: linear-gradient(#243852, #121b2b);
   box-shadow: 0 0 16px rgba(240,160,74,.08);
 }
+.rom .ally .voice {
+  color: rgba(241,217,157,.68);
+}
+.rom .ally .voice span {
+  color: rgba(255,239,194,.92);
+}
 .rom .ally .epithet {
   margin-top: 7px;
   font-size: 15px; font-style: italic;
@@ -352,7 +380,7 @@ body.rom .vignette {
   position: relative;
 }
 .rom .steam-shrine::before {
-  content: 'DECREE OF ACQUISITION';
+  content: 'BY ORDER OF HIS GRACE';
   position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
   padding: 5px 20px;
   font-family: var(--display); font-size: 9px; letter-spacing: .4em; text-indent: .4em;
@@ -408,7 +436,6 @@ body.rom .vignette {
     </div>
   </div>
   <p class="trailer-link reveal d2"><a href="https://www.youtube.com/watch?v=bZRip2tBhMY" target="_blank" rel="noopener">Watch trailer on YouTube</a></p>
-  <p class="plate reveal d2">Fantasy RTS gameplay trailer</p>
 </section>
 
 <!-- ═══════ GALLERY ═══════ -->
@@ -437,7 +464,7 @@ body.rom .vignette {
 <section class="war-table">
   <div class="hall-heading reveal">
     <span class="over">Steam Page</span>
-    <h2>Play Realms of Madness</h2>
+    <h2>Realms of Madness is available now!</h2>
     <div class="rule"></div>
   </div>
   <div class="steam-shrine reveal d1">
@@ -509,11 +536,11 @@ body.rom .vignette {
 (() => {
   const dir = 'Realms of Madness/The Cast/';
   const cast = [
-    ['Amraphel',        'A masked noble with a dangerous second face'],
-    ['Diema',           'A sharp-eyed court figure with hidden power'],
-    ['Moros',           'A dark presence at the center of the conflict'],
-    ['Étoilefleur',     'A bright, otherworldly figure in the cast'],
-    ['Ísarr Iceblood',  'An icebound warrior with a harsher side'],
+    ['Amraphel',        'The scribe of Light and Darkness who rules over the shadowy land of Skotoris.'],
+    ['Diema',           'The scribe of Time and the keeper of Apeiria.'],
+    ['Moros',           'Fate incarnate, who hides in Moroskel.'],
+    ['Étoilefleur',     'The kindest of the bunch. She is the scribe of nature.'],
+    ['Ísarr Iceblood',  'An cold blooded scribe of the frozen north. He rules of Life and Death while being the embodiment of both.'],
   ];
   const fileOf = (name, variant, closed) => {
     /* The closed-eye files are transparent overlays, not full portraits. */
