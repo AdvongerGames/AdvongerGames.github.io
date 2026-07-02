@@ -536,11 +536,11 @@ body.rom .vignette {
 (() => {
   const dir = 'Realms of Madness/The Cast/';
   const cast = [
-    ['Amraphel',        'The scribe of Light and Darkness who rules over the shadowy land of Skotoris.'],
-    ['Diema',           'The scribe of Time and the keeper of Apeiria.'],
-    ['Moros',           'Fate incarnate, who hides in Moroskel.'],
-    ['Étoilefleur',     'The kindest of the bunch. She is the scribe of nature.'],
-    ['Ísarr Iceblood',  'An cold blooded scribe of the frozen north. He rules of Life and Death while being the embodiment of both.'],
+    ['Amraphel',        'Shawn Cooper',  'The scribe of Light and Darkness who rules over the shadowy land of Skotoris.'],
+    ['Diema',           'Aife',          'The scribe of Time and the keeper of Apeiria.'],
+    ['Moros',           'Harry Dyer',    'Fate incarnate, who hides in Moroskel.'],
+    ['Étoilefleur',     'Jess Lambert',  'The kindest of the bunch. She is the scribe of nature.'],
+    ['Ísarr Iceblood',  'Nicholas Cain', 'An cold blooded scribe of the frozen north. He rules of Life and Death while being the embodiment of both.'],
   ];
   const fileOf = (name, variant, closed) => {
     /* The closed-eye files are transparent overlays, not full portraits. */
@@ -553,7 +553,7 @@ body.rom .vignette {
   };
 
   const wrap = document.getElementById('court');
-  cast.forEach(([name, epithet]) => {
+  cast.forEach(([name, actor, epithet]) => {
     /* preload all four states */
     [[0,0],[0,1],[1,0],[1,1]].forEach(([v, c]) => { const i = new Image(); i.src = fileOf(name, v, c); });
 
@@ -567,6 +567,7 @@ body.rom .vignette {
         <img class="eyes-variant" src="${fileOf(name, 1, 1)}" loading="lazy" alt="">
       </div></div>
       <div class="name">${name}</div>
+      <p class="voice">Voice by <span>${actor}</span></p>
       <p class="epithet">${epithet}</p>`;
     wrap.appendChild(el);
 
@@ -587,11 +588,11 @@ body.rom .vignette {
   const allyDir = 'Realms of Madness/The Cast/';
   const allyFile = file => encodeURI(allyDir + file);
   const allies = [
-    ['King', 'King.png', 'King_Eyes.png', 'The ruler at the heart of the realm'],
-    ['Advisor', 'Advisor.png', 'Advisor_Eyes.png', 'The strategist watching the war unfold'],
+    ['King', 'King.png', 'King_Eyes.png', 'Shawn Cooper', 'The ruler at the heart of the realm'],
+    ['Advisor', 'Advisor.png', 'Advisor_Eyes.png', 'Zachary LaSala', 'The strategist watching the war unfold'],
   ];
   const allyWrap = document.getElementById('allies');
-  allies.forEach(([name, src, eyes, epithet]) => {
+  allies.forEach(([name, src, eyes, actor, epithet]) => {
     [src, eyes].forEach(file => { const img = new Image(); img.src = allyFile(file); });
     const el = document.createElement('div');
     el.className = 'ally reveal';
@@ -601,6 +602,7 @@ body.rom .vignette {
         <img class="ally-eyes" src="${allyFile(eyes)}" loading="lazy" alt="">
       </div>
       <div class="name">${name}</div>
+      <p class="voice">Voice by <span>${actor}</span></p>
       <p class="epithet">${epithet}</p>`;
     allyWrap.appendChild(el);
 
