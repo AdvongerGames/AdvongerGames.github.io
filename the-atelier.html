@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Atelier - Behind the Scenes | Advonger Games</title>
+<meta name="description" content="Step into the Advonger Games studio: concept art, first sketches, abandoned drafts, and works in progress from The Great Exhibition, Realms of Madness, Observe, and Open The Gates!.">
+<link rel="icon" type="image/png" href="The%20Great%20Exhibition/shortcut_icon.png">
+<link rel="stylesheet" href="css/archive.css">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<script src="js/archive-transitions.js" defer></script>
+<style>
+/* ============================================================
+   THE ATELIER — the studio behind the museum
+   ============================================================ */
+body.atelier {
+  --hand: 'Caveat', cursive;
+  --ochre:  #eab661;
+  --violet: #bda4e8;
+  --blood:  #ff6f5e;
+  --moss:   #aec873;
+  background:
+    radial-gradient(ellipse 90% 45% at 50% -8%, rgba(214,186,140,.14), transparent 60%),
+    repeating-linear-gradient(90deg, transparent 0 210px, rgba(220,200,160,.025) 210px 211px),
+    linear-gradient(#171208, #100c06 40%, #0d0a06);
+}
+.hand { font-family: var(--hand); font-weight: 400; letter-spacing: .01em; }
+
+/* the studio keeps its own return plaque flavour */
+.atelier .return-plaque { border-color: rgba(226,149,122,.45); }
+.atelier .return-plaque:hover { border-color: #e2957a; color: #f5c9b4; }
+
+/* ------------------------------------------------ decorative paint splats */
+.splat {
+  position: absolute; z-index: 0;
+  border-radius: 58% 42% 55% 45% / 48% 60% 40% 52%;
+  filter: blur(1.5px);
+  opacity: .1;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------ entry */
+.studio-entry {
+  position: relative;
+  min-height: 92vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 90px 24px 80px;
+  overflow: hidden;
+}
+/* the swinging work light */
+.rig {
+  position: absolute; top: -6px; left: 50%;
+  transform-origin: top center;
+  animation: rig-sway 6.5s ease-in-out infinite;
+  z-index: 2;
+  cursor: pointer;
+}
+@keyframes rig-sway {
+  0%, 100% { transform: rotate(-2.4deg); }
+  50%      { transform: rotate(2.4deg); }
+}
+.rig .cord {
+  display: block; width: 2px; height: clamp(70px, 11vh, 120px);
+  margin: 0 auto;
+  background: linear-gradient(#2e241a, #4a3a26);
+}
+.rig .shade {
+  width: 56px; height: 30px; margin: 0 auto;
+  background: linear-gradient(160deg, #4c5a48, #232b21 70%);
+  border-radius: 50% 50% 8% 8% / 90% 90% 10% 10%;
+  border-bottom: 2px solid #141a12;
+}
+.rig .bulb {
+  display: block; width: 26px; height: 26px; margin: -8px auto 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 45% 38%, #fff6dd, #ffd98a 55%, #c99b4a);
+  box-shadow: 0 0 26px 8px rgba(255,214,140,.55), 0 0 90px 30px rgba(255,200,110,.18);
+}
+/* the pool of lamplight the title sits in */
+.studio-entry::before {
+  content: '';
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: min(900px, 100vw); height: 100%;
+  background: radial-gradient(ellipse 55% 42% at 50% 38%, rgba(255,214,150,.12), transparent 70%);
+  pointer-events: none;
+}
+.studio-entry .over {
+  font-family: var(--display); font-size: 11px;
+  letter-spacing: .5em; text-indent: .5em; text-transform: uppercase;
+  color: var(--brass-dim);
+  animation: entry-rise 1.8s .2s cubic-bezier(.2,.6,.2,1) both;
+}
+.studio-entry h1 {
+  margin-top: 16px;
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(44px, 9vw, 100px);
+  letter-spacing: .1em; text-transform: uppercase;
+  background: linear-gradient(100deg, var(--ochre), #e2957a 32%, var(--violet) 56%, var(--blood) 78%, var(--moss));
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 20px rgba(0,0,0,.6));
+  animation: entry-rise 1.8s .4s cubic-bezier(.2,.6,.2,1) both;
+}
+.studio-entry .sub {
+  margin-top: 6px;
+  font-size: clamp(24px, 3vw, 34px);
+  color: #d8c9a8;
+  animation: entry-rise 1.8s .6s cubic-bezier(.2,.6,.2,1) both;
+}
+/* the taped-up curator's note */
+.note-card {
+  margin-top: 40px;
+  max-width: 470px;
+  padding: 22px 26px 18px;
+  background: linear-gradient(#f2ead6, #e6dabc);
+  color: #574325;
+  font-family: var(--hand); font-size: 22px; line-height: 1.35;
+  transform: rotate(-1.6deg);
+  box-shadow: 0 14px 30px rgba(0,0,0,.5);
+  position: relative;
+  animation: entry-rise 1.8s .8s cubic-bezier(.2,.6,.2,1) both;
+}
+.note-card::before {
+  content: '';
+  position: absolute; top: -12px; left: 50%;
+  width: 92px; height: 24px;
+  transform: translateX(-50%) rotate(2deg);
+  background: rgba(225,210,172,.85);
+  box-shadow: 0 2px 5px rgba(0,0,0,.25);
+}
+.note-card .sig { display: block; margin-top: 8px; font-size: 19px; color: #8a6c42; }
+/* wet paint sign, hanging crooked */
+.wet-sign {
+  position: absolute; top: 15%; right: clamp(20px, 9vw, 130px);
+  transform: rotate(6deg); transform-origin: 50% -34px;
+  animation: wet-sway 5s ease-in-out infinite;
+  z-index: 2;
+}
+@keyframes wet-sway {
+  0%, 100% { transform: rotate(4deg); }
+  50%      { transform: rotate(8deg); }
+}
+.wet-sign::before { /* strings */
+  content: '';
+  position: absolute; top: -34px; left: 50%; margin-left: -26px;
+  width: 52px; height: 34px;
+  border-left: 1.5px solid rgba(220,200,160,.4);
+  border-right: 1.5px solid rgba(220,200,160,.4);
+  transform: perspective(60px) rotateX(28deg);
+}
+.wet-sign span {
+  display: block;
+  padding: 10px 16px;
+  background: #ece2ca;
+  color: #c0392b;
+  font-family: var(--display); font-weight: 700;
+  font-size: 15px; letter-spacing: .3em; text-indent: .3em;
+  line-height: 1.5; text-align: center;
+  border: 2px solid #c0392b;
+  box-shadow: 0 8px 18px rgba(0,0,0,.5);
+}
+@media (max-width: 760px) { .wet-sign { display: none; } }
+.studio-entry .down {
+  margin-top: 46px;
+  font-family: var(--hand); font-size: 24px;
+  color: var(--ochre);
+  animation: entry-rise 1.8s 1s both;
+}
+.studio-entry .down:hover { color: #ffd98a; }
+@keyframes entry-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; } }
+
+/* room-light flicker when the bulb is tapped */
+#dimshade { position: fixed; inset: 0; z-index: 120; background: #000; opacity: 0; pointer-events: none; }
+body.zap #dimshade { animation: room-flick .65s steps(1); }
+@keyframes room-flick {
+  0% { opacity: .55; } 20% { opacity: .06; } 40% { opacity: .48; }
+  60% { opacity: .1; } 80% { opacity: .35; } 100% { opacity: 0; }
+}
+
+/* ------------------------------------------------ the palette navigator */
+.palette {
+  position: fixed; right: 20px; bottom: 22px; z-index: 80;
+  width: clamp(104px, 11vw, 148px);
+  transform: rotate(-8deg);
+  filter: drop-shadow(0 12px 22px rgba(0,0,0,.55));
+}
+.palette .board { display: block; width: 100%; }
+.palette .daub {
+  position: absolute;
+  width: 22%; aspect-ratio: 1;
+  border-radius: 54% 46% 50% 50% / 48% 55% 45% 52%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255,255,255,.55) 8%, rgba(255,255,255,0) 42%),
+    var(--c);
+  box-shadow: 0 2px 6px rgba(0,0,0,.5), inset 0 -2px 4px rgba(0,0,0,.28);
+  transition: transform .3s cubic-bezier(.3,1.4,.4,1), box-shadow .3s;
+}
+.palette .daub:hover { transform: scale(1.22); }
+.palette .daub.here {
+  transform: scale(1.28);
+  box-shadow: 0 2px 6px rgba(0,0,0,.5), 0 0 0 2.5px #f2ead6, 0 0 16px var(--c);
+}
+.palette .daub::after {
+  content: attr(data-name);
+  position: absolute; right: 118%; top: 50%;
+  transform: translateY(-50%) rotate(8deg);
+  white-space: nowrap;
+  font-family: var(--hand); font-size: 19px;
+  color: #f2ead6;
+  background: rgba(24,17,10,.92);
+  border: 1px solid rgba(226,149,122,.35);
+  padding: 3px 12px; border-radius: 3px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s;
+}
+.palette .daub:hover::after, .palette .daub:focus-visible::after { opacity: 1; }
+@media (max-width: 640px) {
+  .palette { width: 92px; right: 10px; bottom: 12px; }
+}
+
+/* ------------------------------------------------ stations, shared */
+.station {
+  position: relative;
+  padding: 120px 24px 110px;
+}
+.station + .station { border-top: 1px dashed rgba(220,200,160,.14); }
+.tape-label {
+  display: table;
+  margin: 0 auto;
+  padding: 13px 38px;
+  background: linear-gradient(rgba(236,224,193,.94), rgba(217,201,164,.94));
+  color: #4a3822;
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(17px, 2.4vw, 26px);
+  letter-spacing: .22em; text-indent: .22em; text-transform: uppercase;
+  transform: rotate(-1.6deg);
+  box-shadow: 0 8px 20px rgba(0,0,0,.45);
+  clip-path: polygon(0 12%, 2% 0, 98% 4%, 100% 16%, 99% 88%, 100% 100%, 2% 96%, 0 84%);
+  position: relative; z-index: 1;
+}
+.station:nth-of-type(even) .tape-label { transform: rotate(1.4deg); }
+.station-note {
+  margin: 22px auto 0;
+  max-width: 640px;
+  text-align: center;
+  font-family: var(--hand);
+  font-size: clamp(21px, 2.6vw, 26px);
+  color: var(--acc, var(--brass));
+  position: relative; z-index: 1;
+}
+.station-note .dim { color: rgba(220,200,160,.55); }
+
+/* ============================================================
+   STATION 01 — THE DRAFTING TABLE (The Great Exhibition)
+   ============================================================ */
+#st-exhibition { --acc: var(--ochre); }
+.desk {
+  position: relative;
+  max-width: 1100px;
+  margin: 54px auto 0;
+  border-radius: 6px;
+  border: 10px solid #241708;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,220,160,.09), transparent 65%),
+    repeating-linear-gradient(90deg, rgba(0,0,0,.09) 0 2px, transparent 2px 148px),
+    linear-gradient(165deg, #4e3a20, #33250f 70%, #2b1e0c);
+  box-shadow: 0 30px 70px rgba(0,0,0,.6), inset 0 0 60px rgba(0,0,0,.45);
+  touch-action: none;
+}
+.desk .coffee {
+  position: absolute; right: 7%; top: 8%;
+  width: 84px; height: 84px; border-radius: 50%;
+  border: 8px solid rgba(58,30,8,.4);
+  filter: blur(.6px);
+  pointer-events: none;
+}
+.desk .coffee::after {
+  content: '';
+  position: absolute; inset: -14px 22px 22px -14px;
+  border-radius: 50%;
+  border: 5px solid rgba(58,30,8,.22);
+}
+.desk .pencil {
+  position: absolute; left: 5%; bottom: 6%;
+  width: 150px; height: 9px;
+  transform: rotate(-14deg);
+  background: linear-gradient(90deg, #b8862e 0 78%, #e8cfa0 78% 92%, #2b2b2b 92%);
+  clip-path: polygon(0 0, 78% 0, 100% 50%, 78% 100%, 0 100%);
+  border-radius: 3px 0 0 3px;
+  box-shadow: 0 5px 8px rgba(0,0,0,.5);
+  pointer-events: none;
+}
+.print {
+  position: absolute;
+  width: var(--pw, 190px);
+  padding: 8px 8px 10px;
+  background: linear-gradient(#f4ecda, #e9dfc4);
+  box-shadow: 0 10px 22px rgba(0,0,0,.55);
+  transform: rotate(var(--r, 0deg));
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+.print img {
+  width: 100%; height: var(--ph, 130px);
+  object-fit: cover; display: block;
+  filter: sepia(.08);
+  pointer-events: none;
+}
+.print .tag {
+  display: block; margin-top: 5px;
+  font-family: var(--hand); font-size: 16px; line-height: 1.1;
+  color: #6b5636; text-align: center;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.print::before { /* masking tape */
+  content: '';
+  position: absolute; top: -11px; left: 50%;
+  width: 68px; height: 21px;
+  transform: translateX(-50%) rotate(var(--tr, -3deg));
+  background: rgba(228,214,180,.82);
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+.print.lifted {
+  cursor: grabbing;
+  box-shadow: 0 30px 46px rgba(0,0,0,.65);
+  transform: rotate(var(--r, 0deg)) scale(1.05);
+  transition: box-shadow .2s;
+}
+.print:focus-visible { outline: 2px solid var(--ochre); outline-offset: 3px; }
+
+/* ============================================================
+   STATION 02 — THE CANVAS RACK (Realms of Madness)
+   ============================================================ */
+#st-realms { --acc: var(--violet); }
+.rack-zone { max-width: 760px; margin: 64px auto 0; position: relative; z-index: 1; }
+.rack {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10.5;
+  perspective: 1100px;
+}
+.rack-back {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, #3b2c17 0 14px, transparent 14px calc(100% - 14px), #3b2c17 calc(100% - 14px)),
+    linear-gradient(#3b2c17 0 14px, transparent 14px calc(100% - 14px), #33250f calc(100% - 14px)),
+    linear-gradient(115deg, #241c2e, #1a1422);
+  border: 1px solid #120d18;
+  box-shadow: 0 16px 34px rgba(0,0,0,.4);
+}
+.rack-back.b1 { transform: translateY(-10px) scale(.985) rotate(.7deg); filter: brightness(.8); }
+.rack-back.b2 { transform: translateY(-19px) scale(.968) rotate(-.9deg); filter: brightness(.6); }
+.rack-back.b3 { transform: translateY(-27px) scale(.952) rotate(1.3deg); filter: brightness(.42); }
+.canvas-card {
+  position: absolute; inset: 0;
+  margin: 0;
+  background: #151020;
+  border: 7px solid transparent;
+  border-image: linear-gradient(135deg, #59421f, #33250f 45%, #6b5228 85%) 1;
+  box-shadow: 0 26px 60px rgba(0,0,0,.65), 0 0 40px rgba(189,164,232,.08);
+  transform-origin: 50% 100%;
+  cursor: zoom-in;
+}
+.canvas-card img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.canvas-card figcaption {
+  position: absolute; left: 0; right: 0; bottom: -44px;
+  text-align: center;
+  font-family: var(--hand); font-size: 22px;
+  color: var(--violet);
+}
+.canvas-card.tip-out {
+  transition: transform .3s cubic-bezier(.5,0,.9,.5), opacity .3s ease-in;
+  transform: rotateX(-74deg) translateY(4%);
+  opacity: 0;
+}
+.canvas-card.tip-in { animation: canvas-settle .42s cubic-bezier(.2,.8,.3,1.15) both; }
+@keyframes canvas-settle {
+  from { transform: rotateX(16deg) translateY(-2%); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+.rack-ctrl {
+  margin-top: 62px;
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(18px, 4vw, 40px);
+}
+.flip-btn {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(189,164,232,.5);
+  background: rgba(189,164,232,.06);
+  color: var(--violet);
+  font-family: var(--serif); font-size: 30px; line-height: 1;
+  cursor: pointer;
+  transition: all .3s;
+}
+.flip-btn:hover, .flip-btn:focus-visible {
+  border-color: var(--violet);
+  color: #eee2ff;
+  box-shadow: 0 0 18px rgba(189,164,232,.35);
+  background: rgba(189,164,232,.14);
+}
+.rack-meta { text-align: center; }
+.rack-count {
+  display: block;
+  font-family: var(--mono); font-size: 22px; letter-spacing: .14em;
+  color: var(--violet);
+}
+.rack-ticks {
+  margin-top: 8px;
+  display: flex; gap: 3px; justify-content: center; flex-wrap: wrap;
+  max-width: 300px;
+}
+.rack-ticks span {
+  width: 6px; height: 11px;
+  background: rgba(189,164,232,.22);
+  transition: background .3s, transform .3s;
+}
+.rack-ticks span.on { background: var(--violet); transform: scaleY(1.35); }
+.rack-hint { margin-top: 18px; text-align: center; font-family: var(--hand); font-size: 19px; color: rgba(220,200,160,.5); }
+
+/* ============================================================
+   STATION 03 — THE DARKROOM (Observe)
+   ============================================================ */
+#st-observe {
+  --acc: var(--blood);
+  background:
+    radial-gradient(ellipse 46% 34% at 10% 0%, rgba(255,64,44,.15), transparent 65%),
+    radial-gradient(ellipse 46% 34% at 90% 0%, rgba(255,64,44,.1), transparent 65%),
+    #0a0505;
+  border-top: 1px solid rgba(255,111,94,.16);
+  border-bottom: 1px solid rgba(255,111,94,.16);
+}
+.safelight {
+  position: absolute; top: 30px; left: 8%;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #ff9a8a, #d61f0e 60%);
+  box-shadow: 0 0 18px 5px rgba(255,60,40,.55), 0 0 70px 26px rgba(255,60,40,.14);
+  animation: safelight-hum 4s ease-in-out infinite;
+}
+.safelight::before {
+  content: '';
+  position: absolute; top: -12px; left: 50%; margin-left: -7px;
+  width: 14px; height: 11px;
+  background: #1d1512;
+  border-radius: 4px 4px 0 0;
+}
+@keyframes safelight-hum { 0%,100% { opacity: .85; } 50% { opacity: 1; } }
+.lines { max-width: 1240px; margin: 30px auto 0; position: relative; z-index: 1; }
+.line { position: relative; padding-top: 66px; }
+.line .wire {
+  position: absolute; top: 20px; left: 0;
+  width: 100%; height: 70px;
+  pointer-events: none;
+}
+.line .wire path {
+  fill: none;
+  stroke: rgba(255,225,205,.32);
+  stroke-width: 1.6;
+}
+.pegs {
+  display: flex; justify-content: center; align-items: flex-start;
+  gap: clamp(10px, 2vw, 26px);
+  padding: 0 2vw;
+}
+.photo {
+  --photow: clamp(100px, 12.5vw, 152px);
+  position: relative;
+  width: var(--photow);
+  flex-shrink: 0;
+  padding: 6px 6px 8px;
+  background: linear-gradient(#f0e8d6, #e2d6ba);
+  box-shadow: 0 10px 20px rgba(0,0,0,.6);
+  transform-origin: 50% -22px;
+  animation: photo-sway var(--sway, 5s) var(--sd, 0s) ease-in-out infinite;
+  cursor: pointer;
+}
+@keyframes photo-sway {
+  0%, 100% { transform: rotate(calc(var(--r, 0deg) - 1.2deg)); }
+  50%      { transform: rotate(calc(var(--r, 0deg) + 1.2deg)); }
+}
+.photo .pin {
+  position: absolute; top: -16px; left: 50%; margin-left: -5px;
+  width: 10px; height: 22px;
+  background: linear-gradient(#c59a5e, #8a6539);
+  border-radius: 3px 3px 2px 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.6);
+}
+.photo .pin::after {
+  content: '';
+  position: absolute; left: 50%; top: 9px; margin-left: -.75px;
+  width: 1.5px; height: 12px;
+  background: rgba(40,24,8,.55);
+}
+.photo img {
+  width: 100%; height: calc(var(--photow) * .72);
+  object-fit: cover; display: block;
+  background: #d8cdb4;
+  filter: contrast(.07) brightness(1.72) sepia(.5);
+  transition: filter 2.4s ease;
+}
+.photo.developed img { filter: none; }
+.photo figcaption {
+  margin-top: 5px;
+  font-family: var(--hand); font-size: 15px; line-height: 1.1;
+  color: #6b5636; text-align: center;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+@media (max-width: 760px) {
+  .pegs { justify-content: flex-start; overflow-x: auto; padding: 0 16px 14px; scrollbar-width: thin; }
+  .photo { --photow: 118px; }
+}
+
+/* ============================================================
+   STATION 04 — THE ANIMATOR'S DESK (Open The Gates!)
+   ============================================================ */
+#st-gates { --acc: var(--moss); }
+.deskpad { max-width: 620px; margin: 70px auto 0; position: relative; z-index: 1; }
+.notepad { position: relative; padding-top: 20px; perspective: 1000px; }
+.rings {
+  position: absolute; top: 0; left: 6%; right: 6%;
+  display: flex; justify-content: space-between;
+  z-index: 6;
+  pointer-events: none;
+}
+.rings i {
+  width: 13px; height: 34px;
+  border: 3px solid #99a1a8;
+  border-radius: 7px;
+  background: transparent;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,.35), 0 2px 3px rgba(0,0,0,.4);
+  transform: rotate(4deg);
+}
+.page-under {
+  position: absolute; inset: 20px 0 0;
+  background: #d9cfb4;
+  border-radius: 4px;
+  transform: translate(3px, 4px) rotate(.4deg);
+  box-shadow: 0 18px 40px rgba(0,0,0,.5);
+}
+.page-under::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: #cfc4a6;
+  border-radius: 4px;
+  transform: translate(3px, 4px) rotate(-.5deg);
+  z-index: -1;
+}
+.page {
+  position: relative; z-index: 2;
+  background:
+    repeating-linear-gradient(transparent 0 27px, rgba(110,140,160,.16) 27px 28px),
+    linear-gradient(#f6f0df, #eee5cd);
+  border-radius: 4px;
+  padding: 44px 26px 20px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.5);
+  transform-origin: 50% 0;
+}
+.page::before { /* punched holes */
+  content: '';
+  position: absolute; top: 9px; left: 6%; right: 6%; height: 14px;
+  background: radial-gradient(circle 5px at 50% 50%, rgba(22,16,9,.8) 4.5px, transparent 5.5px);
+  background-size: calc(100% / 12) 14px;
+  background-repeat: repeat-x;
+}
+.page .art { position: relative; cursor: zoom-in; }
+.page .art img {
+  width: 100%; max-height: 400px;
+  object-fit: contain; display: block;
+  background: rgba(90,70,40,.06);
+  border: 1px solid rgba(90,70,40,.18);
+}
+.page .art::before, .page .art::after { /* tape corners */
+  content: '';
+  position: absolute; top: -12px;
+  width: 62px; height: 22px;
+  background: rgba(228,214,180,.85);
+  box-shadow: 0 1px 3px rgba(0,0,0,.25);
+}
+.page .art::before { left: -14px; transform: rotate(-38deg); }
+.page .art::after { right: -14px; transform: rotate(38deg); }
+.page .pad-cap {
+  margin-top: 14px;
+  text-align: center;
+  font-family: var(--hand); font-size: 24px;
+  color: #55603c;
+}
+.page .pad-count {
+  position: absolute; right: 18px; bottom: 10px;
+  font-family: var(--hand); font-size: 18px;
+  color: rgba(90,70,40,.55);
+}
+.page.flip-out {
+  transition: transform .26s cubic-bezier(.5,0,.9,.5), opacity .26s ease-in;
+  transform: rotateX(78deg);
+  opacity: 0;
+}
+.page.flip-in { animation: page-settle .34s cubic-bezier(.2,.8,.3,1.1) both; }
+@keyframes page-settle {
+  from { transform: rotateX(-10deg) translateY(8px); opacity: .3; }
+  to   { transform: none; opacity: 1; }
+}
+.pad-ctrl {
+  margin-top: 30px;
+  display: flex; justify-content: center; gap: clamp(26px, 6vw, 60px);
+}
+.pad-btn {
+  background: none; border: none;
+  border-bottom: 1.5px dashed rgba(174,200,115,.5);
+  padding: 2px 4px 5px;
+  font-family: var(--hand); font-size: 24px;
+  color: var(--moss);
+  cursor: pointer;
+  transition: color .3s, border-color .3s;
+}
+.pad-btn:hover, .pad-btn:focus-visible { color: #d6ecab; border-color: var(--moss); }
+
+/* ------------------------------------------------ closing note */
+.lockup {
+  padding: 90px 24px 20px;
+  text-align: center;
+}
+.lockup p {
+  font-family: var(--hand);
+  font-size: clamp(23px, 3vw, 29px);
+  color: rgba(220,200,160,.6);
+  transform: rotate(-1deg);
+}
+
+/* the atelier's arrival: paint recedes upward */
+@media (max-width: 900px) {
+  .station { padding: 90px 16px 80px; }
+}
+</style>
+</head>
+<body class="atelier">
+
+<div class="grain"></div>
+<div class="vignette"></div>
+<div class="arrive-shade"></div>
+<div id="dimshade"></div>
+
+<a class="return-plaque" href="index.html"><span class="arrow">⟵</span> THE HALL</a>
+
+<!-- ═══════════════ THE PALETTE NAVIGATOR ═══════════════ -->
+<nav class="palette" aria-label="Studio stations">
+  <svg class="board" viewBox="0 0 140 110" aria-hidden="true">
+    <path d="M70 6 C104 4 134 26 134 55 C134 84 108 104 74 104 C52 104 44 92 47 78 C49 67 40 63 30 66 C14 70 4 58 8 42 C13 22 40 8 70 6 Z"
+          fill="#33261a" stroke="#523c22" stroke-width="2.5"/>
+    <ellipse cx="33" cy="45" rx="9" ry="7" fill="#0f0b07" stroke="#523c22" stroke-width="1.5"/>
+    <ellipse cx="62" cy="82" rx="10" ry="5" fill="rgba(234,182,97,.14)"/>
+    <ellipse cx="98" cy="26" rx="8" ry="5" fill="rgba(255,111,94,.12)"/>
+    <ellipse cx="58" cy="30" rx="7" ry="5" fill="rgba(189,164,232,.12)"/>
+  </svg>
+  <a class="daub" href="#st-exhibition" data-name="the drafting table" aria-label="The Great Exhibition station" style="--c:#eab661; left: 44%; top: 8%;"></a>
+  <a class="daub" href="#st-realms" data-name="the canvas rack" aria-label="Realms of Madness station" style="--c:#bda4e8; left: 70%; top: 22%;"></a>
+  <a class="daub" href="#st-observe" data-name="the darkroom" aria-label="Observe station" style="--c:#ff6f5e; left: 74%; top: 52%;"></a>
+  <a class="daub" href="#st-gates" data-name="the animator's desk" aria-label="Open The Gates! station" style="--c:#aec873; left: 52%; top: 66%;"></a>
+</nav>
+
+<!-- ═══════════════ ENTRY ═══════════════ -->
+<header class="studio-entry">
+  <div class="rig" id="rig" title="the work light">
+    <span class="cord"></span>
+    <div class="shade"></div>
+    <span class="bulb"></span>
+  </div>
+  <div class="wet-sign" aria-hidden="true"><span>WET<br>PAINT</span></div>
+  <p class="over">Advonger Games — restricted wing</p>
+  <h1>The Atelier</h1>
+  <p class="sub hand">where the exhibits were made</p>
+  <div class="note-card">
+    You found the studio. Concept art, first sketches, abandoned drafts and
+    works in progress from all four games — exactly as we left them.
+    Touch whatever you like. Mind the wet paint.
+    <span class="sig">— the management</span>
+  </div>
+  <a class="down" href="#st-exhibition">start at the drafting table ↓</a>
+</header>
+
+<!-- ═══════════════ STATION 01 · THE DRAFTING TABLE ═══════════════ -->
+<section class="station" id="st-exhibition">
+  <div class="splat" style="--c:1; left: 4%; top: 90px; width: 130px; height: 100px; background: var(--ochre);"></div>
+  <div class="tape-label">The Great Exhibition</div>
+  <p class="station-note">the drafting table — <span class="dim">shove the prints around, tap one to look closer</span></p>
+  <div class="desk" id="desk">
+    <div class="coffee" aria-hidden="true"></div>
+    <div class="pencil" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ═══════════════ STATION 02 · THE CANVAS RACK ═══════════════ -->
+<section class="station" id="st-realms">
+  <div class="splat" style="right: 6%; top: 140px; width: 150px; height: 110px; background: var(--violet);"></div>
+  <div class="tape-label">Realms of Madness</div>
+  <p class="station-note">the canvas rack — <span class="dim">twenty-six studies, stacked against the wall. flip through them</span></p>
+  <div class="rack-zone">
+    <div class="rack" id="rack">
+      <div class="rack-back b3"></div>
+      <div class="rack-back b2"></div>
+      <div class="rack-back b1"></div>
+      <figure class="canvas-card" id="rack-card" tabindex="0" role="button" aria-label="Enlarge this canvas">
+        <img id="rack-img" src="" alt="Realms of Madness concept study">
+        <figcaption class="hand" id="rack-cap"></figcaption>
+      </figure>
+    </div>
+    <div class="rack-ctrl">
+      <button class="flip-btn" id="rack-prev" aria-label="Previous canvas">‹</button>
+      <div class="rack-meta">
+        <span class="rack-count" id="rack-count">01 / 26</span>
+        <div class="rack-ticks" id="rack-ticks" aria-hidden="true"></div>
+      </div>
+      <button class="flip-btn" id="rack-next" aria-label="Next canvas">›</button>
+    </div>
+    <p class="rack-hint hand">arrow keys work too, once you're down here</p>
+  </div>
+</section>
+
+<!-- ═══════════════ STATION 03 · THE DARKROOM ═══════════════ -->
+<section class="station" id="st-observe">
+  <div class="safelight" aria-hidden="true"></div>
+  <div class="tape-label">Observe</div>
+  <p class="station-note">the darkroom — <span class="dim">the prints are still blank. hold your hand over one to develop it</span></p>
+  <div class="lines" id="lines"></div>
+</section>
+
+<!-- ═══════════════ STATION 04 · THE ANIMATOR'S DESK ═══════════════ -->
+<section class="station" id="st-gates">
+  <div class="splat" style="left: 7%; bottom: 130px; width: 120px; height: 95px; background: var(--moss);"></div>
+  <div class="tape-label">Open The Gates!</div>
+  <p class="station-note">the animator's desk — <span class="dim">a pad of sketches, still on the rings. flip it</span></p>
+  <div class="deskpad">
+    <div class="notepad">
+      <div class="rings" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="page-under" aria-hidden="true"></div>
+      <div class="page" id="pad-page">
+        <div class="art" id="pad-art" tabindex="0" role="button" aria-label="Enlarge this sketch">
+          <img id="pad-img" src="" alt="Open The Gates! sketch">
+        </div>
+        <p class="pad-cap" id="pad-cap"></p>
+        <span class="pad-count" id="pad-count">1 / 12</span>
+      </div>
+    </div>
+    <div class="pad-ctrl">
+      <button class="pad-btn" id="pad-prev">◂ back a page</button>
+      <button class="pad-btn" id="pad-next">flip the page ▸</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ LOCK UP ═══════════════ -->
+<div class="lockup">
+  <p>— cleaned the brushes, locked the door, left the light on for you.</p>
+</div>
+
+<footer class="colophon">
+  <img class="mark" src="Advonger_Games_logo.png" alt="">
+  <p class="curator">The Atelier - Advonger Games</p>
+  <p class="quiet">Behind the scenes of The Great Exhibition, Realms of Madness, Observe, and Open The Gates!</p>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged artwork">
+  <img id="lb-img" src="" alt="">
+  <p class="lb-caption" id="lb-cap"></p>
+</div>
+
+<div class="veil" id="veil"></div>
+
+<script>
+/* ============ the collection ============ */
+const BTS_ROOT = 'Behind%20the%20Scenes/';
+const roman = n => ['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi','xii'][n - 1] || n;
+
+const EXHIBITION = [
+  ['artifacts_1.png', 'artifact studies — sheet i'],
+  ['artifacts_2.png', 'artifact studies — sheet ii'],
+  ['artifacts_3.png', 'artifact studies — sheet iii'],
+  ['sketch.png',      'the first sketch'],
+  ['image.png',       'on the workbench'],
+  ['image_2.png',     'in progress — no. 2'],
+  ['image_3.png',     'in progress — no. 3'],
+  ['image_4.png',     'in progress — no. 4'],
+  ['image_5.png',     'in progress — no. 5'],
+  ['image_6.png',     'in progress — no. 6'],
+  ['image_7.png',     'in progress — no. 7'],
+  ['image_8.png',     'in progress — no. 8'],
+].map(([f, c]) => ({ src: BTS_ROOT + 'The%20Great%20Exhibition/' + f, cap: c }));
+
+const REALMS = [
+  '012cf6f9-8ea2-43c3-a2a9-aeec8de33bd2','0a15e98d-189a-4adb-84e9-66fd45e748b3',
+  '100cb578-a23d-4744-b3f3-01cd2472caab','13d7445b-9642-43f4-acc5-570c56646772',
+  '1cc6ad5f-e5da-47ce-9128-d507c2626d9b','2eab26d5-b03d-447d-8d22-c8ffb5ccdc6c',
+  '34c94cf6-b509-4215-9427-8254c2bda3f4','3898ac0e-60e6-49e5-a44f-cb98d792737a',
+  '43cccb50-f102-4a79-8dfe-4956fea98b68','51276146-bf35-490a-a149-1423c4d7ea40',
+  '693b79c2-d2a2-4072-9117-5fada7f9465e','72f520fc-138e-4f91-ab4c-e349a4ce4c9d',
+  '805c7d63-4804-49f2-aa96-e43fc47bcb28','9d59b9d3-60b6-4c6f-a8b7-06b87a989468',
+  '9db10b64-2187-494d-8c77-e53be6658346','a275d392-b864-482c-9de1-3d83e8401836',
+  'b0eaecc2-cd50-4984-88e3-e880620f3353','b3bf551b-86ec-48e5-9917-858b160de58b',
+  'c22d75c3-213a-41aa-ad49-ba7c3f84d100','c2cd20ee-1515-4086-ad45-c554db94da2c',
+  'ca13495e-a110-4f82-b02a-531d52640e23','cee07ef9-ef24-4c2f-a8d1-b5f5b5c5f672',
+  'd5d0f6ea-0394-486d-b2e5-c0f2ff9fd75c','ece5d742-49c8-4ad0-b4f8-6bb9b2fbd75b',
+  'ef4032fd-c29d-4616-81f0-ff8d8de51ad2','f9c94dd6-b17d-48e4-8707-0424a972e6d0',
+].map((f, i) => ({
+  src: BTS_ROOT + 'Realms%20of%20Madness/' + f + '.png',
+  cap: 'study no. ' + String(i + 1).padStart(2, '0'),
+}));
+
+const OBSERVE = [
+  ['earliest_idea.jpg', 'the earliest idea'],
+  ['sketch.png',        'sketchbook page i'],
+  ['sketch_2.png',      'sketchbook page ii'],
+  ['sketch_3.png',      'sketchbook page iii'],
+  ['concept.jpg',       'concept art i'],
+  ['concept_2.jpg',     'concept art ii'],
+  ['concept_3.png',     'concept art iii'],
+  ['concept_4.png',     'concept art iv'],
+  ['concept_5.png',     'concept art v'],
+  ['concept_6.png',     'concept art vi'],
+  ['concept_7.png',     'concept art vii'],
+  ['concept_8.png',     'concept art viii'],
+  ['old_observe.png',   'an older Observe'],
+  ['old_capsule.png',   'the old capsule art'],
+  ['changes_1.png',     'design changes'],
+  ['preview_1.png',     'store page draft i'],
+  ['preview_2.png',     'store page draft ii'],
+  ['playtesting.jpg',   'playtesting night'],
+  ['IMG_6779.jpg',      'from the desk'],
+].map(([f, c]) => ({ src: BTS_ROOT + 'Observe/' + f, cap: c }));
+
+const GATES = [
+  ['sketch_1.png',  'pencil sketch i'],
+  ['sketch_2.png',  'pencil sketch ii'],
+  ['sketch_3.png',  'pencil sketch iii'],
+  ['sketch_4.jpg',  'pencil sketch iv'],
+  ['sketch_5.png',  'pencil sketch v'],
+  ['animating.png', 'animating, frame by frame'],
+  ['old_menu.png',  'the old main menu'],
+  ['image_1.png',   'work in progress i'],
+  ['image_2.png',   'work in progress ii'],
+  ['image_3.png',   'work in progress iii'],
+  ['image_4.png',   'work in progress iv'],
+  ['image_6.png',   'work in progress v'],
+].map(([f, c]) => ({ src: BTS_ROOT + 'Open%20The%20Gates!/' + f, cap: c }));
+
+/* seeded pseudo-random so the mess is the same mess every visit */
+const srand = i => {
+  const x = Math.sin(i * 127.1 + 311.7) * 43758.5453;
+  return x - Math.floor(x);
+};
+
+/* ============ lightbox ============ */
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+const lbCap = document.getElementById('lb-cap');
+const openLB = (src, cap) => {
+  lbImg.src = src;
+  lbImg.alt = cap;
+  lbCap.textContent = cap;
+  lb.classList.add('open');
+};
+lb.addEventListener('click', () => lb.classList.remove('open'));
+addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+
+/* ============ the work light ============ */
+document.getElementById('rig').addEventListener('click', () => {
+  document.body.classList.remove('zap');
+  void document.body.offsetWidth; /* restart the flicker */
+  document.body.classList.add('zap');
+});
+
+/* ============ station 01 — the drafting table ============ */
+(() => {
+  const desk = document.getElementById('desk');
+  const prints = EXHIBITION.map((it, i) => {
+    const el = document.createElement('figure');
+    el.className = 'print';
+    el.tabIndex = 0;
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-label', 'Enlarge: ' + it.cap);
+    el.style.setProperty('--r', ((srand(i) - .5) * 11).toFixed(1) + 'deg');
+    el.style.setProperty('--tr', ((srand(i + 40) - .5) * 14).toFixed(1) + 'deg');
+    el.innerHTML = `<img src="${it.src}" alt="${it.cap}" loading="lazy" draggable="false">
+                    <span class="tag">${it.cap}</span>`;
+    desk.appendChild(el);
+    return el;
+  });
+
+  const layout = () => {
+    const W = desk.clientWidth;
+    const cols = W > 880 ? 4 : W > 580 ? 3 : 2;
+    const rows = Math.ceil(prints.length / cols);
+    const pw = Math.round(Math.min(215, Math.max(128, W / cols - 44)));
+    const ph = Math.round(pw * .66);
+    desk.style.setProperty('--pw', pw + 'px');
+    desk.style.setProperty('--ph', ph + 'px');
+    const cellW = W / cols;
+    const cellH = ph + 96;
+    desk.style.height = rows * cellH + 56 + 'px';
+    prints.forEach((el, i) => {
+      const col = i % cols, row = Math.floor(i / cols);
+      const jx = (srand(i + 7) - .5) * cellW * .18;
+      const jy = (srand(i + 19) - .5) * 26;
+      const x = Math.min(Math.max(col * cellW + (cellW - pw) / 2 + jx, 10), W - pw - 26);
+      el.style.left = x + 'px';
+      el.style.top = 30 + row * cellH + jy + 'px';
+    });
+  };
+  layout();
+  let rto;
+  addEventListener('resize', () => { clearTimeout(rto); rto = setTimeout(layout, 180); });
+
+  /* drag the prints around the desk */
+  let drag = null, ztop = 10;
+  desk.addEventListener('pointerdown', e => {
+    const p = e.target.closest('.print');
+    if (!p) return;
+    e.preventDefault();
+    p.setPointerCapture(e.pointerId);
+    drag = { p, sx: e.clientX, sy: e.clientY, ox: p.offsetLeft, oy: p.offsetTop, moved: false };
+    p.style.zIndex = ++ztop;
+    p.classList.add('lifted');
+  });
+  desk.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
+    if (Math.abs(dx) + Math.abs(dy) > 6) drag.moved = true;
+    const pw = drag.p.offsetWidth, ph2 = drag.p.offsetHeight;
+    drag.p.style.left = Math.min(Math.max(drag.ox + dx, -14), desk.clientWidth - pw + 14) + 'px';
+    drag.p.style.top = Math.min(Math.max(drag.oy + dy, -14), desk.clientHeight - ph2 + 14) + 'px';
+  });
+  const drop = e => {
+    if (!drag) return;
+    drag.p.classList.remove('lifted');
+    if (!drag.moved) {
+      const i = prints.indexOf(drag.p);
+      openLB(EXHIBITION[i].src, EXHIBITION[i].cap);
+    }
+    drag = null;
+  };
+  desk.addEventListener('pointerup', drop);
+  desk.addEventListener('pointercancel', drop);
+  prints.forEach((el, i) => el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLB(EXHIBITION[i].src, EXHIBITION[i].cap); }
+  }));
+})();
+
+/* ============ station 02 — the canvas rack ============ */
+(() => {
+  const card = document.getElementById('rack-card');
+  const img = document.getElementById('rack-img');
+  const cap = document.getElementById('rack-cap');
+  const count = document.getElementById('rack-count');
+  const ticks = document.getElementById('rack-ticks');
+  const n = REALMS.length;
+  let idx = 0, busy = false, inView = false;
+
+  REALMS.forEach(() => ticks.appendChild(document.createElement('span')));
+  const tickEls = [...ticks.children];
+
+  const paint = () => {
+    img.src = REALMS[idx].src;
+    cap.textContent = REALMS[idx].cap;
+    count.textContent = String(idx + 1).padStart(2, '0') + ' / ' + n;
+    tickEls.forEach((t, i) => t.classList.toggle('on', i === idx));
+    /* warm the neighbours */
+    [1, -1].forEach(d => { new Image().src = REALMS[(idx + d + n) % n].src; });
+  };
+  paint();
+
+  const go = dir => {
+    if (busy) return;
+    busy = true;
+    card.classList.add('tip-out');
+    setTimeout(() => {
+      idx = (idx + dir + n) % n;
+      paint();
+      card.classList.remove('tip-out');
+      card.classList.add('tip-in');
+      setTimeout(() => { card.classList.remove('tip-in'); busy = false; }, 430);
+    }, 290);
+  };
+
+  document.getElementById('rack-next').addEventListener('click', () => go(1));
+  document.getElementById('rack-prev').addEventListener('click', () => go(-1));
+  card.addEventListener('click', () => openLB(REALMS[idx].src, REALMS[idx].cap));
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLB(REALMS[idx].src, REALMS[idx].cap); }
+  });
+  new IntersectionObserver(es => es.forEach(e => inView = e.isIntersecting), { threshold: .25 })
+    .observe(document.getElementById('st-realms'));
+  addEventListener('keydown', e => {
+    if (!inView || lb.classList.contains('open')) return;
+    if (e.key === 'ArrowRight') go(1);
+    if (e.key === 'ArrowLeft') go(-1);
+  });
+})();
+
+/* ============ station 03 — the darkroom ============ */
+(() => {
+  const lines = document.getElementById('lines');
+  const rows = [OBSERVE.slice(0, 7), OBSERVE.slice(7, 13), OBSERVE.slice(13)];
+  const coarse = matchMedia('(pointer: coarse)').matches;
+  let g = 0;
+  rows.forEach(row => {
+    const line = document.createElement('div');
+    line.className = 'line';
+    line.innerHTML = `<svg class="wire" viewBox="0 0 1000 70" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M0 12 Q 500 64 1000 12"/></svg>
+                      <div class="pegs"></div>`;
+    const pegs = line.querySelector('.pegs');
+    row.forEach((it, i) => {
+      const gi = g++;
+      const t = (i + .5) / row.length;                 /* position along the wire */
+      const sag = Math.round(44 * Math.sin(Math.PI * t)); /* hang lower mid-line */
+      const ph = document.createElement('figure');
+      ph.className = 'photo';
+      ph.style.marginTop = sag + 'px';
+      ph.style.setProperty('--r', ((srand(gi + 3) - .5) * 5).toFixed(1) + 'deg');
+      ph.style.setProperty('--sway', (4.4 + srand(gi + 9) * 2.4).toFixed(2) + 's');
+      ph.style.setProperty('--sd', (-srand(gi + 15) * 5).toFixed(2) + 's');
+      ph.tabIndex = 0;
+      ph.setAttribute('role', 'button');
+      ph.setAttribute('aria-label', 'Develop and enlarge: ' + it.cap);
+      ph.innerHTML = `<span class="pin" aria-hidden="true"></span>
+                      <img src="${it.src}" alt="${it.cap}" loading="lazy" draggable="false">
+                      <figcaption>${it.cap}</figcaption>`;
+      const develop = () => ph.classList.add('developed');
+      ph.addEventListener('mouseenter', develop);
+      ph.addEventListener('focus', develop);
+      ph.addEventListener('click', () => { develop(); openLB(it.src, it.cap); });
+      ph.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); develop(); openLB(it.src, it.cap); }
+      });
+      if (coarse) { /* no hovering hands on touch — the safelight does it slowly */
+        new IntersectionObserver((es, io) => es.forEach(en => {
+          if (en.isIntersecting) { setTimeout(develop, 500 + (gi % 7) * 320); io.disconnect(); }
+        }), { threshold: .5 }).observe(ph);
+      }
+      pegs.appendChild(ph);
+    });
+    lines.appendChild(line);
+  });
+})();
+
+/* ============ station 04 — the animator's desk ============ */
+(() => {
+  const page = document.getElementById('pad-page');
+  const img = document.getElementById('pad-img');
+  const cap = document.getElementById('pad-cap');
+  const count = document.getElementById('pad-count');
+  const n = GATES.length;
+  let idx = 0, busy = false;
+
+  const paint = () => {
+    img.src = GATES[idx].src;
+    img.alt = GATES[idx].cap;
+    cap.textContent = GATES[idx].cap;
+    count.textContent = (idx + 1) + ' / ' + n;
+    [1, -1].forEach(d => { new Image().src = GATES[(idx + d + n) % n].src; });
+  };
+  paint();
+
+  const flip = dir => {
+    if (busy) return;
+    busy = true;
+    page.classList.add('flip-out');
+    setTimeout(() => {
+      idx = (idx + dir + n) % n;
+      paint();
+      page.classList.remove('flip-out');
+      page.classList.add('flip-in');
+      setTimeout(() => { page.classList.remove('flip-in'); busy = false; }, 350);
+    }, 250);
+  };
+
+  document.getElementById('pad-next').addEventListener('click', () => flip(1));
+  document.getElementById('pad-prev').addEventListener('click', () => flip(-1));
+  const art = document.getElementById('pad-art');
+  art.addEventListener('click', () => openLB(GATES[idx].src, GATES[idx].cap));
+  art.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLB(GATES[idx].src, GATES[idx].cap); }
+  });
+})();
+
+/* ============ palette follows the visit ============ */
+(() => {
+  const map = {
+    'st-exhibition': 0, 'st-realms': 1, 'st-observe': 2, 'st-gates': 3,
+  };
+  const daubs = document.querySelectorAll('.palette .daub');
+  new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    daubs.forEach((d, i) => d.classList.toggle('here', i === map[e.target.id]));
+  }), { threshold: .3 }).observe(document.getElementById('st-exhibition'));
+  ['st-realms', 'st-observe', 'st-gates'].forEach(id => {
+    new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      daubs.forEach((d, i) => d.classList.toggle('here', i === map[id]));
+    }), { threshold: .3 }).observe(document.getElementById(id));
+  });
+})();
+</script>
+</body>
+</html>

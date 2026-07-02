@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Great Exhibition - Advonger Games</title>
+<meta name="description" content="The Great Exhibition is an adventure game about curating a museum, raiding lost temples for ancient artifacts, funding expeditions, and uncovering mysteries.">
+<link rel="icon" type="image/png" href="The%20Great%20Exhibition/shortcut_icon.png">
+<link rel="stylesheet" href="css/archive.css">
+<script src="js/archive-transitions.js" defer></script>
+<style>
+/* ============================================================
+   EXHIBIT I — THE GREAT EXHIBITION · sunlight & sandstone
+   ============================================================ */
+body.tge {
+  --sand: #e2c98f;
+  --sand-deep: #b28d4c;
+  background: linear-gradient(#191207, #100b05);
+}
+
+/* ------------------------------------------------ hero */
+.tge-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-end;
+  text-align: center;
+  padding: 90px 24px 11vh;
+  overflow: hidden;
+  isolation: isolate;
+}
+.tge-hero .bg {
+  position: absolute; inset: 0; z-index: -3;
+  background: url('The%20Great%20Exhibition/library_hero.png') 42% 28% / cover no-repeat;
+  animation: hero-drift 26s ease-in-out infinite alternate;
+}
+/* on tall screens the wide plate over-zooms; hang the square entrance study instead */
+@media (max-aspect-ratio: 5/6) {
+  .tge-hero .bg { background-image: url('The%20Great%20Exhibition/shortcut_icon.png'); background-position: 50% 62%; }
+}
+@keyframes hero-drift {
+  from { transform: scale(1.04) translateY(-.6%); }
+  to   { transform: scale(1.14) translateY(1%); }
+}
+.tge-hero .tint {
+  position: absolute; inset: 0; z-index: -2;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgba(255,214,140,.2), transparent 55%),
+    linear-gradient(rgba(25,18,7,.34), rgba(25,18,7,.04) 38%, rgba(16,11,5,.94) 90%);
+}
+/* the tomb doorway you are standing in */
+.tge-hero .doorway {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  box-shadow: inset 0 0 0 clamp(10px, 1.6vw, 22px) #0e0903,
+              inset 0 0 120px 40px rgba(10,6,2,.85);
+}
+.tge-hero .doorway::before, .tge-hero .doorway::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0;
+  width: clamp(28px, 5vw, 74px);
+  background:
+    repeating-linear-gradient(rgba(255,226,160,.05) 0 4px, transparent 4px 90px),
+    linear-gradient(90deg, #0e0903, #1c1409 55%, rgba(28,20,9,0));
+}
+.tge-hero .doorway::after {
+  right: 0;
+  transform: scaleX(-1);
+}
+.tge-hero .doorway::before { left: 0; }
+#tomb-dust { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.tge-hero > .logo, .tge-hero .field-tag, .tge-hero .field-note, .tge-hero .descend { z-index: 3; position: relative; }
+/* rotating sunbeams */
+.tge-hero .beams {
+  position: absolute; inset: -30%; z-index: -1;
+  background: conic-gradient(from 195deg at 72% -8%,
+    transparent 0 8%, rgba(255,226,160,.12) 10%, transparent 13%,
+    transparent 17%, rgba(255,226,160,.09) 20%, transparent 24%,
+    transparent 30%, rgba(255,226,160,.13) 33%, transparent 37%);
+  mix-blend-mode: screen;
+  animation: beams-sway 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes beams-sway { from { transform: rotate(-1.6deg); } to { transform: rotate(1.8deg); } }
+.tge-hero .logo {
+  width: min(560px, 82vw);
+  filter: drop-shadow(0 12px 40px rgba(0,0,0,.65));
+  animation: logo-settle 1.8s .3s cubic-bezier(.2,.6,.2,1) both;
+}
+@keyframes logo-settle { from { opacity: 0; transform: translateY(30px) scale(.97); } to { opacity: 1; } }
+.tge-hero .field-tag {
+  margin-top: 28px;
+  font-family: var(--display); font-size: 12px;
+  letter-spacing: .5em; text-indent: .5em; text-transform: uppercase;
+  color: var(--sand);
+  animation: logo-settle 1.8s .6s both;
+}
+.tge-hero .field-note {
+  margin-top: 12px; max-width: 560px;
+  font-style: italic; font-size: 20px; color: rgba(240,225,190,.85);
+  animation: logo-settle 1.8s .8s both;
+}
+.tge-hero .descend {
+  margin-top: 44px;
+  display: inline-flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--sand);
+  font-family: var(--display); font-size: 10px;
+  letter-spacing: .45em; text-indent: .45em; text-transform: uppercase;
+  animation: logo-settle 1.8s 1.1s both;
+  cursor: pointer;
+}
+/* little ankh scroll cue */
+.tge-hero .descend svg { width: 20px; opacity: .9; animation: ankh-bob 2.4s ease-in-out infinite; }
+@keyframes ankh-bob { 50% { transform: translateY(7px); } }
+
+/* ------------------------------------------------ sections */
+.tge section { padding: 15vh 24px; position: relative; }
+
+/* projection room (trailer) */
+.tge .projection { background: radial-gradient(ellipse 80% 70% at 50% 30%, #22180a, transparent 75%); }
+.tge .trailer-frame {
+  margin-top: 64px;
+  padding: clamp(14px, 1.8vw, 22px);
+  aspect-ratio: auto;
+  background: linear-gradient(135deg, #6d5426, #c8a558 25%, #55401c 50%, #d8b868 75%, #5e4720);
+  box-shadow: 0 34px 90px rgba(0,0,0,.75), inset 0 0 0 2px rgba(35,24,8,.9);
+}
+.tge .trailer-frame .well { position: relative; aspect-ratio: 16/9; background: #000; border: 1px solid #1a1108; }
+.tge .trailer-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tge .trailer-frame .beam-spot {
+  content: ''; position: absolute; inset: -60px;
+  background: radial-gradient(ellipse 65% 60% at 50% 40%, rgba(255,220,150,.12), transparent 70%);
+  pointer-events: none; z-index: -1;
+}
+.tge .plate {
+  margin: 26px auto 0; width: fit-content;
+  padding: 8px 26px;
+  font-family: var(--display); font-size: 10px; letter-spacing: .4em; text-indent: .4em;
+  text-transform: uppercase; color: #3a2a10;
+  background: linear-gradient(#e6c47c, #b28d43);
+  border: 1px solid #7a5f28;
+  box-shadow: 0 3px 10px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,240,200,.6);
+}
+
+/* exhibit hall — one mounted plate at a time, shown clean */
+.tge .plate-viewer {
+  margin: 64px auto 0;
+  width: min(1060px, 92vw);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(10px, 2vw, 26px);
+}
+.tge .plate-viewer .frame {
+  padding: clamp(10px, 1.4vw, 18px);
+  background: linear-gradient(135deg, #6d5426, #c8a558 25%, #55401c 50%, #d8b868 75%, #5e4720);
+  box-shadow: 0 30px 80px rgba(0,0,0,.7), inset 0 0 0 2px rgba(35,24,8,.9);
+  cursor: zoom-in;
+}
+.tge .plate-viewer .well {
+  position: relative; overflow: hidden;
+  aspect-ratio: 16/9; background: #0d0a06;
+  border: 1px solid #1a1108;
+}
+.tge .plate-viewer .well img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity .45s ease;
+}
+.tge .plate-viewer .well img.on { opacity: 1; }
+.tge .plate-viewer .nav {
+  width: clamp(38px, 4.4vw, 50px); height: clamp(38px, 4.4vw, 50px);
+  border-radius: 50%;
+  border: 1px solid rgba(201,163,92,.45);
+  background: linear-gradient(160deg, #2a2114, #171208 60%);
+  box-shadow: 0 4px 18px rgba(0,0,0,.6), inset 0 1px 0 rgba(232,201,135,.18);
+  color: var(--sand);
+  font-family: var(--serif); font-size: 24px; line-height: 1;
+  cursor: pointer;
+  transition: border-color .3s, color .3s, transform .3s;
+}
+.tge .plate-viewer .nav:hover { border-color: var(--brass); color: var(--brass-bright); transform: scale(1.08); }
+
+/* thumbnail rail below the plate */
+.tge .thumb-rail {
+  margin: 26px auto 0;
+  width: min(1060px, 92vw);
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: clamp(6px, 1vw, 12px);
+}
+.tge .thumb-rail button {
+  padding: 0; border: 1px solid rgba(201,163,92,.25);
+  background: #0d0a06; cursor: pointer;
+  aspect-ratio: 16/9; overflow: hidden;
+  opacity: .5;
+  transition: opacity .35s, border-color .35s, transform .35s;
+}
+.tge .thumb-rail button img { width: 100%; height: 100%; object-fit: cover; }
+.tge .thumb-rail button:hover { opacity: .85; transform: translateY(-3px); }
+.tge .thumb-rail button.on {
+  opacity: 1;
+  border-color: var(--brass);
+  box-shadow: 0 0 0 1px var(--brass), 0 8px 22px rgba(0,0,0,.55);
+}
+@media (max-width: 640px) {
+  .tge .thumb-rail { grid-template-columns: repeat(3, 1fr); }
+  .tge .plate-viewer { grid-template-columns: minmax(0, 1fr); }
+  .tge .plate-viewer .nav { display: none; }
+}
+
+/* the relic room — everything laid out in the open, no drawers */
+.tge .relic-row {
+  margin: 70px auto 0;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(24px, 3vw, 40px);
+}
+.tge .relic {
+  text-align: center;
+  padding: clamp(20px, 2.6vw, 32px) clamp(18px, 2.4vw, 28px);
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,220,150,.08), transparent 60%),
+    linear-gradient(#241a0e, #171006);
+  border: 1px solid rgba(201,163,92,.35);
+  box-shadow: 0 24px 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(232,201,135,.12);
+  transition: transform .6s cubic-bezier(.2,.6,.2,1), border-color .6s;
+}
+.tge .relic:hover { transform: translateY(-6px); border-color: rgba(201,163,92,.6); }
+.tge .relic img {
+  width: min(180px, 62%);
+  aspect-ratio: 1; object-fit: cover;
+  margin: 0 auto;
+  border: 1px solid rgba(201,163,92,.5);
+  box-shadow: 0 12px 30px rgba(0,0,0,.6);
+}
+.tge .relic .find-no {
+  display: block; margin-top: 20px;
+  font-family: var(--display); font-size: 10px;
+  letter-spacing: .4em; text-transform: uppercase;
+  color: var(--brass-dim);
+}
+.tge .relic p {
+  margin-top: 10px;
+  font-style: italic; font-size: 18px;
+  color: rgba(240,225,190,.88);
+}
+.tge .relic-footnote {
+  margin: 44px auto 0; max-width: 560px;
+  text-align: center;
+  font-style: italic; font-size: 17px;
+  color: rgba(226,201,143,.5);
+}
+
+/* acquisitions (steam) */
+.tge .acquisitions { background: radial-gradient(ellipse 70% 60% at 50% 45%, #201709, transparent 75%); }
+.tge .steam-shrine {
+  margin-top: 60px;
+  padding: clamp(18px, 2.4vw, 30px);
+  background:
+    linear-gradient(160deg, rgba(255,230,170,.07), rgba(255,230,170,0) 45%),
+    linear-gradient(#2a1f0f, #191106);
+  border: 1px solid rgba(201,163,92,.45);
+  box-shadow: 0 26px 70px rgba(0,0,0,.6), inset 0 1px 0 rgba(232,201,135,.2);
+  position: relative;
+}
+.tge .steam-shrine::before {
+  content: 'ACQUISITIONS DESK';
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  padding: 5px 20px;
+  font-family: var(--display); font-size: 9px; letter-spacing: .4em; text-indent: .4em;
+  color: #3a2a10;
+  background: linear-gradient(#e6c47c, #b28d43);
+  border: 1px solid #7a5f28;
+  white-space: nowrap;
+}
+
+/* archive door (return) */
+.tge .archive-door { text-align: center; padding-bottom: 16vh; }
+</style>
+</head>
+<body class="tge">
+
+<div class="arrive-shade"></div>
+<div class="grain"></div>
+<div class="vignette"></div>
+
+<a class="return-plaque" href="index.html"><span class="arrow">⟵</span> The Archive</a>
+
+<!-- ═══════ HERO ═══════ -->
+<header class="tge-hero">
+  <div class="bg"></div>
+  <div class="tint"></div>
+  <div class="beams"></div>
+  <div class="doorway" aria-hidden="true"></div>
+  <canvas id="tomb-dust" aria-hidden="true"></canvas>
+  <img class="logo" src="The%20Great%20Exhibition/logo.png" alt="The Great Exhibition">
+  <p class="field-tag">Museum Curator Adventure</p>
+  <p class="field-note">Lead a museum, raid temples of long-lost civilizations, arrange prestigious artifact displays, fund expeditions, and uncover the mystery of Silas Vane.</p>
+  <a class="descend" href="#projection">
+    <svg viewBox="0 0 24 34" fill="none" stroke="#e2c98f" stroke-width="1.6" aria-hidden="true">
+      <ellipse cx="12" cy="8" rx="5.5" ry="6.5"/><path d="M12 14.5V32M4 20.5h16"/>
+    </svg>
+    Watch the trailer
+  </a>
+</header>
+
+<!-- ═══════ TRAILER ═══════ -->
+<section class="projection" id="projection">
+  <div class="hall-heading reveal">
+    <span class="over">Official Trailer</span>
+    <h2>Temple Raids and Museum Curation</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="trailer-frame reveal d1">
+    <div class="beam-spot"></div>
+    <div class="well">
+      <iframe src="https://www.youtube-nocookie.com/embed/_avfJNkyaqc" title="The Great Exhibition — trailer"
+              loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+  </div>
+  <p class="trailer-link reveal d2"><a href="https://www.youtube.com/watch?v=_avfJNkyaqc" target="_blank" rel="noopener">Watch trailer on YouTube</a></p>
+  <p class="plate reveal d2">Adventure and collection trailer</p>
+</section>
+
+<!-- ═══════ GALLERY ═══════ -->
+<section>
+  <div class="hall-heading reveal">
+    <span class="over">Gameplay Screenshots</span>
+    <h2>Temples, Artifacts, and Museum Displays</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="plate-viewer reveal d1">
+    <button class="nav" id="plate-prev" aria-label="Previous view">‹</button>
+    <div class="frame" id="plate-frame" title="Enlarge">
+      <div class="well"><img id="plate-img" alt=""></div>
+    </div>
+    <button class="nav" id="plate-next" aria-label="Next view">›</button>
+  </div>
+  <p class="plate plate-caption reveal d2" id="plate-caption" aria-live="polite"></p>
+  <div class="thumb-rail reveal d2" id="thumbs"></div>
+</section>
+
+<!-- ═══════ RELIC ROOM ═══════ -->
+<section>
+  <div class="hall-heading reveal">
+    <span class="over">Core Game Loop</span>
+    <h2>Curate, Explore, and Investigate</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="relic-row reveal d1">
+    <figure class="relic">
+      <img src="The%20Great%20Exhibition/shortcut_icon.png" alt="The pyramid entrance at full sun" loading="lazy">
+      <figcaption>
+        <span class="find-no">Temple Exploration</span>
+        <p>Venture into long-forgotten tombs, avoid lethal traps, solve puzzles, and search for artifacts worthy of the museum.</p>
+      </figcaption>
+    </figure>
+    <figure class="relic">
+      <img src="The%20Great%20Exhibition/app_icon.jpg" alt="The Great Exhibition app icon" loading="lazy">
+      <figcaption>
+        <span class="find-no">Museum Collection</span>
+        <p>Arrange displays for prestige, gather artifact sets to raise their value, and attract the attention of world-renowned explorers.</p>
+      </figcaption>
+    </figure>
+    <figure class="relic">
+      <img src="The%20Great%20Exhibition/screenshot_3.png" alt="The excavation site" loading="lazy">
+      <figcaption>
+        <span class="find-no">Expeditions and Mysteries</span>
+        <p>Buy specialized equipment, finance expeditions to unexplored lands, and piece together the stories behind lost civilizations.</p>
+      </figcaption>
+    </figure>
+  </div>
+  <p class="relic-footnote reveal d2">All tombs are connected in more ways than they first appear, and the artifacts point toward a larger mystery.</p>
+</section>
+
+<!-- ═══════ STEAM ═══════ -->
+<section class="acquisitions">
+  <div class="hall-heading reveal">
+    <span class="over">Steam Page</span>
+    <h2>Wishlist The Great Exhibition</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="steam-shrine reveal d1">
+    <iframe class="steam-widget" src="https://store.steampowered.com/widget/4504510/" title="The Great Exhibition on Steam" loading="lazy"></iframe>
+    <p class="steam-note">The Great Exhibition is coming to Steam. Wishlist it on
+      <a href="https://store.steampowered.com/app/4504510/The_Great_Exhibition" target="_blank" rel="noopener">Steam - The Great Exhibition</a>.</p>
+  </div>
+</section>
+
+<!-- ═══════ RETURN ═══════ -->
+<footer class="archive-door colophon">
+  <img class="mark" src="Advonger_Games_logo.png" alt="">
+  <p class="curator"><a href="index.html">⟵ Return to the Archive</a></p>
+  <p class="quiet">Become the head curator, grow the museum collection, and descend ever deeper into connected tombs.</p>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <img alt="">
+  <span class="lb-caption"></span>
+</div>
+
+<script>
+/* gallery: the viewing plate */
+(() => {
+  const tags = ['Museum Interior','Temple Approach','Artifact Hunt','Collection Display','Ancient Site',
+                'Expedition View','Puzzle Space','Museum Progress','Deep Tomb'];
+  const src = i => `The%20Great%20Exhibition/screenshot_${i + 1}.png`;
+  const img = document.getElementById('plate-img');
+  const cap = document.getElementById('plate-caption');
+  const rail = document.getElementById('thumbs');
+  let cur = -1;
+
+  tags.forEach((t, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', `Screenshot ${String(i + 1).padStart(2, '0')} - ${t}`);
+    b.innerHTML = `<img src="${src(i)}" loading="lazy" alt="">`;
+    b.addEventListener('click', () => show(i));
+    rail.appendChild(b);
+  });
+
+  function show(i) {
+    if (i === cur) return;
+    cur = (i + tags.length) % tags.length;
+    img.classList.remove('on');
+    const next = new Image();
+    next.onload = () => {
+      img.src = next.src;
+      img.alt = `The Great Exhibition screenshot - ${tags[cur]}`;
+      img.classList.add('on');
+    };
+    next.src = src(cur);
+    cap.textContent = `Screenshot ${String(cur + 1).padStart(2, '0')} - ${tags[cur]}`;
+    rail.querySelectorAll('button').forEach((b, j) => b.classList.toggle('on', j === cur));
+  }
+
+  document.getElementById('plate-prev').addEventListener('click', () => show(cur - 1));
+  document.getElementById('plate-next').addEventListener('click', () => show(cur + 1));
+  addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') show(cur - 1);
+    if (e.key === 'ArrowRight') show(cur + 1);
+  });
+  show(0);
+})();
+
+/* dust hanging in the tomb doorway */
+(() => {
+  const c = document.getElementById('tomb-dust');
+  const ctx = c.getContext('2d');
+  const hero = document.querySelector('.tge-hero');
+  let w, h, motes;
+  const resize = () => {
+    w = c.width = hero.clientWidth; h = c.height = hero.clientHeight;
+    motes = Array.from({length: Math.min(80, w / 14)}, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      r: .4 + Math.random() * 1.6,
+      vx: -.05 + Math.random() * .1, vy: .05 + Math.random() * .16,
+      a: .08 + Math.random() * .3, p: Math.random() * Math.PI * 2
+    }));
+  };
+  resize(); addEventListener('resize', resize);
+  (function tick() {
+    ctx.clearRect(0, 0, w, h);
+    for (const m of motes) {
+      m.x += m.vx; m.y += m.vy; m.p += .014;
+      if (m.y > h + 4) { m.y = -4; m.x = Math.random() * w; }
+      ctx.globalAlpha = m.a * (0.55 + 0.45 * Math.sin(m.p));
+      ctx.fillStyle = '#ffe2a0';
+      ctx.beginPath(); ctx.arc(m.x, m.y, m.r, 0, 7); ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* reveal on scroll */
+(() => {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('lit'); io.unobserve(e.target); }
+  }), { threshold: .18 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+
+/* lightbox: enlarge the current plate */
+(() => {
+  const lb = document.getElementById('lightbox');
+  const img = lb.querySelector('img');
+  const cap = lb.querySelector('.lb-caption');
+  document.getElementById('plate-frame').addEventListener('click', () => {
+    img.src = document.getElementById('plate-img').src;
+    cap.textContent = document.getElementById('plate-caption').textContent;
+    lb.classList.add('open');
+  });
+  lb.addEventListener('click', () => lb.classList.remove('open'));
+  addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+})();
+</script>
+</body>
+</html>

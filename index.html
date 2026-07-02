@@ -1,144 +1,1274 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advonger Games Archive - Steam Game Collection</title>
+<meta name="description" content="Explore Advonger Games: The Great Exhibition, Realms of Madness, Observe, and Open The Gates!, with accurate game descriptions from their Steam pages — plus the Atelier, a behind-the-scenes art studio.">
+<link rel="icon" type="image/png" href="The%20Great%20Exhibition/shortcut_icon.png">
+<link rel="stylesheet" href="css/archive.css">
+<script src="js/archive-transitions.js" defer></script>
+<style>
+/* ============================================================
+   THE HALL — homepage only
+   ============================================================ */
+body.home {
+  background:
+    radial-gradient(ellipse 120% 60% at 50% -10%, #1c1610 0%, transparent 60%),
+    linear-gradient(#0c0a08, #090705);
+}
 
+#dust { position: fixed; inset: 0; z-index: 3; pointer-events: none; }
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <title>Realms of Madness</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64x64.png">
-  <link rel="manifest" href="images/favicon/site.webmanifest">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
-  <meta name="description" content="Realms of Madness - castlebuilder RTS game played from a unique sideview perspective." />
-  <meta name="Keywords" content="RTS, real time strategy, fantasy, game, 2d, sideview, indie, game art, castlebuilder, dragons, trolls, medieval fantasy, economy, tower defense " />
+/* ------------------------------------------------ the lantern */
+/* Past the entrance the hall goes dark; a pool of lamplight follows the hand. */
+#lantern {
+  position: fixed; inset: 0; z-index: 55; pointer-events: none;
+  opacity: 0; transition: opacity 1.6s ease;
+  background: radial-gradient(circle 520px at var(--lx, 50vw) var(--ly, 55vh),
+    transparent 0 42%, rgba(6,3,0,.24) 66%, rgba(5,2,0,.58) 100%);
+}
+#lantern.on { opacity: 1; }
+@media (pointer: coarse) { #lantern { display: none; } }
 
+/* ------------------------------------------------ the hall floor */
+.floor {
+  position: fixed; left: -22%; right: -22%; bottom: -2px; height: 30vh;
+  z-index: 2; pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 116px, rgba(201,163,92,.07) 116px 118px),
+    repeating-linear-gradient(transparent 0 46px, rgba(201,163,92,.045) 46px 47px),
+    linear-gradient(transparent, rgba(26,19,10,.6));
+  transform: perspective(520px) rotateX(56deg);
+  transform-origin: 50% 100%;
+  -webkit-mask-image: linear-gradient(transparent, #000 55%);
+          mask-image: linear-gradient(transparent, #000 55%);
+}
+
+/* ------------------------------------------------ entrance */
+.entrance {
+  position: relative;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 60px 24px 110px;
+  overflow: hidden;
+}
+/* museum matting: a fine brass line framing the first view */
+.entrance::before {
+  content: '';
+  position: absolute; inset: clamp(10px, 1.8vw, 20px);
+  border: 1px solid rgba(201,163,92,.22);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.4);
+  pointer-events: none;
+}
+.entrance .shaft {
+  position: absolute; inset: -20% -10%;
+  background: conic-gradient(from 178deg at 50% -8%,
+    transparent 46%, rgba(214,178,110,.10) 49%, rgba(232,201,135,.16) 50%,
+    rgba(214,178,110,.10) 51%, transparent 54%);
+  animation: shaft-breathe 9s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes shaft-breathe {
+  0%, 100% { opacity: .55; transform: rotate(-1.2deg); }
+  50%       { opacity: 1;   transform: rotate(1.2deg); }
+}
+.entrance .floorglow {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 34vh;
+  background: radial-gradient(ellipse 60% 90% at 50% 115%, rgba(201,163,92,.13), transparent 70%);
+  pointer-events: none;
+}
+.entrance .mark {
+  width: clamp(96px, 13vw, 150px);
+  filter: drop-shadow(0 0 26px rgba(232,201,135,.28));
+  animation: mark-rise 2.2s cubic-bezier(.2,.6,.2,1) both;
+}
+@keyframes mark-rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; } }
+.entrance .studio {
+  margin-top: 30px;
+  font-family: var(--display);
+  font-size: clamp(13px, 1.6vw, 17px);
+  letter-spacing: .62em; text-indent: .62em;
+  color: var(--brass);
+  text-transform: uppercase;
+  animation: mark-rise 2.2s .25s cubic-bezier(.2,.6,.2,1) both;
+}
+.entrance h1 {
+  margin-top: 14px;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(34px, 7vw, 84px);
+  line-height: 1.08;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--bone);
+  text-shadow: 0 0 60px rgba(232,201,135,.22);
+  animation: mark-rise 2.2s .45s cubic-bezier(.2,.6,.2,1) both;
+}
+.entrance .creed {
+  margin-top: 26px;
+  max-width: 560px;
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.65;
+  color: #dbcfb6;
+  text-shadow: 0 1px 8px rgba(0,0,0,.6);
+  animation: mark-rise 2.2s .7s cubic-bezier(.2,.6,.2,1) both;
+}
+.entrance .descend {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  animation: mark-rise 2.2s 1.1s both;
+}
+.entrance .descend .threshold {
+  padding: 12px 26px;
+  font-family: var(--display); font-size: 11px; font-weight: 600;
+  letter-spacing: .42em; text-indent: .42em; text-transform: uppercase;
+  color: var(--brass-bright);
+  border: 1px solid rgba(201,163,92,.5);
+  background: linear-gradient(rgba(42,33,20,.85), rgba(23,18,8,.85));
+  box-shadow: 0 6px 20px rgba(0,0,0,.55), inset 0 1px 0 rgba(232,201,135,.2);
+  transition: border-color .4s, box-shadow .4s, color .4s;
+}
+.entrance .descend:hover .threshold {
+  color: #f5e3bb;
+  border-color: var(--brass);
+  box-shadow: 0 6px 26px rgba(0,0,0,.6), 0 0 22px rgba(201,163,92,.25), inset 0 1px 0 rgba(232,201,135,.3);
+}
+.entrance .descend .plumb {
+  width: 1px; height: 54px;
+  background: linear-gradient(var(--brass-dim), transparent);
+  position: relative;
+  overflow: hidden;
+}
+.entrance .descend .plumb::after {
+  content: ''; position: absolute; left: 0; top: -30%;
+  width: 100%; height: 30%;
+  background: var(--brass-bright);
+  animation: plumb-drop 2.6s ease-in-out infinite;
+}
+@keyframes plumb-drop { 0% { top: -30%; } 70%, 100% { top: 110%; } }
+
+/* ------------------------------------------------ catalogue rail */
+.rail {
+  position: fixed; right: 26px; top: 50%; transform: translateY(-50%);
+  z-index: 70; display: flex; flex-direction: column; gap: 22px;
+}
+.rail a {
+  font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: .18em;
+  color: rgba(220,185,115,.65);
+  border-right: 1px solid rgba(201,163,92,.4);
+  padding-right: 12px;
+  text-shadow: 0 1px 4px rgba(0,0,0,.8);
+  transition: color .4s, border-color .4s;
+}
+.rail a:hover, .rail a.here { color: var(--brass-bright); border-color: var(--brass); }
+@media (max-width: 900px) { .rail { display: none; } }
+
+/* ------------------------------------------------ exhibits */
+.hall {
+  position: relative; z-index: 4;
+  /* faint wall panelling so the hall never reads as empty black */
+  background:
+    repeating-linear-gradient(90deg, transparent 0 300px, rgba(201,163,92,.03) 300px 301px),
+    linear-gradient(rgba(28,22,16,.35), transparent 14%, transparent 86%, rgba(28,22,16,.35));
+}
+/* small curatorial line as you step off the entrance */
+.hall-lead {
+  padding: 64px 24px 8px;
+  text-align: center;
+}
+.hall-lead span {
+  display: inline-flex; align-items: center; gap: 16px;
+  font-family: var(--display); font-size: 11px;
+  letter-spacing: .48em; text-indent: .48em; text-transform: uppercase;
+  color: #caa964;
+}
+.hall-lead span::before, .hall-lead span::after {
+  content: ''; width: 54px; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,163,92,.55));
+}
+.hall-lead span::after { transform: scaleX(-1); }
+
+.exhibit {
+  position: relative;
+  min-height: 80vh;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: center;
+  gap: clamp(30px, 5vw, 80px);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 54px clamp(22px, 5vw, 60px);
+  cursor: pointer;
+  outline: none;
+}
+/* engraved divider between exhibits */
+.exhibit + .exhibit::after {
+  content: '◆';
+  position: absolute; top: -7px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; color: rgba(201,163,92,.55);
+  padding: 0 18px;
+  background: transparent;
+}
+.exhibit + .exhibit {
+  border-top: 1px solid rgba(201,163,92,.13);
+}
+.exhibit.flip { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+.exhibit.flip .ex-stage { order: 2; }
+.exhibit.flip .ex-plaque { order: 1; text-align: right; }
+
+/* spotlight cone behind each object */
+.ex-stage {
+  position: relative;
+  display: flex; align-items: flex-end; justify-content: center;
+  min-height: 52vh;
+}
+.ex-stage::before {
+  content: '';
+  position: absolute; inset: -12% -18% -4%;
+  background: radial-gradient(ellipse 55% 62% at 50% 46%, var(--spot, rgba(201,163,92,.18)), transparent 70%);
+  opacity: .75;
+  transition: opacity .8s ease;
+  pointer-events: none;
+}
+.exhibit:hover .ex-stage::before,
+.exhibit:focus-visible .ex-stage::before { opacity: 1; }
+/* floor ellipse */
+.ex-stage::after {
+  content: '';
+  position: absolute; bottom: -3%; left: 12%; right: 12%; height: 7%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,.75), transparent 70%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.ex-object {
+  position: relative;
+  transition: transform .9s cubic-bezier(.2,.6,.2,1);
+  will-change: transform;
+}
+.exhibit:hover .ex-object, .exhibit:focus-visible .ex-object { transform: translateY(-8px); }
+
+/* plaques */
+.exhibit {
+  --accent: var(--brass);
+  --accent-soft: rgba(201,163,92,.45);
+  --accent-glow: rgba(201,163,92,.3);
+}
+.ex-plaque {
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.ex-plaque .num {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--display); font-size: 12px; font-weight: 600;
+  letter-spacing: .5em; text-transform: uppercase;
+  color: var(--accent);
+  text-align: left;
+}
+.ex-plaque .num::before {
+  content: ''; width: 26px; height: 1px;
+  background: var(--accent-soft);
+}
+.exhibit.flip .ex-plaque {
+  align-items: flex-end;
+  text-align: right;
+}
+.exhibit.flip .ex-plaque .num { flex-direction: row-reverse; text-align: right; }
+.ex-plaque h2 {
+  margin-top: 14px;
+  font-family: var(--display); font-weight: 500;
+  font-size: clamp(26px, 3.3vw, 40px);
+  letter-spacing: .1em; text-transform: uppercase;
+  color: #f4ecdc;
+  text-shadow: 0 2px 12px rgba(0,0,0,.7);
+  transition: text-shadow .6s;
+}
+.exhibit:hover .ex-plaque h2 { text-shadow: 0 2px 12px rgba(0,0,0,.7), 0 0 38px var(--accent-glow); }
+.ex-plaque .lore {
+  margin-top: 16px;
+  font-size: 20px; font-style: italic;
+  line-height: 1.6;
+  color: #cec2a9;
+  text-shadow: 0 1px 6px rgba(0,0,0,.55);
+  width: 100%;
+}
+/* the action tag: readable, bordered, clearly an invitation */
+.ex-plaque .cue {
+  margin-top: 28px;
+  display: inline-flex; align-items: center; gap: 12px;
+  max-width: 100%;
+  padding: 12px 22px;
+  font-family: var(--display); font-size: 11px; font-weight: 600;
+  letter-spacing: .3em; text-indent: 0; text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent-soft);
+  background: linear-gradient(rgba(255,255,255,.04), rgba(0,0,0,.3));
+  box-shadow: 0 5px 16px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.07);
+  transition: border-color .45s, box-shadow .45s, color .45s, transform .45s;
+}
+.ex-plaque .cue::before {
+  content: '◈';
+  font-size: 13px;
+  letter-spacing: 0;
+}
+.exhibit:hover .cue, .exhibit:focus-visible .cue {
+  color: #fdf4e0;
+  border-color: var(--accent);
+  box-shadow: 0 5px 20px rgba(0,0,0,.55), 0 0 24px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,.1);
+  transform: translateY(-2px);
+}
+
+/* ============ I. THE GREAT EXHIBITION — glass case ============ */
+#ex-exhibition {
+  --spot: rgba(226,178,94,.22);
+  --accent: #eab661;
+  --accent-soft: rgba(234,182,97,.5);
+  --accent-glow: rgba(234,182,97,.35);
+}
+.case { width: min(440px, 80vw); }
+.case .glass {
+  position: relative;
+  height: clamp(240px, 34vw, 330px);
+  border: 1px solid rgba(214,196,160,.35);
+  border-bottom: none;
+  background: linear-gradient(165deg, rgba(240,230,205,.10), rgba(240,230,205,.02) 40%, rgba(20,14,8,.35));
+  overflow: hidden;
+  transition: transform 1s cubic-bezier(.2,.6,.2,1);
+  transform-origin: 50% 100%;
+}
+.case .glass img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 58%;
+  filter: saturate(1.08) contrast(1.04);
+  transform: scale(1.04);
+  transition: transform 1.4s ease;
+}
+/* the sand you brush off with your hand */
+.case .glass canvas.sand {
+  position: absolute; inset: 0; z-index: 2;
+  width: 100%; height: 100%;
+  transition: opacity 2.2s ease;
+  cursor: grab;
+}
+.case .glass canvas.sand.swept { opacity: 0; }
+#ex-exhibition:hover .case .glass img { transform: scale(1.1); }
+/* sun sweep across the glass */
+.case .glass::after {
+  content: '';
+  position: absolute; inset: -40% -60%;
+  background: linear-gradient(115deg, transparent 42%, rgba(255,240,200,.28) 50%, transparent 58%);
+  transform: translateX(-70%);
+  transition: transform 1.6s ease;
+  pointer-events: none;
+}
+#ex-exhibition:hover .case .glass::after { transform: translateX(55%); }
+/* dust haze inside the case */
+.case .glass::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 45% at 50% 8%, rgba(255,231,180,.2), transparent 70%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+}
+.case .sill {
+  height: 16px;
+  background: linear-gradient(#5b452a, #332413);
+  border: 1px solid #1c1209;
+  box-shadow: 0 3px 8px rgba(0,0,0,.5);
+}
+.case .pedestal {
+  width: 82%; margin: 0 auto;
+  height: clamp(60px, 8vw, 90px);
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.05), transparent 18%, transparent 82%, rgba(0,0,0,.3)),
+    linear-gradient(#4a3821, #2b1d0f);
+  border-top: 2px solid #6d5432;
+  position: relative;
+}
+.case .pedestal::after {
+  content: 'NO. 001 - LOST TEMPLE ARTIFACTS';
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  font-family: var(--display); font-size: 9px; letter-spacing: .3em;
+  color: rgba(232,201,135,.5);
+  border: 1px solid rgba(201,163,92,.3);
+  padding: 5px 12px;
+  background: linear-gradient(#241a0e, #171006);
+  white-space: nowrap;
+}
+
+/* ============ II. REALMS OF MADNESS — the drowned painting ============ */
+#ex-realms {
+  --spot: rgba(146,108,214,.22);
+  --accent: #bda4e8;
+  --accent-soft: rgba(189,164,232,.5);
+  --accent-glow: rgba(189,164,232,.35);
+}
+.painting {
+  width: min(470px, 80vw);
+  transform: perspective(900px) rotateY(var(--ty, 0deg)) rotateX(var(--tx, 0deg));
+  transition: transform .35s ease-out;
+  will-change: transform;
+}
+.painting .frame {
+  position: relative;
+  padding: clamp(12px, 1.6vw, 18px);
+  background:
+    linear-gradient(135deg, #6d5426, #b28d43 22%, #55401c 47%, #c8a558 72%, #5e4720);
+  box-shadow: 0 24px 60px rgba(0,0,0,.65), inset 0 0 0 2px rgba(35,24,8,.85);
+}
+.painting .frame .canvas-wrap {
+  position: relative; overflow: hidden;
+  border: 1px solid #1a1108;
+}
+.painting .frame img { width: 100%; display: block; }
+/* dragon shadow gliding over the canvas */
+.painting .dragon {
+  position: absolute; top: 6%; left: -34%;
+  width: 30%;
+  opacity: 0;
+  filter: blur(1.5px);
+  pointer-events: none;
+  z-index: 2;
+}
+#ex-realms:hover .dragon { animation: dragon-pass 3.2s ease-in-out; }
+@keyframes dragon-pass {
+  0%   { opacity: 0; transform: translateX(0) translateY(0) scale(.85); }
+  18%  { opacity: .8; }
+  55%  { opacity: .85; transform: translateX(280%) translateY(16%) scale(1.05); }
+  100% { opacity: 0; transform: translateX(430%) translateY(4%) scale(.9); }
+}
+/* moonlit shimmer on the canvas */
+.painting .canvas-wrap::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 70% 22%, rgba(190,160,255,.16), transparent 70%);
+  opacity: 0;
+  transition: opacity 1s;
+  pointer-events: none;
+}
+#ex-realms:hover .canvas-wrap::after { opacity: 1; }
+/* reflection pool below the frame */
+.painting .pool {
+  position: relative;
+  height: clamp(80px, 11vw, 120px);
+  margin-top: 6px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(rgba(0,0,0,.5), transparent 92%);
+          mask-image: linear-gradient(rgba(0,0,0,.5), transparent 92%);
+}
+.painting .pool img {
+  width: 100%;
+  transform: scaleY(-1) translateY(-1%);
+  filter: blur(2px) saturate(1.3) brightness(.9);
+  animation: pool-sway 7s ease-in-out infinite;
+}
+@keyframes pool-sway {
+  0%, 100% { transform: scaleY(-1.02) translateY(-1%) skewX(0deg); }
+  25%      { transform: scaleY(-1)    translateY(-2%) skewX(1deg); }
+  75%      { transform: scaleY(-1.03) translateY(0%)  skewX(-1deg); }
+}
+.painting .pool::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(rgba(12,10,20,0) 0 5px, rgba(12,10,20,.35) 5px 7px);
+  animation: pool-lines 4.5s linear infinite;
+}
+@keyframes pool-lines { from { transform: translateY(0); } to { transform: translateY(7px); } }
+
+/* ============ III. OBSERVE — the watching monitor ============ */
+#ex-observe {
+  --spot: rgba(214,60,50,.2);
+  --accent: #ff6f5e;
+  --accent-soft: rgba(255,111,94,.5);
+  --accent-glow: rgba(255,111,94,.3);
+}
+.crt { width: min(440px, 78vw); }
+.crt .shell {
+  position: relative;
+  padding: clamp(16px, 2vw, 24px);
+  background: linear-gradient(160deg, #3a352e, #1d1a15 55%, #12100c);
+  border-radius: 14px;
+  border: 1px solid #000;
+  box-shadow: 0 24px 60px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08);
+}
+.crt .screen {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #180404 center / cover no-repeat;
+  background-image: url('Observe/Cover%20Art/capsule_616x353.jpg');
+  box-shadow: inset 0 0 46px rgba(0,0,0,.85);
+  animation: crt-flicker 5s steps(12) infinite;
+}
+@keyframes crt-flicker {
+  0%, 91%, 94%, 100% { filter: brightness(1); }
+  92% { filter: brightness(1.22) contrast(1.06); }
+  93% { filter: brightness(.86); }
+}
+.crt .screen::before { /* scanlines */
+  content: '';
+  position: absolute; inset: 0; z-index: 2;
+  background: repeating-linear-gradient(rgba(0,0,0,0) 0 2px, rgba(0,0,0,.3) 2px 4px);
+  pointer-events: none;
+}
+.crt .screen::after { /* curvature glare */
+  content: '';
+  position: absolute; inset: 0; z-index: 3;
+  background: radial-gradient(ellipse 90% 70% at 30% 12%, rgba(255,255,255,.13), transparent 55%);
+  pointer-events: none;
+}
+.crt .osd {
+  position: absolute; z-index: 4; top: 10px; left: 12px;
+  font-family: var(--mono); font-size: 18px;
+  color: #e9dfd2; text-shadow: 0 0 8px rgba(255,120,90,.8);
+  letter-spacing: .06em;
+}
+.crt .rec {
+  position: absolute; z-index: 4; top: 12px; right: 12px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #ff3b30;
+  box-shadow: 0 0 10px #ff3b30;
+  animation: rec-blink 1.4s steps(1) infinite;
+}
+@keyframes rec-blink { 50% { opacity: .15; } }
+.crt .chin {
+  margin-top: 12px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6px;
+}
+.crt .label {
+  font-family: var(--mono); font-size: 16px;
+  color: rgba(233,223,210,.5); letter-spacing: .12em;
+}
+.crt .dial {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #57504a, #211d18 70%);
+  border: 1px solid #000;
+  position: relative;
+  transition: transform .8s cubic-bezier(.3,1.4,.4,1);
+}
+.crt .dial::after {
+  content: ''; position: absolute; left: 50%; top: 3px;
+  width: 2px; height: 10px; margin-left: -1px;
+  background: var(--brass);
+}
+.crt .dial { cursor: pointer; }
+.crt .dial:hover { box-shadow: 0 0 12px rgba(255,74,60,.35); }
+.crt .foot {
+  width: 40%; height: 14px; margin: 0 auto;
+  background: linear-gradient(#26221c, #0e0c09);
+  border-radius: 0 0 8px 8px;
+}
+
+/* ============ IV. OPEN THE GATES! — the diorama ============ */
+#ex-gates {
+  --spot: rgba(170,200,110,.16);
+  --accent: #aec873;
+  --accent-soft: rgba(174,200,115,.5);
+  --accent-glow: rgba(174,200,115,.3);
+}
+.diorama { width: min(500px, 82vw); position: relative; }
+.diorama .box {
+  position: relative;
+  aspect-ratio: 16 / 10.5;
+  overflow: hidden;
+  border: clamp(10px, 1.4vw, 14px) solid transparent;
+  border-image: linear-gradient(160deg, #7a5a2e, #4a3218 45%, #8a6a38 80%) 1;
+  background: linear-gradient(#aee3f2 0%, #cfeef5 46%, #9fd6a5 60%);
+  box-shadow: 0 26px 60px rgba(0,0,0,.65), inset 0 0 40px rgba(30,20,5,.35);
+}
+.diorama .layer { position: absolute; left: -4%; right: -4%; bottom: -2%; pointer-events: none; }
+.diorama .layer img { width: 100%; object-fit: cover; }
+.diorama .mts img { height: 100%; object-position: bottom; }
+.diorama .mts { height: 74%; transition: transform 1.2s ease; }
+.diorama .grd { height: 42%; transition: transform 1.2s ease; }
+.diorama .grd img { height: 100%; object-position: top; }
+.diorama .castle {
+  position: absolute; left: 50%; bottom: 4%;
+  width: 46%; transform: translateX(-50%);
+  transition: transform 1.2s ease;
+  filter: drop-shadow(0 6px 12px rgba(20,30,10,.45));
+}
+#ex-gates:hover .mts, #ex-gates.wound .mts { transform: translateY(2.5%) scale(1.02); }
+#ex-gates:hover .grd, #ex-gates.wound .grd { transform: translateY(-1.5%) scale(1.03); }
+#ex-gates:hover .castle { transform: translateX(-50%) scale(1.05); }
+#ex-gates.wound .castle { animation: castle-hop .55s cubic-bezier(.3,1.5,.4,1) 3; }
+@keyframes castle-hop {
+  0%, 100% { transform: translateX(-50%) scale(1.05); }
+  40% { transform: translateX(-50%) translateY(-3.5%) scale(1.06) rotate(-.6deg); }
+}
+/* the jester peeks out from behind the wall */
+.diorama .peek {
+  position: absolute; left: 13%; bottom: -34%;
+  width: 17%;
+  transition: transform 1s cubic-bezier(.3,1.3,.4,1) .1s;
+  filter: drop-shadow(0 4px 8px rgba(20,30,10,.4));
+}
+#ex-gates:hover .peek, #ex-gates.wound .peek { transform: translateY(-78%) rotate(-6deg); }
+.diorama .peek2 {
+  position: absolute; right: 12%; bottom: -36%;
+  width: 16%;
+  transition: transform 1s cubic-bezier(.3,1.3,.4,1) .22s;
+  filter: drop-shadow(0 4px 8px rgba(20,30,10,.4));
+}
+#ex-gates:hover .peek2, #ex-gates.wound .peek2 { transform: translateY(-70%) rotate(5deg); }
+/* hanging banner with the game logo */
+.diorama .banner {
+  position: absolute; top: -3%; left: 50%; transform: translateX(-50%);
+  width: 56%; z-index: 3;
+  filter: drop-shadow(0 8px 14px rgba(20,15,0,.5));
+  transition: transform .9s cubic-bezier(.3,1.3,.4,1);
+  transform-origin: top center;
+}
+#ex-gates:hover .banner, #ex-gates.wound .banner { transform: translateX(-50%) rotate(1.6deg) scale(1.04); }
+/* the winding key on the stand */
+.diorama .windkey {
+  position: absolute; right: 8%; bottom: 6px; z-index: 4;
+  width: 44px; height: 44px;
+  cursor: pointer;
+  transition: transform 2.4s cubic-bezier(.5,.05,.4,1), filter .3s;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,.55));
+}
+.diorama .windkey:hover { filter: drop-shadow(0 3px 6px rgba(0,0,0,.55)) drop-shadow(0 0 10px rgba(232,201,135,.5)); }
+#ex-gates.wound .windkey { transform: rotate(720deg); }
+.diorama .stand {
+  width: 62%; margin: 0 auto;
+  height: clamp(44px, 6vw, 64px);
+  background: linear-gradient(#4a3821, #2b1d0f);
+  border-top: 2px solid #6d5432;
+  position: relative;
+}
+.diorama .stand::after {
+  content: 'NO. 004 - CASTLE SIEGE DIORAMA';
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  font-family: var(--display); font-size: 9px; letter-spacing: .3em;
+  color: rgba(232,201,135,.5);
+  border: 1px solid rgba(201,163,92,.3);
+  padding: 5px 12px;
+  background: linear-gradient(#241a0e, #171006);
+  white-space: nowrap;
+}
+
+/* ============ V. THE ATELIER — the studio door ============ */
+#ex-atelier {
+  --spot: rgba(226,149,122,.2);
+  --accent: #e2957a;
+  --accent-soft: rgba(226,149,122,.5);
+  --accent-glow: rgba(226,149,122,.32);
+}
+.studio-door { width: min(320px, 68vw); }
+.studio-door .doorway {
+  position: relative;
+  height: clamp(300px, 42vw, 430px);
+  background:
+    linear-gradient(100deg, rgba(255,190,110,.28), rgba(30,16,6,.2) 55%),
+    #0a0503;
+  border: clamp(9px, 1.2vw, 13px) solid transparent;
+  border-image: linear-gradient(165deg, #7a5a2e, #452f14 45%, #8a6a38 82%) 1;
+  box-shadow: 0 26px 60px rgba(0,0,0,.65), inset 0 0 30px rgba(0,0,0,.5);
+  perspective: 900px;
+  overflow: hidden;
+}
+/* warm studio light behind the door */
+.studio-door .glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 75% 58% at 78% 48%, rgba(255,190,110,.5), transparent 68%);
+  opacity: .55;
+  transition: opacity 1.1s ease;
+}
+#ex-atelier:hover .glow { opacity: 1; }
+/* the easel, glimpsed through the gap */
+.studio-door .easel-sil {
+  position: absolute; right: 5%; bottom: 6%;
+  width: 36%;
+  opacity: .9;
+  transform: translateX(12%);
+  transition: transform 1.1s ease;
+}
+#ex-atelier:hover .easel-sil { transform: translateX(0); }
+/* the door itself, hinged left, opening inward */
+.studio-door .leaf {
+  position: absolute; inset: 0;
+  transform-origin: left center;
+  transform: rotateY(24deg);
+  transition: transform 1.1s cubic-bezier(.3,.9,.3,1);
+  background:
+    linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(0,0,0,.35)),
+    repeating-linear-gradient(90deg, #4a3115 0 34px, #55391b 34px 37px);
+  border-right: 3px solid #241505;
+  box-shadow: 16px 0 30px rgba(10,4,0,.5);
+}
+#ex-atelier:hover .leaf { transform: rotateY(56deg); }
+/* cross braces */
+.studio-door .leaf::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(rgba(0,0,0,0) 16%, rgba(0,0,0,.2) 16%, rgba(0,0,0,.2) 24%, rgba(0,0,0,0) 24%),
+    linear-gradient(rgba(0,0,0,0) 76%, rgba(0,0,0,.2) 76%, rgba(0,0,0,.2) 84%, rgba(0,0,0,0) 84%);
+}
+.studio-door .knob {
+  position: absolute; right: 12px; top: 48%;
+  width: 13px; height: 13px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f0d9a0, #8a6a38 65%, #4a3418);
+  box-shadow: 0 2px 5px rgba(0,0,0,.6), 0 0 8px rgba(232,201,135,.25);
+}
+/* the crooked staff-only sign, nailed to the door */
+.studio-door .sign {
+  position: absolute; top: 19%; left: 50%;
+  width: 72%;
+  transform: translateX(-50%) rotate(-3.5deg);
+  transform-origin: 50% -10px;
+  padding: 9px 6px 11px;
+  background: linear-gradient(#ece0c4, #d9c9a4);
+  color: #4a3320;
+  text-align: center;
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(11px, 1.4vw, 14px);
+  letter-spacing: .24em; text-indent: .24em;
+  box-shadow: 0 4px 10px rgba(0,0,0,.55);
+}
+.studio-door .sign::before {
+  content: '';
+  position: absolute; top: -7px; left: 50%; margin-left: -3px;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #d8c8a0, #55401c);
+}
+.studio-door .sign em {
+  display: block; margin-top: 3px;
+  font-family: var(--serif); font-style: italic; font-weight: 500;
+  font-size: 15px; letter-spacing: .06em; text-indent: 0;
+  text-transform: none; color: #7a5636;
+}
+#ex-atelier:hover .sign { animation: sign-swing 1.8s cubic-bezier(.3,.9,.3,1); }
+@keyframes sign-swing {
+  0%, 100% { transform: translateX(-50%) rotate(-3.5deg); }
+  25% { transform: translateX(-50%) rotate(2.6deg); }
+  55% { transform: translateX(-50%) rotate(-6.2deg); }
+  80% { transform: translateX(-50%) rotate(-2.2deg); }
+}
+/* paint that crept out under the door */
+.studio-door .drips {
+  position: relative;
+  height: 24px; margin: -2px 10% 0;
+}
+.studio-door .drips i {
+  position: absolute; top: 0;
+  width: 7px; border-radius: 0 0 4px 4px;
+  opacity: .85;
+}
+.studio-door .drips i:nth-child(1) { left: 12%; height: 18px; background: #eab661; }
+.studio-door .drips i:nth-child(2) { left: 30%; height: 10px; background: #bda4e8; }
+.studio-door .drips i:nth-child(3) { left: 61%; height: 21px; background: #ff6f5e; transition: height .9s ease; }
+.studio-door .drips i:nth-child(4) { left: 82%; height: 13px; background: #aec873; }
+#ex-atelier:hover .drips i:nth-child(3) { height: 24px; }
+.studio-door .drips::after {
+  content: '';
+  position: absolute; left: 4%; right: 40%; top: -4px; height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, rgba(234,182,97,.5), rgba(255,111,94,.45));
+  filter: blur(1px);
+}
+.studio-door .stand {
+  width: 58%; margin: 0 auto;
+  height: clamp(46px, 6vw, 66px);
+  background: linear-gradient(#4a3821, #2b1d0f);
+  border-top: 2px solid #6d5432;
+  position: relative;
+}
+.studio-door .stand::after {
+  content: 'NO. 005 - DOOR TO THE STUDIO';
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  font-family: var(--display); font-size: 9px; letter-spacing: .3em;
+  color: rgba(232,201,135,.5);
+  border: 1px solid rgba(201,163,92,.3);
+  padding: 5px 12px;
+  background: linear-gradient(#241a0e, #171006);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------ veil variants */
+.veil--gold { background: radial-gradient(circle at 50% 60%, #f3d489, #b07f2e 55%, #241503); }
+.veil--gold.active { animation: veil-flood .85s ease-in forwards; }
+.veil--ripple { background: radial-gradient(circle at 50% 45%, #2a1745, #0b0618 70%); }
+.veil--ripple.active { animation: veil-flood .85s ease-in forwards; }
+.veil--ripple::after {
+  content: ''; position: absolute; left: 50%; top: 45%;
+  width: 10px; height: 10px; border-radius: 50%;
+  transform: translate(-50%,-50%);
+  border: 2px solid rgba(190,160,255,.8);
+  opacity: 0;
+}
+.veil--ripple.active::after { animation: ripple-ring .85s ease-out forwards; }
+@keyframes ripple-ring {
+  0% { opacity: 1; box-shadow: 0 0 0 0 rgba(190,160,255,.5); }
+  100% { opacity: 0; width: 130vmax; height: 130vmax; box-shadow: 0 0 0 40px rgba(190,160,255,.12); }
+}
+.veil--crt { background: #000; }
+.veil--crt.active { animation: veil-flood .3s ease-in forwards; }
+.veil--crt::after {
+  content: ''; position: absolute; left: 0; right: 0; top: 50%;
+  height: 3px; margin-top: -1px;
+  background: #fff; box-shadow: 0 0 30px 6px rgba(255,255,255,.9);
+  transform: scaleX(0);
+}
+.veil--crt.active::after { animation: crt-line .8s ease forwards; }
+@keyframes crt-line {
+  0% { transform: scaleX(0); opacity: 1; }
+  45% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1) scaleY(.2); opacity: 0; }
+}
+.veil--gate { background: transparent; }
+.veil--gate::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(90deg, #241708 0 26px, #3a2712 26px 34px, #241708 34px 60px),
+    #241708;
+  box-shadow: inset 0 -20px 50px rgba(0,0,0,.7);
+  transform: translateY(-102%);
+}
+.veil--gate.active::before { animation: gate-drop .8s cubic-bezier(.6,0,.9,.6) forwards; }
+@keyframes gate-drop { to { transform: translateY(0); } }
+.veil--gate.active { animation: veil-hold .85s forwards; }
+@keyframes veil-hold { 0%, 100% { opacity: 1; } }
+@keyframes veil-flood { from { opacity: 0; } to { opacity: 1; } }
+
+/* ------------------------------------------------ responsive */
+@media (max-width: 900px) {
+  .exhibit, .exhibit.flip {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 56px 20px 52px;
+    gap: 30px;
+  }
+  .exhibit.flip .ex-stage { order: 1; }
+  .exhibit.flip .ex-plaque { order: 2; text-align: left; align-items: flex-start; }
+  .exhibit.flip .ex-plaque .num { flex-direction: row; }
+  .ex-stage { min-height: auto; }
+  .ex-plaque { max-width: 560px; }
+  .ex-plaque .lore { font-size: 18px; }
+  .hall-lead { padding-top: 44px; }
+  .entrance { padding-bottom: 130px; }
+  .entrance .creed br { display: none; } /* let lines wrap naturally on small screens */
+}
+</style>
 </head>
+<body class="home">
 
-<body>
-    <div class="banner">
-        <header>
-           <h1>Robin v/d Horst, Advonger Games</h1>
-            <div class="header-icons">
-                <a href="https://twitter.com/robin_vdhorst"><img src="images/twitter.png" alt="twitter"></a>
-                <a href="mailto:advongergames@outlook.com"><img src="images/email.png" alt="email"></a>
+<div class="grain"></div>
+<div class="vignette"></div>
+<div class="floor" aria-hidden="true"></div>
+<canvas id="dust"></canvas>
+<div id="lantern" aria-hidden="true"></div>
+
+<nav class="rail" aria-label="Exhibit index">
+  <a href="#ex-exhibition">I</a>
+  <a href="#ex-realms">II</a>
+  <a href="#ex-observe">III</a>
+  <a href="#ex-gates">IV</a>
+  <a href="#ex-atelier">V</a>
+</nav>
+
+<!-- ═══════════════════ ENTRANCE ═══════════════════ -->
+<header class="entrance">
+  <div class="shaft"></div>
+  <div class="floorglow"></div>
+  <img class="mark" src="Advonger_Games_logo.png" alt="Advonger Games">
+  <p class="studio">Advonger Games collection</p>
+  <h1>The Advonger<br>Archive</h1>
+  <p class="creed">Four Steam games from Advonger Games:<br>
+    temple-raiding museum adventure, castlebuilder RTS, observation puzzle game, and sidescrolling siege campaign.</p>
+  <a class="descend" href="#ex-exhibition" aria-label="View the game collection">
+    <span class="plumb"></span>
+    <span class="threshold">View the games</span>
+  </a>
+</header>
+
+<!-- ═══════════════════ THE HALL ═══════════════════ -->
+<main class="hall">
+
+  <div class="hall-lead reveal"><span>Four Steam Games</span></div>
+
+  <!-- I · THE GREAT EXHIBITION -->
+  <section class="exhibit reveal" id="ex-exhibition" data-href="the-great-exhibition.html"
+           data-veil="veil--gold" role="link" tabindex="0"
+           aria-label="The Great Exhibition - open the game page">
+    <div class="ex-stage">
+      <div class="ex-object" data-depth="14">
+        <div class="case">
+          <div class="glass">
+            <img src="The%20Great%20Exhibition/shortcut_icon.png" alt="A lost-temple entrance from The Great Exhibition">
+            <canvas class="sand" id="sand-canvas" aria-hidden="true"></canvas>
+          </div>
+          <div class="sill"></div>
+          <div class="pedestal"></div>
+        </div>
+      </div>
+    </div>
+    <div class="ex-plaque">
+      <span class="num">Exhibit I</span>
+      <h2>The Great Exhibition</h2>
+      <p class="lore">Head curator of a growing museum, you raid lost temples for ancient artifacts, arrange valuable displays, fund deeper expeditions, and follow the mystery of Silas Vane.</p>
+      <span class="cue">Raid temples - curate the collection</span>
+    </div>
+  </section>
+
+  <!-- II · REALMS OF MADNESS -->
+  <section class="exhibit flip reveal" id="ex-realms" data-href="realms-of-madness.html"
+           data-veil="veil--ripple" role="link" tabindex="0"
+           aria-label="Realms of Madness - open the game page">
+    <div class="ex-stage">
+      <div class="ex-object" data-depth="10">
+        <div class="painting">
+          <div class="frame">
+            <div class="canvas-wrap">
+              <img src="Realms%20of%20Madness/Cover%20Art/Realms-1920x1080.jpg" alt="A fantasy castle battle scene from Realms of Madness">
+              <svg class="dragon" viewBox="0 0 100 60" aria-hidden="true">
+                <path fill="rgba(8,4,16,.85)" d="M50 34c-4-2-7-6-8-11-3 4-9 6-15 5 5 3 8 6 9 9-8-1-9-1-10 0-8-4-16-4-24-1 10 1 17 4 22 9 4 4 9 6 15 5l4 8 3-8c6 0 11-2 14-6 5 5 12 8 21 8-7-3-12-7-14-12-1-1-9-4-13-4-1 0-3-1-4-2z"/>
+              </svg>
             </div>
-        </header>
-        <p> WISHLIST</p>
-        <div class="steam-btn">
-            <a href="https://store.steampowered.com/app/2501920/Realms_of_Madness"> <img src="images/Steam.png" alt="Steam"></a>
+          </div>
+          <div class="pool" aria-hidden="true">
+            <img src="Realms%20of%20Madness/Cover%20Art/Realms-1920x1080.jpg" alt="">
+          </div>
         </div>
+      </div>
     </div>
-    <div class="content">
+    <div class="ex-plaque">
+      <span class="num">Exhibit II</span>
+      <h2>Realms of Madness</h2>
+      <p class="lore">A sideways fantasy castlebuilder RTS where you build a medieval fortress, manage upgrades and economy, command sea, ground, and sky forces, unlock chaotic abilities, and summon dragons.</p>
+      <span class="cue">Build the castle - lead the siege</span>
+    </div>
+  </section>
 
-     <div class="text">
-        <p><span class="italic">Realms of Madness</span>&nbsp; is a castlebuilder RTS (real-time strategy) game played from a unique sideview perspective.</p>
-        <p>Build a castle, manage its economy, recruit an army and lay siege on the opposing castle.</p>
-        <p>Control mythical creatures such as dragons, trolls, underwater squids, flying harpies and more.</p>
-        <p>Releasing in 2025, a free demo is already available!</p>
-     </div>
-	 <div style="text-align: center;">
-	  <iframe style="max-width: 560px; width: 100%; height: 315px; max-height: 315px; display: block; margin: 0 auto;" src="https://www.youtube.com/embed/OA9NDG4grOc" frameborder="0" allowfullscreen></iframe>
-     </div>
-	 <br>
-     <img class="full-width-image" src="images/Realms_of_Madness-scrn_EC_1.png" alt="Realms of Madness screenshot">
-
-     <div class="text">
-      <h2>A castlebuilder RTS played from a sideview perspective</h2>
-     </div>
-	 <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
-		<iframe style="max-width: 560px; width: 100%; height: 315px; max-height: 315px;" src="https://www.youtube.com/embed/-u9gMj7X6CQ" frameborder="0" allowfullscreen></iframe>
-		<iframe style="max-width: 560px; width: 100%; height: 315px; max-height: 315px;" src="https://www.youtube.com/embed/8jMq8wAHaxM" frameborder="0" allowfullscreen></iframe>
-	</div>
-	 <br>
-     <img class="full-width-image" src="images/Realms_of_Madness-scrn_CC_2.png" alt="Realms of Madness screenshot">
-     <div class="text">
-       <h2>Build castles</h2>
-       <p>• <span class="uppercase">Manage the economy</span> </br> food variety, wood, stone, taxation, structure upgrades and more.</p>
-       <p>• <span class="uppercase">Build defenses</span> </br> falling rock traps, wall towers, firebraziers and more.</p>
-       <p>• <span class="uppercase">Command your forces</span> </br> move units freely across the map, like in traditional RTS games.</p>
-     </div>
-     <img class="full-width-image" src="images/Realms_of_Madness-scrn_AP_1.png" alt="Realms of Madness screenshot">
-	 <div class="container clearfix">
-	   <img src="images/gif1.gif" alt="Image description">
-	   <img src="images/gif2.gif" alt="Image description">
-	   <img src="images/gif3.gif" alt="Image description">
-   </div>
-     <div class="text">
-       <h2>Attack your opponent's castle</h2>
-       <p>• Using siege equipmentsuch as catapults, ballista’s and siegetowers.</p>
-       <p>• Using magical creatures, including wizards.</p>
-     </div>
-     <img class="limited-width-image" src="images/attack.png" alt="Realms of Madness screenshot">
-     <div class="container clearfix">
-        <img src="images/StrongholdLegends.png" alt="StrongholdLegends" class="image">
-        <div class="text-block">
-            <h3>Inspired by Stronghold: Legends</h3>
-            <p>• Build a castle, manage the economy, defend and attack.</p>
-            <p>• Control mythical creatures.</p>
-            <p>• A fully voice-acted campaign with meta-progression.</p>
+  <!-- III · OBSERVE -->
+  <section class="exhibit reveal" id="ex-observe" data-href="observe.html"
+           data-veil="veil--crt" role="link" tabindex="0"
+           aria-label="Observe - open the game page">
+    <div class="ex-stage">
+      <div class="ex-object" data-depth="12">
+        <div class="crt">
+          <div class="shell">
+            <div class="screen" id="observe-screen">
+              <span class="osd" id="observe-osd">RUN 00 - ROOM</span>
+              <span class="rec" aria-hidden="true"></span>
+            </div>
+            <div class="chin">
+              <span class="label">PAST REPLAY</span>
+              <div class="dial" id="observe-dial" role="button" tabindex="0" aria-label="Turn the dial to switch puzzle rooms"></div>
+            </div>
+          </div>
+          <div class="foot"></div>
         </div>
+      </div>
     </div>
-    <div class="container clearfix">
-       <img src="images/OpenTheGates-scrn3.jpg" alt="Open The Gates! screenshot" class="image">
-       <img src="images/OpenTheGates-scrn1.jpg" alt="Open The Gates! screenshot" class="image">
-       <img src="images/OpenTheGates-scrn2.jpg" alt="Open The Gates! screenshot" class="image">
-   </div>
-   <div class="text">
-     <h3>Building on the lessons learned from my previous game <a href="https://store.steampowered.com/app/1332450/Open_The_Gates/">Open The Gates!</a> (2022)</h3>
-     <p>• Players liked the core gameplay loop (building, defending, attacking)</p>
-     <p>• Players disliked the repetitivenessdue to the lack of mechanics. Essentially, they wanted more to do.</p>
-     <p>• <span class="italic">Realms of Madness</span> provides a much more complete and polished product over <span class="italic">Open The Gates!</span> (2022).</p>
-   </div>
-   <div style="text-align: center;">
-	  <iframe style="max-width: 560px; width: 100%; height: 315px; max-height: 315px; display: block; margin: 0 auto;" src="https://www.youtube.com/embed/eHRBcRgmmvA" frameborder="0" allowfullscreen></iframe>
-   </div>
-   <div class="container clearfix">
-      <img src="images/troll.png" alt="troll" class="image">
-      <img src="images/dragons.png" alt="dragons" class="image">
-      <img src="images/harpy.png" alt="harpy" class="image">
-  </div>
-  <div class="text">
-    <h2>Control mythical creatures</h2>
-  </div>
-  <img class="full-width-image" src="images/5_layers_of_combat.jpg" alt="5 layers of combat">
-  <div class="text">
-    <h2>Five layers of combat</h2>
-    <p>• The game area is split into five layers. Each layer can be individually contested during the game.</p>
-    <p>• A player may decide to invest heavily into flying units, thereby leaving the seas open to the opponent for exploitation.</p>
-  </div>
-  <div class="container clearfix">
-     <img class="img2Next" src="images/World_Map.png" alt="Description of the image" class="image">
-     <img class="img2Next" src="images/Moroskel.jpg" alt="Description of the image" class="image">
- </div>
- <div class="text">
-   <h3>Play across five chaotic Realms, each with its own substory in a larger narrative.</h3>
-   <p>• Each Realm has a fully voice acted character acting as an antagonist.</p>
-   <p>• All realms have a distinct atmosphere achieved through music composed specifically for this game.</p>
- </div>
-   <div class="container clearfix">
-    <img src="images/UI-tech-tree.jpg" alt="UI" class="image">
-     <div class="text-block">
-        <h2>Meta Progression</h2>
-        <p>• Players will unlock points upon completing a level.</p>
-        <p>• Points unlock new mechanics on the tech tree allowing players to tailor their experience to their preferences.</p>
+    <div class="ex-plaque">
+      <span class="num">Exhibit III</span>
+      <h2>Observe</h2>
+      <p class="lore">A single-player puzzle game where vision is your tool. Actions from solved rooms replay beside you, so you collaborate with past versions of yourself across time to solve puzzles about regret.</p>
+      <span class="cue">Replay the past - solve the room</span>
     </div>
-   </div>
+  </section>
 
-</div>
-
-<!-- Footer -->
-    <footer>
-      <hr class="footer-line">
-        <div class="footer-icons">
-          <a href="https://twitter.com/robin_vdhorst" class="footer-icon"><img src="images/twitter.png" alt="twitter"></a>
-          <a href="https://store.steampowered.com/app/2501920/Realms_of_Madness" class="footer-icon"> <img src="images/Steam-simple.png" alt="Steam"></a>
-          <a href="mailto:advongergames@outlook.com" class="footer-icon"><img src="images/email.png" alt="email"></a>
+  <!-- IV · OPEN THE GATES! -->
+  <section class="exhibit flip reveal" id="ex-gates" data-href="open-the-gates.html"
+           data-veil="veil--gate" role="link" tabindex="0"
+           aria-label="Open The Gates! - open the game page">
+    <div class="ex-stage">
+      <div class="ex-object" data-depth="9">
+        <div class="diorama">
+          <img class="banner" src="Open%20The%20Gates!/Cover%20Art/Logo.png" alt="">
+          <div class="box">
+            <div class="layer mts"><img src="Open%20The%20Gates!/Random%20Items%20From%20The%20Game/Backgrounds/mountains_green_1.png" alt=""></div>
+            <div class="layer grd"><img src="Open%20The%20Gates!/Random%20Items%20From%20The%20Game/Backgrounds/ground_green.png" alt=""></div>
+            <img class="castle" src="Open%20The%20Gates!/Random%20Items%20From%20The%20Game/castle.png" alt="A castle from the sidescrolling RTS Open The Gates!">
+            <img class="peek" src="Open%20The%20Gates!/Components%20%26%20Characters/character_jester.png" alt="">
+            <img class="peek2" src="Open%20The%20Gates!/Components%20%26%20Characters/character_bullgruf.png" alt="">
+          </div>
+          <div class="stand"></div>
+          <svg class="windkey" id="windkey" viewBox="0 0 44 44" role="button" tabindex="0" aria-label="Wind the castle siege diorama">
+            <circle cx="22" cy="14" r="9" fill="none" stroke="#c9a35c" stroke-width="3.5"/>
+            <rect x="19.5" y="22" width="5" height="16" rx="1.5" fill="#c9a35c"/>
+            <rect x="15" y="34" width="6" height="3.5" rx="1" fill="#c9a35c"/>
+          </svg>
         </div>
-    </footer>
+      </div>
+    </div>
+    <div class="ex-plaque">
+      <span class="num">Exhibit IV</span>
+      <h2>Open The Gates!</h2>
+      <p class="lore">A sidescrolling castlebuilder RTS: raise houses and resource chains, keep citizens safe, build walls, towers, and traps, survive sieges, then counterattack with units and siege weapons.</p>
+      <span class="cue">Build, defend, open the gates</span>
+    </div>
+  </section>
+
+  <!-- V · THE ATELIER -->
+  <section class="exhibit reveal" id="ex-atelier" data-href="the-atelier.html"
+           data-veil="veil--paint" role="link" tabindex="0"
+           aria-label="The Atelier - behind the scenes of every game">
+    <div class="ex-stage">
+      <div class="ex-object" data-depth="11">
+        <div class="studio-door">
+          <div class="doorway">
+            <div class="glow" aria-hidden="true"></div>
+            <svg class="easel-sil" viewBox="0 0 60 100" aria-hidden="true">
+              <g stroke="#170b03" stroke-width="4" stroke-linecap="round" fill="none">
+                <path d="M30 8 L10 92"/>
+                <path d="M30 8 L50 92"/>
+                <path d="M30 44 L30 96"/>
+                <path d="M12 62 L48 62"/>
+              </g>
+              <rect x="14" y="22" width="32" height="38" fill="#170b03"/>
+            </svg>
+            <div class="leaf">
+              <div class="sign">The Atelier<em>staff only</em></div>
+              <span class="knob"></span>
+            </div>
+          </div>
+          <div class="drips" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="stand"></div>
+        </div>
+      </div>
+    </div>
+    <div class="ex-plaque">
+      <span class="num">Exhibit V</span>
+      <h2>The Atelier</h2>
+      <p class="lore">Every exhibit in this hall began as a pencil line. Past this door lies the studio itself — concept art, first sketches, abandoned drafts, and works in progress from all four games.</p>
+      <span class="cue">Push the door - see how it's made</span>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════════════ COLOPHON ═══════════════════ -->
+<footer class="colophon">
+  <img class="mark" src="Advonger_Games_logo.png" alt="">
+  <p class="curator">Advonger Games - Strategy, Puzzle, and Adventure Worlds</p>
+  <p class="quiet">Explore the Steam lineup: Realms of Madness, Open The Gates!, Observe, and The Great Exhibition.</p>
+</footer>
+
+<div class="veil" id="veil"></div>
+
+<script>
+/* ---------- dust motes ---------- */
+(() => {
+  const c = document.getElementById('dust');
+  const ctx = c.getContext('2d');
+  let w, h, motes;
+  const resize = () => {
+    w = c.width = innerWidth; h = c.height = innerHeight;
+    motes = Array.from({length: Math.min(70, innerWidth / 16)}, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      r: .4 + Math.random() * 1.4,
+      vx: -.08 + Math.random() * .16, vy: .04 + Math.random() * .12,
+      a: .06 + Math.random() * .2, p: Math.random() * Math.PI * 2
+    }));
+  };
+  resize(); addEventListener('resize', resize);
+  (function tick(t) {
+    ctx.clearRect(0, 0, w, h);
+    for (const m of motes) {
+      m.x += m.vx; m.y += m.vy; m.p += .012;
+      if (m.y > h + 4) { m.y = -4; m.x = Math.random() * w; }
+      if (m.x < -4) m.x = w + 4; if (m.x > w + 4) m.x = -4;
+      ctx.globalAlpha = m.a * (0.6 + 0.4 * Math.sin(m.p));
+      ctx.fillStyle = '#e8c987';
+      ctx.beginPath(); ctx.arc(m.x, m.y, m.r, 0, 7); ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* ---------- scroll reveal + rail highlight ---------- */
+(() => {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('lit');
+      const id = e.target.id;
+      document.querySelectorAll('.rail a').forEach(a =>
+        a.classList.toggle('here', a.getAttribute('href') === '#' + id));
+    }
+  }), { threshold: .3 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+
+/* ---------- pointer parallax on exhibit objects ---------- */
+(() => {
+  if (matchMedia('(pointer: coarse)').matches) return;
+  let rx = 0, ry = 0;
+  addEventListener('mousemove', e => {
+    rx = (e.clientX / innerWidth - .5);
+    ry = (e.clientY / innerHeight - .5);
+  });
+  const objs = document.querySelectorAll('.ex-object');
+  (function tick() {
+    objs.forEach(o => {
+      const d = +o.dataset.depth || 10;
+      o.style.transform = `translate(${(-rx * d).toFixed(1)}px, ${(-ry * d * .6).toFixed(1)}px)`;
+    });
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* ---------- the lantern follows the hand once you leave the entrance ---------- */
+(() => {
+  const lantern = document.getElementById('lantern');
+  if (matchMedia('(pointer: coarse)').matches) return;
+  addEventListener('mousemove', e => {
+    lantern.style.setProperty('--lx', e.clientX + 'px');
+    lantern.style.setProperty('--ly', e.clientY + 'px');
+  });
+  const entrance = document.querySelector('.entrance');
+  addEventListener('scroll', () => {
+    lantern.classList.toggle('on', scrollY > entrance.offsetHeight * .55);
+  }, { passive: true });
+})();
+
+/* ---------- Exhibit I: brush the sand from the glass ---------- */
+(() => {
+  const canvas = document.getElementById('sand-canvas');
+  const ctx = canvas.getContext('2d');
+  let strokes = 0, done = false;
+  const fill = () => {
+    const r = canvas.getBoundingClientRect();
+    canvas.width = r.width; canvas.height = r.height;
+    /* translucent, so the buried art ghosts through and invites the hand */
+    const g = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    g.addColorStop(0, 'rgba(206,180,132,.58)');
+    g.addColorStop(1, 'rgba(160,132,88,.68)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    /* speckle */
+    for (let i = 0; i < canvas.width * canvas.height / 160; i++) {
+      ctx.fillStyle = Math.random() < .5 ? 'rgba(120,95,55,.22)' : 'rgba(235,215,170,.26)';
+      ctx.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 1.6, 1.6);
+    }
+  };
+  fill();
+  addEventListener('resize', () => { if (!done) { fill(); strokes = 0; } });
+  const sweep = () => { done = true; canvas.classList.add('swept'); };
+  canvas.addEventListener('mousemove', e => {
+    if (done) return;
+    const r = canvas.getBoundingClientRect();
+    ctx.globalCompositeOperation = 'destination-out';
+    const grd = ctx.createRadialGradient(e.clientX - r.left, e.clientY - r.top, 4,
+                                         e.clientX - r.left, e.clientY - r.top, 40);
+    grd.addColorStop(0, 'rgba(0,0,0,.9)');
+    grd.addColorStop(1, 'transparent');
+    ctx.fillStyle = grd;
+    ctx.beginPath(); ctx.arc(e.clientX - r.left, e.clientY - r.top, 40, 0, 7); ctx.fill();
+    ctx.globalCompositeOperation = 'source-over';
+    if (++strokes > 34) sweep();
+  });
+  /* touch devices: the sand sighs off on its own once seen */
+  if (matchMedia('(pointer: coarse)').matches) {
+    new IntersectionObserver((es, io) => es.forEach(en => {
+      if (en.isIntersecting) { setTimeout(sweep, 1400); io.disconnect(); }
+    }), { threshold: .5 }).observe(canvas);
+  }
+})();
+
+/* ---------- Exhibit II: the frame leans toward your lantern ---------- */
+(() => {
+  if (matchMedia('(pointer: coarse)').matches) return;
+  const ex = document.getElementById('ex-realms');
+  const painting = ex.querySelector('.painting');
+  ex.addEventListener('mousemove', e => {
+    const r = ex.getBoundingClientRect();
+    const nx = (e.clientX - r.left) / r.width - .5;
+    const ny = (e.clientY - r.top) / r.height - .5;
+    painting.style.setProperty('--ty', (nx * 10).toFixed(2) + 'deg');
+    painting.style.setProperty('--tx', (-ny * 7).toFixed(2) + 'deg');
+  });
+  ex.addEventListener('mouseleave', () => {
+    painting.style.setProperty('--ty', '0deg');
+    painting.style.setProperty('--tx', '0deg');
+  });
+})();
+
+/* ---------- Exhibit III: the dial turns; the feed obeys ---------- */
+(() => {
+  const feeds = [1, 3, 5, 7, 9].map(n => `Observe/Screenshot${n}.jpg`);
+  feeds.forEach(src => { const i = new Image(); i.src = src; });
+  const screen = document.getElementById('observe-screen');
+  const osd = document.getElementById('observe-osd');
+  const ex = document.getElementById('ex-observe');
+  const dial = document.getElementById('observe-dial');
+  let timer = null, idx = 0, angle = 0;
+  const show = () => {
+    screen.style.backgroundImage = `url('${feeds[idx]}')`;
+    osd.textContent = `RUN 0${idx + 1} - REPLAY`;
+    screen.animate(
+      [{ filter: 'brightness(2.4) contrast(2)' }, { filter: 'brightness(1)' }],
+      { duration: 160 }
+    );
+  };
+  const turn = () => {
+    angle += 72;
+    dial.style.transform = `rotate(${angle}deg)`;
+    idx = (idx + 1) % feeds.length;
+    show();
+  };
+  dial.addEventListener('click', e => { e.stopPropagation(); turn(); });
+  dial.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); turn(); }
+  });
+  ex.addEventListener('mouseenter', () => {
+    timer = setInterval(() => { angle += 72; dial.style.transform = `rotate(${angle}deg)`; idx = (idx + 1) % feeds.length; show(); }, 1400);
+  });
+  ex.addEventListener('mouseleave', () => {
+    clearInterval(timer);
+    screen.style.backgroundImage = "url('Observe/Cover%20Art/capsule_616x353.jpg')";
+    osd.textContent = 'RUN 00 - ROOM';
+  });
+})();
+
+/* ---------- Exhibit IV: wind the key ---------- */
+(() => {
+  const ex = document.getElementById('ex-gates');
+  const key = document.getElementById('windkey');
+  let winding = false;
+  const wind = () => {
+    if (winding) return;
+    winding = true;
+    ex.classList.add('wound');
+    setTimeout(() => { ex.classList.remove('wound'); winding = false; }, 2600);
+  };
+  key.addEventListener('click', e => { e.stopPropagation(); wind(); });
+  key.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); wind(); }
+  });
+})();
+
+/* ---------- entering an exhibit ---------- */
+(() => {
+  const veil = document.getElementById('veil');
+  const enter = ex => {
+    const href = ex.dataset.href;
+    if (window.ArchiveTransitions) {
+      window.ArchiveTransitions.leaveFor(href, ex.dataset.veil);
+      return;
+    }
+    veil.className = 'veil ' + ex.dataset.veil + ' active';
+    setTimeout(() => location.href = href, 820);
+  };
+  document.querySelectorAll('.exhibit').forEach(ex => {
+    ex.addEventListener('click', () => enter(ex));
+    ex.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); enter(ex); }
+    });
+  });
+})();
+</script>
 </body>
-
 </html>

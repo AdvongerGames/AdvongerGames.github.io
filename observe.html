@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Observe - Advonger Games</title>
+<meta name="description" content="Observe is a single-player puzzle game where you solve rooms by watching, replaying past actions, and collaborating with parallel versions of yourself.">
+<link rel="icon" type="image/png" href="The%20Great%20Exhibition/shortcut_icon.png">
+<link rel="stylesheet" href="css/archive.css">
+<script src="js/archive-transitions.js" defer></script>
+<style>
+/* ============================================================
+   EXHIBIT III — OBSERVE · the watching room
+   ============================================================ */
+body.obs {
+  --blood: #b3241d;
+  --blood-bright: #ff4a3c;
+  --phos: #e9dfd2;
+  background: #060404;
+  font-family: var(--mono);
+  font-size: 21px;
+  line-height: 1.45;
+}
+body.obs .vignette {
+  background: radial-gradient(ellipse at 50% 45%, transparent 40%, rgba(2,0,0,.72) 100%);
+}
+/* global scanlines over the whole station */
+body.obs .scan-wall {
+  position: fixed; inset: 0; z-index: 89; pointer-events: none;
+  background: repeating-linear-gradient(rgba(0,0,0,0) 0 3px, rgba(0,0,0,.22) 3px 5px);
+  -webkit-mask: linear-gradient(#000, #000), var(--trailer-clear-mask, none);
+  -webkit-mask-composite: source-over, destination-out;
+  mask: linear-gradient(#000, #000), var(--trailer-clear-mask, none);
+  mask-composite: add, subtract;
+}
+/* rare full-page signal jump */
+@keyframes station-jump {
+  0%, 96.5%, 100% { transform: none; filter: none; }
+  97% { transform: translateX(3px) skewX(.4deg); filter: hue-rotate(-12deg); }
+  98% { transform: translateX(-4px); }
+  99% { transform: none; filter: brightness(1.25); }
+}
+body.obs main, body.obs header { animation: station-jump 14s steps(1) infinite; }
+
+/* headings become station stencils */
+.obs .hall-heading .over { color: rgba(255,74,60,.6); font-family: var(--mono); font-size: 17px; letter-spacing: .4em; }
+.obs .hall-heading h2 {
+  font-family: var(--mono); font-weight: 400;
+  font-size: clamp(30px, 4.6vw, 52px);
+  color: var(--phos);
+  text-shadow: 0 0 14px rgba(255,74,60,.35);
+}
+.obs .hall-heading .rule {
+  background:
+    radial-gradient(circle 3px at 50% 50%, var(--blood-bright) 40%, transparent 45%),
+    linear-gradient(to right, transparent, rgba(179,36,29,.7) 20%, rgba(179,36,29,.7) 80%, transparent) 50% 50% / 100% 1px no-repeat;
+}
+.obs .return-plaque {
+  font-family: var(--mono); font-size: 15px; letter-spacing: .18em;
+  background: #0c0606; border-color: rgba(179,36,29,.5); color: rgba(233,223,210,.75);
+}
+.obs .return-plaque:hover { border-color: var(--blood-bright); color: var(--phos); }
+
+/* ------------------------------------------------ hero: the wall screen */
+.obs-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 90px clamp(20px, 6vw, 90px) 9vh;
+  overflow: hidden;
+  isolation: isolate;
+}
+.obs-hero .feed {
+  position: absolute; inset: 0; z-index: -2;
+  background: url('Observe/Cover%20Art/capsule_616x353.jpg') center 20% / cover no-repeat;
+  image-rendering: pixelated;
+  animation: feed-breathe 18s ease-in-out infinite alternate, feed-flicker 7s steps(24) infinite;
+}
+@keyframes feed-breathe { from { transform: scale(1.02); } to { transform: scale(1.09); } }
+@keyframes feed-flicker {
+  0%, 93%, 96%, 100% { opacity: 1; }
+  94% { opacity: .82; } 95% { opacity: 1; filter: brightness(1.3); }
+}
+.obs-hero .feed-shade {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(ellipse 70% 55% at 28% 78%, rgba(6,4,4,.66), transparent 70%),
+    linear-gradient(rgba(6,4,4,.55), transparent 30%, transparent 52%, rgba(6,4,4,.97) 86%);
+}
+.obs-hero .osd-top {
+  position: absolute; top: 26px; right: clamp(20px, 6vw, 90px);
+  display: flex; align-items: center; gap: 14px;
+  font-size: 19px; letter-spacing: .12em;
+  color: var(--phos);
+  text-shadow: 0 0 10px rgba(255,74,60,.6);
+}
+.obs-hero .osd-top .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--blood-bright);
+  box-shadow: 0 0 12px var(--blood-bright);
+  animation: rec-blink 1.3s steps(1) infinite;
+}
+@keyframes rec-blink { 50% { opacity: .12; } }
+.obs-hero .subject {
+  max-width: 760px;
+  animation: type-rise 1.6s .4s both;
+}
+@keyframes type-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; } }
+.obs-hero .subject .line1 {
+  font-size: 19px; letter-spacing: .3em; color: rgba(255,74,60,.75);
+}
+.obs-hero .subject h1 {
+  font-family: var(--mono); font-weight: 400;
+  font-size: clamp(64px, 12vw, 150px);
+  line-height: .95;
+  color: var(--phos);
+  text-shadow: 4px 0 0 rgba(179,36,29,.55), -4px 0 0 rgba(60,90,140,.35), 0 0 34px rgba(255,74,60,.3);
+  animation: title-split 9s steps(1) infinite;
+}
+@keyframes title-split {
+  0%, 90%, 94%, 100% { transform: none; }
+  91% { transform: translateX(-3px) skewX(-1deg); }
+  92% { transform: translateX(3px); }
+}
+.obs-hero .subject .brief {
+  margin-top: 18px;
+  font-size: 21px; color: rgba(233,223,210,.85);
+  max-width: 560px;
+}
+.obs-hero .descend {
+  margin-top: 40px;
+  display: inline-flex; align-items: center; gap: 14px;
+  font-size: 18px; letter-spacing: .28em; text-transform: uppercase;
+  color: rgba(255,74,60,.85);
+  cursor: pointer;
+  animation: type-rise 1.6s .9s both;
+}
+.obs-hero .descend .chevrons { animation: chev-drop 2s ease-in-out infinite; display: inline-block; }
+@keyframes chev-drop { 50% { transform: translateY(6px); } }
+
+/* ------------------------------------------------ sections */
+.obs section { padding: 14vh 24px; position: relative; }
+
+/* the switchboard: main monitor + channel knobs */
+.obs .switchboard { max-width: 1080px; margin: 70px auto 0; }
+.obs .monitor {
+  position: relative;
+  padding: clamp(14px, 1.8vw, 22px);
+  background: linear-gradient(160deg, #2e2a24, #16130f 55%, #0d0b08);
+  border-radius: 12px;
+  border: 1px solid #000;
+  box-shadow: 0 30px 80px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.07);
+}
+.obs .monitor .tube {
+  position: relative; overflow: hidden;
+  aspect-ratio: 16/9;
+  border-radius: 5px;
+  background: #120303;
+  cursor: zoom-in;
+}
+.obs .monitor .tube img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+}
+.obs .monitor .tube .static {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  opacity: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23s)'/%3E%3C/svg%3E");
+}
+.obs .monitor .tube.switching .static { animation: static-burst .38s steps(4); }
+@keyframes static-burst { 0% { opacity: .9; } 100% { opacity: 0; } }
+.obs .monitor .tube::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: repeating-linear-gradient(rgba(0,0,0,0) 0 2px, rgba(0,0,0,.3) 2px 4px);
+}
+.obs .monitor .tube::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 4; pointer-events: none;
+  background: radial-gradient(ellipse 100% 80% at 28% 8%, rgba(255,255,255,.1), transparent 55%);
+}
+.obs .monitor .osd {
+  position: absolute; z-index: 5; top: 14px; left: 16px;
+  font-size: 21px; color: var(--phos);
+  letter-spacing: .1em;
+  text-shadow: 0 0 9px rgba(255,74,60,.7);
+}
+.obs .monitor .osd-time {
+  position: absolute; z-index: 5; bottom: 12px; right: 16px;
+  font-size: 18px; color: rgba(233,223,210,.75);
+  letter-spacing: .12em;
+}
+/* channel knobs */
+.obs .channels {
+  margin-top: 22px;
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 12px;
+}
+.obs .knob {
+  position: relative;
+  width: clamp(88px, 10vw, 118px);
+  aspect-ratio: 16/10;
+  padding: 0;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #241d16;
+  border-radius: 4px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.6), inset 0 0 14px rgba(0,0,0,.8);
+  cursor: pointer;
+  filter: brightness(.5) saturate(.75);
+  transition: filter .35s, box-shadow .35s, transform .35s;
+  overflow: hidden;
+}
+.obs .knob::before { /* mini scanlines */
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(rgba(0,0,0,0) 0 2px, rgba(0,0,0,.35) 2px 3px);
+}
+.obs .knob::after { /* channel stamp */
+  content: attr(data-cam);
+  position: absolute; left: 5px; bottom: 3px;
+  font-family: var(--mono); font-size: 13px;
+  letter-spacing: .08em;
+  color: rgba(233,223,210,.85);
+  text-shadow: 0 0 6px rgba(0,0,0,.9);
+}
+.obs .knob:hover { filter: brightness(.85); transform: translateY(-3px); }
+.obs .knob.tuned {
+  filter: brightness(1) saturate(1);
+  border-color: rgba(255,74,60,.75);
+  box-shadow: 0 0 18px rgba(255,74,60,.3), 0 6px 16px rgba(0,0,0,.6);
+}
+.obs .knob.tuned::after { color: var(--blood-bright); }
+.obs .board-note {
+  margin-top: 20px; text-align: center;
+  font-size: 17px; color: rgba(233,223,210,.4);
+  letter-spacing: .1em;
+}
+
+/* trailer monitor */
+.obs .trailer-frame {
+  margin-top: 64px;
+  aspect-ratio: auto;
+  padding: clamp(14px, 1.8vw, 22px);
+  background: linear-gradient(160deg, #2e2a24, #16130f 55%, #0d0b08);
+  border-radius: 12px;
+  border: 1px solid #000;
+  box-shadow: 0 30px 80px rgba(0,0,0,.8);
+  position: relative;
+  z-index: 91;
+}
+.obs .trailer-frame .well { position: relative; aspect-ratio: 16/9; background: #000; border-radius: 4px; overflow: hidden; }
+.obs .trailer-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+.obs .trailer-frame .tape {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  padding: 4px 18px;
+  background: #120606;
+  border: 1px solid rgba(179,36,29,.6);
+  font-size: 16px; letter-spacing: .3em; color: var(--blood-bright);
+  white-space: nowrap;
+}
+
+/* requisition terminal (steam) */
+.obs .terminal {
+  margin-top: 60px;
+  width: min(760px, 92vw);
+  margin-left: auto; margin-right: auto;
+  background: #0a0505;
+  border: 1px solid rgba(179,36,29,.5);
+  box-shadow: 0 0 50px rgba(179,36,29,.15), 0 26px 70px rgba(0,0,0,.7);
+}
+.obs .terminal .term-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(179,36,29,.35);
+  font-size: 17px; letter-spacing: .18em;
+  color: rgba(255,74,60,.8);
+}
+.obs .terminal .term-body { padding: clamp(14px, 2vw, 24px); }
+.obs .terminal .term-line {
+  font-size: 18px; color: rgba(233,223,210,.7);
+  margin-bottom: 14px; letter-spacing: .06em;
+}
+.obs .terminal .term-line .ok { color: #7ec97e; }
+.obs .terminal .cursor { display: inline-block; width: 10px; height: 18px; background: var(--phos); vertical-align: -3px; animation: rec-blink 1s steps(1) infinite; }
+.obs .steam-note { font-family: var(--mono); font-style: normal; font-size: 17px; letter-spacing: .05em; }
+.obs .steam-note a { color: var(--blood-bright); border-color: rgba(255,74,60,.4); }
+
+.obs .colophon .curator, .obs .colophon .curator a { font-family: var(--mono); font-size: 16px; color: rgba(255,74,60,.6); }
+.obs .colophon .quiet { font-family: var(--mono); font-style: normal; font-size: 17px; color: rgba(233,223,210,.4); }
+</style>
+</head>
+<body class="obs">
+
+<div class="arrive-shade"></div>
+<div class="grain"></div>
+<div class="scan-wall"></div>
+<div class="vignette"></div>
+
+<a class="return-plaque" href="index.html"><span class="arrow">⟵</span> THE ARCHIVE</a>
+
+<!-- ═══════ HERO ═══════ -->
+<header class="obs-hero">
+  <div class="feed"></div>
+  <div class="feed-shade"></div>
+  <div class="osd-top"><span class="dot"></span> REPLAY · <span id="clock">00:00:00</span></div>
+  <div class="subject">
+    <p class="line1">SINGLE-PLAYER PUZZLE GAME</p>
+    <h1>OBSERVE</h1>
+    <p class="brief">Solve interconnected rooms using only your eyes. Your completed actions replay beside you, letting past and future versions of yourself work together.</p>
+    <a class="descend" href="#switchboard"><span class="chevrons">▼▼</span> VIEW PUZZLE ROOMS</a>
+  </div>
+</header>
+
+<!-- ═══════ FEEDS (gallery) ═══════ -->
+<section id="switchboard">
+  <div class="hall-heading reveal">
+    <span class="over">Puzzle Rooms</span>
+    <h2>Observation, Replays, and Parallel Selves</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="switchboard reveal d1">
+    <div class="monitor">
+      <div class="tube" id="tube">
+        <img id="tube-img" src="Observe/Screenshot1.jpg" alt="Observe screenshot 1">
+        <div class="static"></div>
+        <span class="osd" id="tube-osd">ROOM 01 - REPLAY</span>
+        <span class="osd-time" id="tube-time"></span>
+      </div>
+    </div>
+    <div class="channels" id="channels" role="tablist" aria-label="Observe screenshots"></div>
+    <p class="board-note">SELECT A ROOM. CLICK THE SCREEN TO ENLARGE. PLAN AHEAD FOR THE NEXT REPLAY.</p>
+  </div>
+</section>
+
+<!-- ═══════ TRAILER ═══════ -->
+<section>
+  <div class="hall-heading reveal">
+    <span class="over">Official Trailer</span>
+    <h2>See the Puzzle System in Motion</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="trailer-frame reveal d1">
+    <span class="tape">PUZZLE TRAILER</span>
+    <div class="well">
+      <iframe src="https://www.youtube-nocookie.com/embed/1S4LxchTAlQ" title="Observe — trailer"
+              loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+  </div>
+  <p class="trailer-link reveal d2"><a href="https://www.youtube.com/watch?v=1S4LxchTAlQ" target="_blank" rel="noopener">Watch trailer on YouTube</a></p>
+</section>
+
+<!-- ═══════ STEAM ═══════ -->
+<section>
+  <div class="hall-heading reveal">
+    <span class="over">Steam Page</span>
+    <h2>Play Observe</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="terminal reveal d1">
+    <div class="term-head"><span>OBSERVE</span><span>STEAM</span></div>
+    <div class="term-body">
+      <p class="term-line">&gt; puzzle type: observation, time replay, parallel selves</p>
+      <p class="term-line"><span class="ok">✓</span> Steam page linked below.</p>
+      <iframe class="steam-widget" src="https://store.steampowered.com/widget/2738190/" title="Observe on Steam" loading="lazy"></iframe>
+      <p class="steam-note">&gt; steam page:
+        <a href="https://store.steampowered.com/app/2738190/Observe/" target="_blank" rel="noopener">store.steampowered.com/app/2738190/Observe</a>
+        <span class="cursor"></span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ RETURN ═══════ -->
+<footer class="colophon">
+  <img class="mark" src="Advonger_Games_logo.png" alt="">
+  <p class="curator"><a href="index.html">⟵ RETURN TO THE ARCHIVE</a></p>
+  <p class="quiet">Collaborate with past versions of yourself and piece together a story about regret.</p>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <img alt="">
+  <span class="lb-caption"></span>
+</div>
+
+<script>
+/* clocks */
+(() => {
+  const pads = n => String(n).padStart(2, '0');
+  const clock = document.getElementById('clock');
+  const tubeTime = document.getElementById('tube-time');
+  setInterval(() => {
+    const d = new Date();
+    const t = `${pads(d.getHours())}:${pads(d.getMinutes())}:${pads(d.getSeconds())}`;
+    clock.textContent = t;
+    tubeTime.textContent = `OBSERVE ${t}`;
+  }, 1000);
+})();
+
+/* keep the trailer clear of the page-wide scanline layer */
+(() => {
+  const scanWall = document.querySelector('.scan-wall');
+  const trailerWell = document.querySelector('.trailer-frame .well');
+  if (!scanWall || !trailerWell) return;
+
+  const clearTrailer = () => {
+    const r = trailerWell.getBoundingClientRect();
+    scanWall.style.setProperty(
+      '--trailer-clear-mask',
+      `linear-gradient(#000, #000) ${r.left}px ${r.top}px / ${r.width}px ${r.height}px no-repeat`
+    );
+  };
+
+  clearTrailer();
+  addEventListener('scroll', clearTrailer, { passive: true });
+  addEventListener('resize', clearTrailer);
+})();
+
+/* the switchboard */
+(() => {
+  const N = 9;
+  const tube = document.getElementById('tube');
+  const img = document.getElementById('tube-img');
+  const osd = document.getElementById('tube-osd');
+  const chWrap = document.getElementById('channels');
+  const src = i => `Observe/Screenshot${i}.jpg`;
+  for (let i = 1; i <= N; i++) { const pre = new Image(); pre.src = src(i); }
+
+  let current = 1;
+  const knobs = [];
+  const tune = i => {
+    if (i === current) return;
+    current = i;
+    tube.classList.remove('switching');
+    void tube.offsetWidth; /* restart the static burst */
+    tube.classList.add('switching');
+    setTimeout(() => {
+      img.src = src(i);
+      img.alt = `Observe screenshot ${i}`;
+      osd.textContent = `ROOM ${String(i).padStart(2,'0')} - REPLAY`;
+    }, 120);
+    knobs.forEach((k, n) => k.classList.toggle('tuned', n + 1 === i));
+  };
+  for (let i = 1; i <= N; i++) {
+    const b = document.createElement('button');
+    b.className = 'knob' + (i === 1 ? ' tuned' : '');
+    b.style.backgroundImage = `url('${src(i)}')`;
+    b.dataset.cam = `ROOM ${String(i).padStart(2,'0')}`;
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-label', `Show Observe screenshot ${i}`);
+    b.addEventListener('click', () => tune(i));
+    chWrap.appendChild(b);
+    knobs.push(b);
+  }
+
+  /* idle: cycle through puzzle-room screenshots */
+  setInterval(() => {
+    if (document.hidden) return;
+    if (Math.random() < .18) tune(1 + Math.floor(Math.random() * N));
+  }, 7000);
+
+  /* enlarge */
+  const lb = document.getElementById('lightbox');
+  const lbImg = lb.querySelector('img');
+  const cap = lb.querySelector('.lb-caption');
+  tube.addEventListener('click', () => {
+    lbImg.src = img.src;
+    cap.textContent = osd.textContent + ' - Observe screenshot';
+    lb.classList.add('open');
+  });
+  lb.addEventListener('click', () => lb.classList.remove('open'));
+  addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+})();
+
+/* reveal on scroll */
+(() => {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('lit'); io.unobserve(e.target); }
+  }), { threshold: .18 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>

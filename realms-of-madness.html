@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Realms of Madness - Advonger Games</title>
+<meta name="description" content="Realms of Madness is a fantasy castlebuilder RTS where you build a medieval castle, command sea, ground, and sky forces, and demolish the enemy stronghold.">
+<link rel="icon" type="image/png" href="The%20Great%20Exhibition/shortcut_icon.png">
+<link rel="stylesheet" href="css/archive.css">
+<script src="js/archive-transitions.js" defer></script>
+<style>
+/* ============================================================
+   EXHIBIT II — REALMS OF MADNESS · two moons & burning water
+   ============================================================ */
+body.rom {
+  --violet: #a98fd6;
+  --violet-deep: #5b4390;
+  --flame: #f0a04a;
+  background: linear-gradient(#0d0a16, #070510);
+}
+body.rom .vignette {
+  background: radial-gradient(ellipse at 50% 40%, transparent 48%, rgba(5,3,12,.62) 100%);
+}
+#embers { position: fixed; inset: 0; z-index: 3; pointer-events: none; }
+
+/* ------------------------------------------------ hero */
+.rom-hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  justify-content: flex-end; align-items: center;
+  text-align: center;
+  padding: 90px 24px 0;
+  isolation: isolate;
+}
+.rom-hero .bg {
+  position: absolute; inset: 0 0 18% 0; z-index: -2;
+  background: url('Realms%20of%20Madness/Cover%20Art/Realms-1920x1080.jpg') center 22% / cover no-repeat;
+  animation: rom-drift 30s ease-in-out infinite alternate;
+}
+@keyframes rom-drift { from { transform: scale(1.03); } to { transform: scale(1.1) translateY(1%); } }
+/* the water: the same sky, drowned */
+.rom-hero .water {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 20%; z-index: -1;
+  overflow: hidden;
+}
+.rom-hero .water .flip {
+  position: absolute; inset: 0;
+  background: url('Realms%20of%20Madness/Cover%20Art/Realms-1920x1080.jpg') center 24% / cover no-repeat;
+  transform: scaleY(-1);
+  filter: blur(3px) saturate(1.35) brightness(.75);
+  animation: water-breathe 8s ease-in-out infinite;
+}
+@keyframes water-breathe {
+  0%, 100% { transform: scaleY(-1.04) skewX(0deg); }
+  33%      { transform: scaleY(-1)    skewX(.8deg); }
+  66%      { transform: scaleY(-1.06) skewX(-.8deg); }
+}
+.rom-hero .water::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(rgba(7,5,16,0) 0 6px, rgba(7,5,16,.45) 6px 9px),
+    linear-gradient(rgba(7,5,16,.15), rgba(7,5,16,.92));
+  animation: water-lines 5s linear infinite;
+}
+@keyframes water-lines { from { background-position: 0 0, 0 0; } to { background-position: 0 9px, 0 0; } }
+.rom-hero .tint {
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(rgba(13,10,22,.35), transparent 30%, transparent 62%, rgba(7,5,16,.55) 78%, rgba(7,5,16,0) 82%);
+  pointer-events: none;
+}
+.rom-hero .plaque-row {
+  position: relative;
+  margin-bottom: 5vh;
+  padding: 34px 60px 24px;
+  background: radial-gradient(ellipse 62% 75% at 50% 55%, rgba(7,5,16,.78), rgba(7,5,16,.32) 58%, transparent 82%);
+  animation: rom-rise 2s .4s cubic-bezier(.2,.6,.2,1) both;
+}
+@keyframes rom-rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; } }
+.rom-hero .field-tag {
+  font-family: var(--display); font-size: 12px; font-weight: 600;
+  letter-spacing: .5em; text-indent: .5em; text-transform: uppercase;
+  color: #ded4f2;
+  text-shadow: 0 1px 3px rgba(7,5,16,.95), 0 0 14px rgba(7,5,16,.9), 0 2px 22px #000;
+}
+.rom-hero .field-note {
+  margin-top: 12px; max-width: 600px;
+  font-style: italic; font-size: 21px;
+  color: rgba(226,216,240,.92);
+  text-shadow: 0 2px 14px rgba(0,0,0,.9);
+}
+.rom-hero .descend {
+  margin-top: 30px;
+  display: inline-flex; flex-direction: column; align-items: center; gap: 10px;
+  font-family: var(--display); font-size: 10px;
+  letter-spacing: .45em; text-indent: .45em; text-transform: uppercase;
+  color: var(--violet);
+  cursor: pointer;
+}
+/* a sword, point down, as the scroll cue */
+.rom-hero .descend svg { width: 15px; animation: sword-sink 2.6s ease-in-out infinite; }
+@keyframes sword-sink { 50% { transform: translateY(8px); } }
+
+/* ------------------------------------------------ sections */
+.rom section { padding: 15vh 24px; position: relative; }
+
+/* scrying pool (trailer) */
+.rom .scrying { background: radial-gradient(ellipse 75% 65% at 50% 32%, #171028, transparent 75%); }
+.rom .trailer-frame {
+  margin-top: 64px;
+  aspect-ratio: auto;
+  padding: clamp(14px, 1.8vw, 22px);
+  background:
+    linear-gradient(135deg, #3a2f56, #191228 40%, #4a3a6a 75%, #201638);
+  border: 1px solid rgba(169,143,214,.35);
+  box-shadow: 0 0 90px rgba(91,67,144,.35), 0 34px 90px rgba(0,0,0,.8), inset 0 0 0 2px rgba(10,6,20,.9);
+  position: relative;
+}
+.rom .trailer-frame::before, .rom .trailer-frame::after {
+  content: '◆';
+  position: absolute; top: 50%; transform: translateY(-50%);
+  color: var(--violet); font-size: 13px;
+  text-shadow: 0 0 12px rgba(169,143,214,.8);
+}
+.rom .trailer-frame::before { left: -26px; }
+.rom .trailer-frame::after { right: -26px; }
+.rom .trailer-frame .well { position: relative; aspect-ratio: 16/9; background: #000; border: 1px solid #0a0614; }
+.rom .trailer-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+.rom .plate {
+  margin: 26px auto 0; width: fit-content;
+  padding: 8px 26px;
+  font-family: var(--display); font-size: 10px; letter-spacing: .4em; text-indent: .4em;
+  text-transform: uppercase; color: var(--violet);
+  border: 1px solid rgba(169,143,214,.4);
+  background: linear-gradient(#1c1430, #120c22);
+  box-shadow: 0 3px 14px rgba(0,0,0,.6);
+}
+
+/* visions (gallery) — paintings hung in the dark */
+.rom .visions-grid {
+  margin: 70px auto 0;
+  max-width: 1240px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: clamp(30px, 3.6vw, 52px);
+}
+.rom .vision {
+  cursor: zoom-in;
+  transition: transform .7s cubic-bezier(.2,.6,.2,1);
+}
+.rom .vision:hover { transform: translateY(-9px); }
+.rom .vision .frame {
+  padding: clamp(9px, 1.1vw, 13px);
+  background: linear-gradient(135deg, #55406e, #241a38 30%, #6a5288 65%, #2c2044);
+  box-shadow: 0 20px 50px rgba(0,0,0,.7), inset 0 0 0 1px rgba(10,6,20,.9);
+  position: relative;
+  overflow: hidden;
+}
+.rom .vision .frame img {
+  width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;
+  border: 1px solid #0a0614;
+  filter: brightness(.92);
+  transition: filter .8s ease, transform 1.4s ease;
+}
+.rom .vision:hover .frame img { filter: brightness(1.08) saturate(1.12); transform: scale(1.05); }
+/* candlelight sweep */
+.rom .vision .frame::after {
+  content: '';
+  position: absolute; inset: -30% -50%;
+  background: radial-gradient(ellipse 30% 55% at 50% 50%, rgba(240,160,74,.22), transparent 70%);
+  transform: translateX(-80%);
+  transition: transform 1.5s ease;
+  pointer-events: none;
+}
+.rom .vision:hover .frame::after { transform: translateX(70%); }
+.rom .vision .tag {
+  margin-top: 10px; text-align: center;
+  font-family: var(--display); font-size: 9px; letter-spacing: .32em;
+  text-transform: uppercase; color: rgba(169,143,214,.6);
+}
+
+/* the mad court — portraits that watch back */
+.rom .court-note {
+  margin: 26px auto 0; max-width: 520px;
+  text-align: center;
+  font-style: italic; font-size: 18px;
+  color: rgba(169,143,214,.65);
+}
+.rom .court {
+  margin: 60px auto 0;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: clamp(22px, 3vw, 40px);
+  justify-items: center;
+}
+.rom .courtier { text-align: center; width: 100%; max-width: 240px; }
+.rom .courtier .arch {
+  position: relative;
+  aspect-ratio: 4 / 4.9;
+  border-radius: 46% 46% 4px 4px / 34% 34% 4px 4px;
+  padding: clamp(7px, .9vw, 10px);
+  background: linear-gradient(160deg, #55406e, #241a38 35%, #6a5288 70%, #2c2044);
+  box-shadow: 0 18px 44px rgba(0,0,0,.7);
+  overflow: hidden;
+  cursor: pointer;
+}
+.rom .courtier .arch .velvet {
+  position: absolute; inset: clamp(7px, .9vw, 10px);
+  border-radius: 44% 44% 3px 3px / 32% 32% 3px 3px;
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 20%, rgba(169,143,214,.2), transparent 60%),
+    linear-gradient(#191230, #0b0818);
+  overflow: hidden;
+}
+.rom .courtier img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 15%;
+  transition: opacity .28s ease, transform .8s ease;
+}
+.rom .courtier .portrait-variant,
+.rom .courtier .eyes-closed,
+.rom .courtier .eyes-variant {
+  opacity: 0;
+  pointer-events: none;
+}
+.rom .courtier .portrait { z-index: 0; }
+.rom .courtier .portrait-variant { z-index: 1; }
+.rom .courtier .eyes-closed { z-index: 2; }
+.rom .courtier .eyes-variant { z-index: 3; }
+.rom .courtier:hover .portrait,
+.rom .courtier.show-variant .portrait { opacity: 0; }
+.rom .courtier:hover .portrait-variant,
+.rom .courtier.show-variant .portrait-variant { opacity: 1; }
+.rom .courtier.blinking .eyes-closed { opacity: 1; }
+.rom .courtier:hover.blinking .eyes-closed,
+.rom .courtier.show-variant.blinking .eyes-closed { opacity: 0; }
+.rom .courtier:hover.blinking .eyes-variant,
+.rom .courtier.show-variant.blinking .eyes-variant { opacity: 1; }
+.rom .courtier:hover img { transform: scale(1.06); }
+/* moonlight passes over the face on hover */
+.rom .courtier .arch::after {
+  content: '';
+  position: absolute; inset: -30% -50%; z-index: 2;
+  background: radial-gradient(ellipse 30% 55% at 50% 50%, rgba(190,160,255,.24), transparent 70%);
+  transform: translateX(-85%);
+  transition: transform 1.4s ease;
+  pointer-events: none;
+}
+.rom .courtier:hover .arch::after { transform: translateX(75%); }
+.rom .courtier .name {
+  margin: 12px auto 0; width: fit-content;
+  padding: 5px 18px;
+  font-family: var(--display); font-size: 11px;
+  letter-spacing: .26em; text-indent: .26em; text-transform: uppercase;
+  color: #d8cdec;
+  border: 1px solid rgba(169,143,214,.4);
+  background: linear-gradient(#1c1430, #120c22);
+}
+.rom .courtier .epithet {
+  margin-top: 7px;
+  font-size: 15px; font-style: italic;
+  color: rgba(169,143,214,.6);
+  opacity: 0; transition: opacity .5s;
+}
+.rom .courtier:hover .epithet { opacity: 1; }
+.rom .allies {
+  margin: 58px auto 0;
+  max-width: 620px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  gap: clamp(24px, 4vw, 46px);
+  justify-items: center;
+}
+.rom .ally {
+  width: 100%;
+  max-width: 230px;
+  text-align: center;
+}
+.rom .ally .sigil-frame {
+  position: relative;
+  aspect-ratio: 4 / 4.9;
+  padding: clamp(8px, 1vw, 11px);
+  border-radius: 12px 12px 5px 5px;
+  background:
+    linear-gradient(145deg, #f3d894, #8f6828 28%, #2d4560 62%, #d9b765);
+  box-shadow: 0 18px 44px rgba(0,0,0,.62), 0 0 28px rgba(240,160,74,.18);
+  overflow: hidden;
+}
+.rom .ally .sigil-frame::before {
+  content: '';
+  position: absolute; inset: clamp(8px, 1vw, 11px);
+  border-radius: 8px 8px 3px 3px;
+  background:
+    radial-gradient(ellipse 80% 54% at 50% 14%, rgba(245,219,151,.26), transparent 62%),
+    linear-gradient(#182335, #0d1424);
+}
+.rom .ally img {
+  position: absolute; inset: clamp(8px, 1vw, 11px);
+  z-index: 1;
+  width: calc(100% - clamp(16px, 2vw, 22px));
+  height: calc(100% - clamp(16px, 2vw, 22px));
+  object-fit: contain;
+  object-position: 50% 100%;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+  transition: opacity .22s ease, transform .8s ease, filter .8s ease;
+}
+.rom .ally .ally-eyes {
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+}
+.rom .ally.blinking .ally-eyes {
+  opacity: 1;
+}
+.rom .ally:hover img {
+  transform: translateY(-5px) scale(1.04);
+  filter: drop-shadow(0 13px 22px rgba(0,0,0,.5)) brightness(1.08);
+}
+.rom .ally .name {
+  margin: 12px auto 0; width: fit-content;
+  padding: 5px 18px;
+  font-family: var(--display); font-size: 11px;
+  letter-spacing: .26em; text-indent: .26em; text-transform: uppercase;
+  color: #f1d99d;
+  border: 1px solid rgba(240,160,74,.52);
+  background: linear-gradient(#243852, #121b2b);
+  box-shadow: 0 0 16px rgba(240,160,74,.08);
+}
+.rom .ally .epithet {
+  margin-top: 7px;
+  font-size: 15px; font-style: italic;
+  color: rgba(226,216,240,.68);
+}
+@media (max-width: 520px) {
+  .rom .allies { grid-template-columns: 1fr; }
+}
+
+/* war table (steam) */
+.rom .war-table { background: radial-gradient(ellipse 70% 60% at 50% 45%, #150f26, transparent 75%); }
+.rom .steam-shrine {
+  margin-top: 60px;
+  padding: clamp(18px, 2.4vw, 30px);
+  background:
+    radial-gradient(ellipse 80% 100% at 50% 0%, rgba(169,143,214,.08), transparent 60%),
+    linear-gradient(#191230, #0e0a1e);
+  border: 1px solid rgba(169,143,214,.4);
+  box-shadow: 0 26px 70px rgba(0,0,0,.7), 0 0 60px rgba(91,67,144,.2);
+  position: relative;
+}
+.rom .steam-shrine::before {
+  content: 'DECREE OF ACQUISITION';
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  padding: 5px 20px;
+  font-family: var(--display); font-size: 9px; letter-spacing: .4em; text-indent: .4em;
+  color: #d8cdec;
+  background: linear-gradient(#332552, #1c1434);
+  border: 1px solid rgba(169,143,214,.5);
+  white-space: nowrap;
+}
+.rom .steam-note a { color: var(--violet); border-color: rgba(169,143,214,.4); }
+.rom .steam-note a:hover { color: #d8cdec; border-color: #d8cdec; }
+
+.rom .colophon .curator, .rom .colophon .curator a { color: #7a68a8; }
+</style>
+</head>
+<body class="rom">
+
+<div class="arrive-shade"></div>
+<div class="grain"></div>
+<div class="vignette"></div>
+<canvas id="embers"></canvas>
+
+<a class="return-plaque" href="index.html"><span class="arrow">⟵</span> The Archive</a>
+
+<!-- ═══════ HERO ═══════ -->
+<header class="rom-hero">
+  <div class="bg"></div>
+  <div class="tint"></div>
+  <div class="water"><div class="flip"></div></div>
+  <div class="plaque-row">
+    <p class="field-tag">Fantasy Castlebuilder RTS</p>
+    <p class="field-note">Build a medieval fantasy castle, expand your economy and upgrades, then lead mythical sea, ground, and sky forces against the enemy stronghold.</p>
+    <a class="descend" href="#scrying">
+      <svg viewBox="0 0 20 40" fill="none" stroke="#a98fd6" stroke-width="1.5" aria-hidden="true">
+        <path d="M10 2v30M10 38l-3.5-6h7L10 38ZM3 10h14M10 2l-2 4h4l-2-4Z"/>
+      </svg>
+      Watch the trailer
+    </a>
+  </div>
+</header>
+
+<!-- ═══════ TRAILER ═══════ -->
+<section class="scrying" id="scrying">
+  <div class="hall-heading reveal">
+    <span class="over">Official Trailer</span>
+    <h2>Castlebuilding, Siege Warfare, and Dragons</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="trailer-frame reveal d1">
+    <div class="well">
+      <iframe src="https://www.youtube-nocookie.com/embed/bZRip2tBhMY" title="Realms of Madness — trailer"
+              loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+  </div>
+  <p class="trailer-link reveal d2"><a href="https://www.youtube.com/watch?v=bZRip2tBhMY" target="_blank" rel="noopener">Watch trailer on YouTube</a></p>
+  <p class="plate reveal d2">Fantasy RTS gameplay trailer</p>
+</section>
+
+<!-- ═══════ GALLERY ═══════ -->
+<section>
+  <div class="hall-heading reveal">
+    <span class="over">Gameplay Screenshots</span>
+    <h2>Fight Across Sea, Land, and Sky</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="visions-grid" id="visions"></div>
+</section>
+
+<!-- ═══════ THE MAD COURT ═══════ -->
+<section style="padding-top:0;">
+  <div class="hall-heading reveal">
+    <span class="over">Campaign Characters</span>
+    <h2>Voice-Acted Fantasy Cast</h2>
+    <div class="rule"></div>
+  </div>
+  <p class="court-note reveal d1">Realms of Madness includes fully voice-acted characters alongside its handcrafted castlebuilding, combat, and original soundtrack.</p>
+  <div class="court" id="court"></div>
+  <div class="allies" id="allies" aria-label="The defenders"></div>
+</section>
+
+<!-- ═══════ STEAM ═══════ -->
+<section class="war-table">
+  <div class="hall-heading reveal">
+    <span class="over">Steam Page</span>
+    <h2>Play Realms of Madness</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="steam-shrine reveal d1">
+    <iframe class="steam-widget" src="https://store.steampowered.com/widget/2501920/" title="Realms of Madness on Steam" loading="lazy"></iframe>
+    <p class="steam-note">Realms of Madness is available on
+      <a href="https://store.steampowered.com/app/2501920/Realms_of_Madness/" target="_blank" rel="noopener">Steam - Realms of Madness</a>.</p>
+  </div>
+</section>
+
+<!-- ═══════ RETURN ═══════ -->
+<footer class="colophon">
+  <img class="mark" src="Advonger_Games_logo.png" alt="">
+  <p class="curator"><a href="index.html">⟵ Return to the Archive</a></p>
+  <p class="quiet">Build your fortress, unlock chaotic abilities, and bring dragons into the late-game battle.</p>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <img alt="">
+  <span class="lb-caption"></span>
+</div>
+
+<script>
+/* embers drifting up */
+(() => {
+  const c = document.getElementById('embers');
+  const ctx = c.getContext('2d');
+  let w, h, sparks;
+  const resize = () => {
+    w = c.width = innerWidth; h = c.height = innerHeight;
+    sparks = Array.from({length: Math.min(46, innerWidth / 26)}, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      r: .5 + Math.random() * 1.6,
+      vx: -.15 + Math.random() * .3, vy: -.25 - Math.random() * .5,
+      a: .1 + Math.random() * .4, p: Math.random() * Math.PI * 2,
+      hot: Math.random() < .6
+    }));
+  };
+  resize(); addEventListener('resize', resize);
+  (function tick() {
+    ctx.clearRect(0, 0, w, h);
+    for (const s of sparks) {
+      s.x += s.vx + Math.sin(s.p) * .3; s.y += s.vy; s.p += .02;
+      if (s.y < -6) { s.y = h + 6; s.x = Math.random() * w; }
+      ctx.globalAlpha = s.a * (0.55 + 0.45 * Math.sin(s.p * 2));
+      ctx.fillStyle = s.hot ? '#f0a04a' : '#a98fd6';
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 7); ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* gallery: seven visions */
+(() => {
+  const wrap = document.getElementById('visions');
+  const tags = ['Castlebuilding View','Fantasy RTS Battle','Fortress Under Siege','Army Formation',
+                'Layered Battlefield','Mythical Forces','Naval and Ground War'];
+  for (let i = 1; i <= 7; i++) {
+    const f = document.createElement('figure');
+    f.className = 'vision reveal';
+    f.innerHTML = `
+      <div class="frame"><img src="Realms%20of%20Madness/Screenshot${i}.jpg" loading="lazy"
+        alt="Realms of Madness screenshot ${i}"></div>
+      <figcaption class="tag">Screenshot ${String(i).padStart(2,'0')} - ${tags[i-1]}</figcaption>`;
+    wrap.appendChild(f);
+  }
+})();
+
+/* the mad court: portraits that blink, and change when you come close */
+(() => {
+  const dir = 'Realms of Madness/The Cast/';
+  const cast = [
+    ['Amraphel',        'A masked noble with a dangerous second face'],
+    ['Diema',           'A sharp-eyed court figure with hidden power'],
+    ['Moros',           'A dark presence at the center of the conflict'],
+    ['Étoilefleur',     'A bright, otherworldly figure in the cast'],
+    ['Ísarr Iceblood',  'An icebound warrior with a harsher side'],
+  ];
+  const fileOf = (name, variant, closed) => {
+    /* The closed-eye files are transparent overlays, not full portraits. */
+    let f;
+    if (variant && closed) f = `${name} variant eyes closed.png`;
+    else if (variant)      f = `${name} variant.png`;
+    else if (closed)       f = `${name} eyes closed.png`;
+    else                   f = `${name} 1.png`;
+    return encodeURI(dir + f);
+  };
+
+  const wrap = document.getElementById('court');
+  cast.forEach(([name, epithet]) => {
+    /* preload all four states */
+    [[0,0],[0,1],[1,0],[1,1]].forEach(([v, c]) => { const i = new Image(); i.src = fileOf(name, v, c); });
+
+    const el = document.createElement('div');
+    el.className = 'courtier reveal';
+    el.innerHTML = `
+      <div class="arch"><div class="velvet">
+        <img class="portrait" src="${fileOf(name, 0, 0)}" loading="lazy" alt="${name}, a character from Realms of Madness">
+        <img class="portrait-variant" src="${fileOf(name, 1, 0)}" loading="lazy" alt="">
+        <img class="eyes-closed" src="${fileOf(name, 0, 1)}" loading="lazy" alt="">
+        <img class="eyes-variant" src="${fileOf(name, 1, 1)}" loading="lazy" alt="">
+      </div></div>
+      <div class="name">${name}</div>
+      <p class="epithet">${epithet}</p>`;
+    wrap.appendChild(el);
+
+    let closed = false;
+    const paint = () => {
+      el.classList.toggle('blinking', closed);
+    };
+
+    /* blink at uneasy intervals */
+    (function blink() {
+      setTimeout(() => {
+        closed = true; paint();
+        setTimeout(() => { closed = false; paint(); blink(); }, 140 + Math.random() * 90);
+      }, 2200 + Math.random() * 5200);
+    })();
+  });
+
+  const allyDir = 'Realms of Madness/The Cast/';
+  const allyFile = file => encodeURI(allyDir + file);
+  const allies = [
+    ['King', 'King.png', 'King_Eyes.png', 'The ruler at the heart of the realm'],
+    ['Advisor', 'Advisor.png', 'Advisor_Eyes.png', 'The strategist watching the war unfold'],
+  ];
+  const allyWrap = document.getElementById('allies');
+  allies.forEach(([name, src, eyes, epithet]) => {
+    [src, eyes].forEach(file => { const img = new Image(); img.src = allyFile(file); });
+    const el = document.createElement('div');
+    el.className = 'ally reveal';
+    el.innerHTML = `
+      <div class="sigil-frame">
+        <img class="ally-portrait" src="${allyFile(src)}" loading="lazy" alt="${name}, one of the defenders">
+        <img class="ally-eyes" src="${allyFile(eyes)}" loading="lazy" alt="">
+      </div>
+      <div class="name">${name}</div>
+      <p class="epithet">${epithet}</p>`;
+    allyWrap.appendChild(el);
+
+    (function blink() {
+      setTimeout(() => {
+        el.classList.add('blinking');
+        setTimeout(() => { el.classList.remove('blinking'); blink(); }, 130 + Math.random() * 80);
+      }, 2600 + Math.random() * 5600);
+    })();
+  });
+})();
+
+/* reveal on scroll */
+(() => {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('lit'); io.unobserve(e.target); }
+  }), { threshold: .18 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+
+/* lightbox */
+(() => {
+  const lb = document.getElementById('lightbox');
+  const img = lb.querySelector('img');
+  const cap = lb.querySelector('.lb-caption');
+  document.getElementById('visions').addEventListener('click', e => {
+    const fig = e.target.closest('.vision');
+    if (!fig) return;
+    img.src = fig.querySelector('img').src;
+    cap.textContent = fig.querySelector('.tag').textContent;
+    lb.classList.add('open');
+  });
+  lb.addEventListener('click', () => lb.classList.remove('open'));
+  addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+})();
+</script>
+</body>
+</html>
