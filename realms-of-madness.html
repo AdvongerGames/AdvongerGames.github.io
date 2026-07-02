@@ -139,6 +139,38 @@ body.rom .vignette {
 }
 
 /* visions (gallery) — paintings hung in the dark */
+.rom .realm-map {
+  margin: 64px auto 0;
+  width: min(1120px, 100%);
+  padding: clamp(10px, 1.3vw, 17px);
+  background:
+    radial-gradient(ellipse 75% 95% at 50% 45%, rgba(169,143,214,.16), transparent 66%),
+    linear-gradient(135deg, #3a2f56, #191228 38%, #4a3a6a 72%, #201638);
+  border: 1px solid rgba(169,143,214,.42);
+  box-shadow: 0 0 90px rgba(91,67,144,.28), 0 34px 90px rgba(0,0,0,.74), inset 0 0 0 2px rgba(10,6,20,.88);
+  position: relative;
+}
+.rom .realm-map::before,
+.rom .realm-map::after {
+  content: '◆';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--violet);
+  font-size: 13px;
+  text-shadow: 0 0 14px rgba(169,143,214,.9);
+}
+.rom .realm-map::before { left: -26px; }
+.rom .realm-map::after { right: -26px; }
+.rom .realm-map img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid #0a0614;
+  filter: brightness(.94) saturate(1.04);
+}
+
 .rom .visions-grid {
   margin: 70px auto 0;
   max-width: 1240px;
@@ -436,6 +468,17 @@ body.rom .vignette {
     </div>
   </div>
   <p class="trailer-link reveal d2"><a href="https://www.youtube.com/watch?v=bZRip2tBhMY" target="_blank" rel="noopener">Watch trailer on YouTube</a></p>
+</section>
+
+<section style="padding-top:0;">
+  <div class="hall-heading reveal">
+    <span class="over">World Map</span>
+    <h2>The Realms</h2>
+    <div class="rule"></div>
+  </div>
+  <figure class="realm-map reveal d1">
+    <img src="Realms%20of%20Madness/world_map.jpg" alt="World map for Realms of Madness" loading="lazy">
+  </figure>
 </section>
 
 <!-- ═══════ GALLERY ═══════ -->

@@ -82,8 +82,8 @@ body.otg .vignette {
 /* royal command balcony */
 .otg-hero .royal-court {
   position: absolute;
-  left: 50%; bottom: 2.2%; z-index: 4;
-  width: min(980px, 86vw);
+  left: 50%; bottom: 3.6%; z-index: 4;
+  width: min(920px, 76vw);
   height: clamp(220px, 27vw, 360px);
   transform: translateX(-50%);
   pointer-events: none;
@@ -102,7 +102,7 @@ body.otg .vignette {
 }
 .otg-hero .royal-card {
   position: absolute;
-  bottom: clamp(22px, 2.6vw, 42px);
+  bottom: clamp(34px, 6.8vh, 88px);
   width: clamp(132px, 14vw, 198px);
   height: clamp(174px, 18vw, 256px);
   margin: 0;
@@ -399,6 +399,39 @@ body.otg .vignette {
   font-style: italic; font-size: 18px; color: #6d5432;
 }
 
+/* campaign map */
+.otg .campaign-map {
+  margin: 64px auto 0;
+  width: min(1120px, 100%);
+  position: relative;
+}
+.otg .campaign-map::before,
+.otg .campaign-map::after {
+  content: '';
+  position: absolute;
+  left: 4%; right: 4%;
+  height: 14px;
+  background: linear-gradient(90deg, #5a3b1a, #9a743f 18%, #6d4f28 50%, #9a743f 82%, #4a3218);
+  border: 1px solid var(--wood-deep);
+  border-radius: 999px;
+  z-index: 2;
+  box-shadow: 0 8px 18px rgba(60,40,10,.24);
+}
+.otg .campaign-map::before { top: -7px; }
+.otg .campaign-map::after { bottom: -7px; }
+.otg .campaign-map img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  padding: clamp(10px, 1.2vw, 16px);
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 45%, rgba(255,247,220,.55), transparent 70%),
+    linear-gradient(#fbf1d6, #e8d0a0);
+  border: 1px solid #b68f50;
+  box-shadow: 0 26px 60px rgba(60,40,10,.3), inset 0 0 0 1px rgba(255,248,220,.5);
+}
+
 /* the cast */
 .otg .cast-row {
   margin: 70px auto 0;
@@ -627,6 +660,17 @@ body.otg .vignette {
     <p class="gate-note">Construct houses and resource buildings, keep citizens happy, fortify your walls, survive enemy sieges, and counterattack across more than 26 campaign levels.</p>
     <p class="trailer-link reveal d2"><a href="https://www.youtube.com/watch?v=AzQaa2pc1uk" target="_blank" rel="noopener">Watch trailer on YouTube</a></p>
   </div>
+</section>
+
+<section class="parchment" style="padding-top:0;">
+  <div class="hall-heading reveal">
+    <span class="over">Campaign Map</span>
+    <h2>The Road Beyond the Gate</h2>
+    <div class="rule"></div>
+  </div>
+  <figure class="campaign-map reveal d1">
+    <img src="Open%20The%20Gates!/world_map.jpg" alt="World map for Open The Gates!" loading="lazy">
+  </figure>
 </section>
 
 <!-- ═══════ THE CAST ═══════ -->
