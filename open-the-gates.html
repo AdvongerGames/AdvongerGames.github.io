@@ -587,6 +587,219 @@ body.otg .vignette {
 .otg .steam-note a { color: #8a3d22; border-color: rgba(138,61,34,.4); }
 .otg .steam-note a:hover { color: #a8342a; border-color: #a8342a; }
 
+/* royal dispatches (newsletter) */
+.otg .royal-dispatches {
+  padding-top: 0;
+}
+.otg .dispatch-decree {
+  margin: 70px auto 0;
+  width: min(790px, 100%);
+  position: relative;
+  padding: clamp(54px, 5vw, 68px) clamp(18px, 3vw, 38px) clamp(28px, 4vw, 46px);
+  background:
+    radial-gradient(ellipse 100% 48% at 50% 0%, rgba(255,250,232,.9), transparent 58%),
+    linear-gradient(135deg, rgba(168,52,42,.08), transparent 38%),
+    linear-gradient(#fbf0d5, #e6cf9d);
+  border: 1px solid #bc9858;
+  box-shadow: 0 28px 64px rgba(60,40,10,.35), inset 0 0 0 1px rgba(255,250,232,.5);
+  clip-path: polygon(0 10px, 3% 0, 97% 5px, 100% 13px, 99% 96%, 96% 100%, 4% 98%, 0 92%);
+}
+.otg .dispatch-decree::before,
+.otg .dispatch-decree::after {
+  content: '';
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  height: 10px;
+  background: linear-gradient(90deg, #5a3b1a, #9a743f 18%, #6d4f28 50%, #9a743f 82%, #4a3218);
+  border: 1px solid var(--wood-deep);
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(60,40,10,.22);
+}
+.otg .dispatch-decree::before { top: -5px; }
+.otg .dispatch-decree::after { bottom: -5px; }
+.otg .dispatch-plank {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 24px 9px;
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .34em;
+  text-indent: .34em;
+  text-transform: uppercase;
+  color: #f5e9c8;
+  background:
+    linear-gradient(rgba(255,235,190,.18), transparent 45%, rgba(0,0,0,.22)),
+    repeating-linear-gradient(90deg, #7a5a2e 0 34px, #6b4d25 34px 68px);
+  border: 2px solid #3c2a12;
+  border-radius: 3px;
+  box-shadow: 0 8px 18px rgba(60,40,10,.28);
+  white-space: nowrap;
+}
+.otg .dispatch-copy {
+  max-width: 610px;
+  margin: 0 auto 26px;
+  text-align: center;
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.5;
+  color: #5a3b1a;
+}
+#mlb2-43343437.ml-form-embedContainer {
+  width: 100%;
+  max-width: 590px;
+  margin: 0 auto;
+}
+#mlb2-43343437 .ml-form-embedWrapper {
+  width: 100%;
+}
+#mlb2-43343437 .ml-form-embedContent {
+  display: none;
+}
+#mlb2-43343437 .ml-block-form,
+#mlb2-43343437 .ml-form-formContent {
+  margin: 0;
+}
+#mlb2-43343437 input[type="email"] {
+  width: 100%;
+  min-height: 56px;
+  padding: 15px 18px;
+  color: #3c2a14;
+  background:
+    radial-gradient(ellipse 80% 100% at 50% 0%, rgba(255,250,232,.55), transparent 62%),
+    #f6e5bd;
+  border: 1px solid #a77c3b;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 rgba(255,250,232,.7), 0 10px 22px rgba(60,40,10,.16);
+  font-family: var(--serif);
+  font-size: 20px;
+  outline: none;
+  transition: border-color .3s, box-shadow .3s, background .3s;
+}
+#mlb2-43343437 input[type="email"]::placeholder {
+  color: rgba(60,42,20,.58);
+}
+#mlb2-43343437 input[type="email"]:focus {
+  border-color: #8a3d22;
+  box-shadow: inset 0 1px 0 rgba(255,250,232,.8), 0 0 0 3px rgba(168,52,42,.12), 0 12px 26px rgba(60,40,10,.18);
+  background:
+    radial-gradient(ellipse 80% 100% at 50% 0%, rgba(255,250,232,.72), transparent 62%),
+    #f8e9c7;
+}
+#mlb2-43343437 .ml-form-embedSubmit {
+  margin-top: 16px;
+}
+#mlb2-43343437 .ml-form-embedSubmit button {
+  width: 100%;
+  min-height: 52px;
+  border: 1px solid #6e241d;
+  border-radius: 3px;
+  color: #f9edca;
+  background:
+    linear-gradient(rgba(255,235,190,.18), transparent 45%, rgba(0,0,0,.2)),
+    linear-gradient(#b63b31, #7d251f);
+  box-shadow: 0 12px 28px rgba(60,40,10,.26), inset 0 1px 0 rgba(255,235,190,.26);
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .32em;
+  text-indent: .32em;
+  text-transform: uppercase;
+  transition: transform .3s, box-shadow .3s, filter .3s;
+}
+#mlb2-43343437 .ml-form-embedSubmit button:hover,
+#mlb2-43343437 .ml-form-embedSubmit button:focus-visible {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 16px 34px rgba(60,40,10,.32), 0 0 22px rgba(168,52,42,.22), inset 0 1px 0 rgba(255,235,190,.34);
+}
+#mlb2-43343437 .ml-form-embedSubmit button.loading {
+  display: none;
+}
+#mlb2-43343437 .ml-form-successBody {
+  text-align: center;
+}
+#mlb2-43343437 .ml-form-successContent h4 {
+  color: #7d251f;
+  font-family: var(--display);
+  font-size: clamp(24px, 3.2vw, 38px);
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-indent: .16em;
+  text-transform: uppercase;
+}
+#mlb2-43343437 .ml-form-successContent p,
+.otg .dispatch-note {
+  margin-top: 12px;
+  text-align: center;
+  color: #7a5a2e;
+  font-size: 15px;
+  font-style: italic;
+}
+.ml-form-embedSubmitLoad {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+.ml-form-embedSubmitLoad::after {
+  content: " ";
+  display: block;
+  width: 11px;
+  height: 11px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 4px solid #f9edca;
+  border-color: #f9edca #f9edca #f9edca transparent;
+  animation: ml-form-embedSubmitLoad 1.2s linear infinite;
+}
+@keyframes ml-form-embedSubmitLoad {
+  to { transform: rotate(360deg); }
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+@media (min-width: 700px) {
+  #mlb2-43343437 .ml-form-formContent {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 190px;
+    gap: 12px;
+    align-items: stretch;
+  }
+  #mlb2-43343437 .ml-form-embedSubmit {
+    margin-top: 0;
+  }
+  #mlb2-43343437 .ml-form-embedSubmit button {
+    height: 100%;
+  }
+}
+@media (max-width: 520px) {
+  .otg .dispatch-plank {
+    width: auto;
+    max-width: none;
+    white-space: nowrap !important;
+    text-align: center;
+    font-size: 9px;
+    line-height: 1;
+    letter-spacing: .16em;
+    text-indent: .16em;
+  }
+  #mlb2-43343437 .ml-form-embedSubmit button {
+    letter-spacing: .2em;
+    text-indent: .2em;
+  }
+}
+
 /* dark wood footer */
 .otg .colophon { background: linear-gradient(var(--wood-deep), #201406); }
 </style>
@@ -710,6 +923,58 @@ body.otg .vignette {
 </section>
 
 <!-- ═══════ RETURN ═══════ -->
+<section class="parchment royal-dispatches" id="dispatches">
+  <div class="hall-heading reveal">
+    <span class="over">Royal Dispatches</span>
+    <h2>Follow Open The Gates!</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="dispatch-decree reveal d1">
+    <span class="dispatch-plank">Notice</span>
+    <p class="dispatch-copy">Receive major castle dispatches: update news, demo notes, Steam announcements, siege reports, and future Advonger Games messages.</p>
+
+    <div id="mlb2-43343437" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-43343437">
+      <div class="ml-form-align-center">
+        <div class="ml-form-embedWrapper embedForm">
+          <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+            <div class="ml-form-embedContent">
+              <h4>Newsletter</h4>
+              <p>Signup for news and special offers!</p>
+            </div>
+            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/434629/forms/191967274867885742/subscribe" data-code="" method="post" target="_blank">
+              <div class="ml-form-formContent">
+                <div class="ml-form-fieldRow ml-last-item">
+                  <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                    <label class="sr-only" for="otg-dispatch-email">Email address</label>
+                    <input id="otg-dispatch-email" aria-label="email" aria-required="true" type="email" class="form-control" name="fields[email]" placeholder="Email address" autocomplete="email">
+                  </div>
+                </div>
+                <input type="hidden" name="ml-submit" value="1">
+                <div class="ml-form-embedSubmit">
+                  <button type="submit" class="primary">Join</button>
+                  <button disabled="disabled" style="display: none;" type="button" class="loading">
+                    <div class="ml-form-embedSubmitLoad"></div>
+                    <span class="sr-only">Loading...</span>
+                  </button>
+                </div>
+              </div>
+              <input type="hidden" name="anticsrf" value="true">
+            </form>
+          </div>
+          <div class="ml-form-successBody row-success" style="display: none">
+            <div class="ml-form-successContent">
+              <h4>Thank you</h4>
+              <p>You have joined the castle dispatch list.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="dispatch-note">Major updates only. Unsubscribe any time.</p>
+  </div>
+</section>
+
 <footer class="colophon">
   <img class="mark" src="Advonger_Games_logo.png" alt="">
   <p class="curator"><a href="index.html">⟵ Return to the Archive</a></p>
@@ -835,6 +1100,26 @@ body.otg .vignette {
   lb.addEventListener('click', () => lb.classList.remove('open'));
   addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
 })();
+</script>
+<script>
+window.ml_webform_success_43343437 = function() {
+  var $ = window.ml_jQuery || window.jQuery;
+  if ($) {
+    $('.ml-subscribe-form-43343437 .row-success').show();
+    $('.ml-subscribe-form-43343437 .row-form').hide();
+    return;
+  }
+  document.querySelectorAll('.ml-subscribe-form-43343437 .row-success').forEach(function(el) {
+    el.style.display = 'block';
+  });
+  document.querySelectorAll('.ml-subscribe-form-43343437 .row-form').forEach(function(el) {
+    el.style.display = 'none';
+  });
+};
+</script>
+<script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
+<script>
+fetch("https://assets.mailerlite.com/jsonp/434629/forms/191967274867885742/takel").catch(function() {});
 </script>
 </body>
 </html>

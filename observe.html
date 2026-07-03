@@ -287,6 +287,213 @@ body.obs main, body.obs header { animation: station-jump 14s steps(1) infinite; 
 .obs .steam-note { font-family: var(--mono); font-style: normal; font-size: 17px; letter-spacing: .05em; }
 .obs .steam-note a { color: var(--blood-bright); border-color: rgba(255,74,60,.4); }
 
+/* signal updates (newsletter) */
+.obs .signal-updates {
+  background:
+    radial-gradient(ellipse 68% 54% at 50% 40%, rgba(179,36,29,.18), transparent 72%),
+    linear-gradient(rgba(6,4,4,0), rgba(6,4,4,.84));
+}
+.obs .signal-terminal {
+  width: min(790px, 92vw);
+  margin: 60px auto 0;
+  position: relative;
+  padding: clamp(22px, 3.6vw, 38px);
+  background:
+    repeating-linear-gradient(rgba(255,255,255,0) 0 3px, rgba(255,255,255,.025) 3px 5px),
+    radial-gradient(ellipse 80% 100% at 50% 0%, rgba(255,74,60,.12), transparent 62%),
+    linear-gradient(#120707, #070303);
+  border: 1px solid rgba(179,36,29,.62);
+  border-radius: 8px;
+  box-shadow:
+    0 34px 90px rgba(0,0,0,.78),
+    0 0 58px rgba(179,36,29,.18),
+    inset 0 0 0 1px rgba(233,223,210,.045);
+}
+.obs .signal-terminal::before {
+  content: 'SIGNAL OPEN';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 18px;
+  background: #120606;
+  border: 1px solid rgba(255,74,60,.7);
+  box-shadow: 0 0 18px rgba(255,74,60,.18);
+  color: var(--blood-bright);
+  font-family: var(--mono);
+  font-size: 16px;
+  letter-spacing: .28em;
+  text-indent: .28em;
+  white-space: nowrap;
+}
+.obs .signal-terminal::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(233,223,210,.045);
+  border-radius: 5px;
+  pointer-events: none;
+}
+.obs .signal-copy {
+  max-width: 610px;
+  margin: 0 auto 24px;
+  text-align: center;
+  color: rgba(233,223,210,.86);
+  font-family: var(--mono);
+  font-size: clamp(19px, 2.1vw, 23px);
+  line-height: 1.42;
+  letter-spacing: .04em;
+  text-shadow: 0 0 12px rgba(255,74,60,.16), 0 2px 12px rgba(0,0,0,.8);
+}
+#mlb2-43343398.ml-form-embedContainer {
+  width: 100%;
+  max-width: 590px;
+  margin: 0 auto;
+}
+#mlb2-43343398 .ml-form-embedWrapper {
+  width: 100%;
+}
+#mlb2-43343398 .ml-form-embedContent {
+  display: none;
+}
+#mlb2-43343398 .ml-block-form,
+#mlb2-43343398 .ml-form-formContent {
+  margin: 0;
+}
+#mlb2-43343398 input[type="email"] {
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 16px;
+  color: var(--phos);
+  background:
+    repeating-linear-gradient(rgba(255,255,255,0) 0 3px, rgba(255,255,255,.025) 3px 5px),
+    #090303;
+  border: 1px solid rgba(255,74,60,.66);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(233,223,210,.05), 0 0 20px rgba(179,36,29,.12);
+  font-family: var(--mono);
+  font-size: 23px;
+  letter-spacing: .04em;
+  outline: none;
+  transition: border-color .25s, box-shadow .25s, background .25s;
+}
+#mlb2-43343398 input[type="email"]::placeholder {
+  color: rgba(233,223,210,.48);
+}
+#mlb2-43343398 input[type="email"]:focus {
+  border-color: var(--blood-bright);
+  box-shadow: inset 0 1px 0 rgba(233,223,210,.08), 0 0 28px rgba(255,74,60,.24);
+  background:
+    repeating-linear-gradient(rgba(255,255,255,0) 0 3px, rgba(255,255,255,.035) 3px 5px),
+    #100505;
+}
+#mlb2-43343398 .ml-form-embedSubmit {
+  margin-top: 16px;
+}
+#mlb2-43343398 .ml-form-embedSubmit button {
+  width: 100%;
+  min-height: 52px;
+  border: 1px solid rgba(255,74,60,.72);
+  border-radius: 4px;
+  color: var(--phos);
+  background:
+    linear-gradient(rgba(255,255,255,.08), rgba(255,255,255,0)),
+    linear-gradient(#a92821, #5d100d);
+  box-shadow: 0 12px 28px rgba(0,0,0,.55), 0 0 26px rgba(255,74,60,.18), inset 0 1px 0 rgba(255,255,255,.1);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 21px;
+  letter-spacing: .22em;
+  text-indent: .22em;
+  text-transform: uppercase;
+  transition: transform .25s, box-shadow .25s, filter .25s;
+}
+#mlb2-43343398 .ml-form-embedSubmit button:hover,
+#mlb2-43343398 .ml-form-embedSubmit button:focus-visible {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+  box-shadow: 0 16px 36px rgba(0,0,0,.6), 0 0 34px rgba(255,74,60,.26), inset 0 1px 0 rgba(255,255,255,.14);
+}
+#mlb2-43343398 .ml-form-embedSubmit button.loading {
+  display: none;
+}
+#mlb2-43343398 .ml-form-successBody {
+  text-align: center;
+}
+#mlb2-43343398 .ml-form-successContent h4 {
+  color: var(--phos);
+  font-family: var(--mono);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 400;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-shadow: 0 0 16px rgba(255,74,60,.34);
+}
+#mlb2-43343398 .ml-form-successContent p,
+.obs .signal-note {
+  margin-top: 12px;
+  text-align: center;
+  color: rgba(233,223,210,.56);
+  font-family: var(--mono);
+  font-size: 17px;
+  letter-spacing: .05em;
+}
+.ml-form-embedSubmitLoad {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+.ml-form-embedSubmitLoad::after {
+  content: " ";
+  display: block;
+  width: 11px;
+  height: 11px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 4px solid var(--phos);
+  border-color: var(--phos) var(--phos) var(--phos) transparent;
+  animation: ml-form-embedSubmitLoad 1.2s linear infinite;
+}
+@keyframes ml-form-embedSubmitLoad {
+  to { transform: rotate(360deg); }
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+@media (min-width: 700px) {
+  #mlb2-43343398 .ml-form-formContent {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 180px;
+    gap: 12px;
+    align-items: stretch;
+  }
+  #mlb2-43343398 .ml-form-embedSubmit {
+    margin-top: 0;
+  }
+  #mlb2-43343398 .ml-form-embedSubmit button {
+    height: 100%;
+  }
+}
+@media (max-width: 520px) {
+  .obs .signal-terminal::before {
+    max-width: calc(100% - 40px);
+    overflow-wrap: anywhere;
+    white-space: normal;
+    text-align: center;
+  }
+  #mlb2-43343398 .ml-form-embedSubmit button {
+    letter-spacing: .14em;
+    text-indent: .14em;
+  }
+}
+
 .obs .colophon .curator, .obs .colophon .curator a { font-family: var(--mono); font-size: 16px; color: rgba(255,74,60,.6); }
 .obs .colophon .quiet { font-family: var(--mono); font-style: normal; font-size: 17px; color: rgba(233,223,210,.4); }
 </style>
@@ -374,6 +581,57 @@ body.obs main, body.obs header { animation: station-jump 14s steps(1) infinite; 
 </section>
 
 <!-- ═══════ RETURN ═══════ -->
+<section class="signal-updates" id="dispatches">
+  <div class="hall-heading reveal">
+    <span class="over">Signal Updates</span>
+    <h2>Follow Observe</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="signal-terminal reveal d1">
+    <p class="signal-copy">&gt; Receive major transmissions: updates, trailer drops, Steam news, puzzle-room notes, and future Advonger Games announcements.</p>
+
+    <div id="mlb2-43343398" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-43343398">
+      <div class="ml-form-align-center">
+        <div class="ml-form-embedWrapper embedForm">
+          <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+            <div class="ml-form-embedContent">
+              <h4>Newsletter</h4>
+              <p>Signup for news and special offers!</p>
+            </div>
+            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/434629/forms/191967208448984323/subscribe" data-code="" method="post" target="_blank">
+              <div class="ml-form-formContent">
+                <div class="ml-form-fieldRow ml-last-item">
+                  <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                    <label class="sr-only" for="observe-signal-email">Email address</label>
+                    <input id="observe-signal-email" aria-label="email" aria-required="true" type="email" class="form-control" name="fields[email]" placeholder="Email address" autocomplete="email">
+                  </div>
+                </div>
+                <input type="hidden" name="ml-submit" value="1">
+                <div class="ml-form-embedSubmit">
+                  <button type="submit" class="primary">Join</button>
+                  <button disabled="disabled" style="display: none;" type="button" class="loading">
+                    <div class="ml-form-embedSubmitLoad"></div>
+                    <span class="sr-only">Loading...</span>
+                  </button>
+                </div>
+              </div>
+              <input type="hidden" name="anticsrf" value="true">
+            </form>
+          </div>
+          <div class="ml-form-successBody row-success" style="display: none">
+            <div class="ml-form-successContent">
+              <h4>Signal received</h4>
+              <p>You have joined the Observe update list.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="signal-note">&gt; Major updates only. Unsubscribe any time.</p>
+  </div>
+</section>
+
 <footer class="colophon">
   <img class="mark" src="Advonger_Games_logo.png" alt="">
   <p class="curator"><a href="index.html">⟵ RETURN TO THE ARCHIVE</a></p>
@@ -481,6 +739,26 @@ body.obs main, body.obs header { animation: station-jump 14s steps(1) infinite; 
   }), { threshold: .18 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 })();
+</script>
+<script>
+window.ml_webform_success_43343398 = function() {
+  var $ = window.ml_jQuery || window.jQuery;
+  if ($) {
+    $('.ml-subscribe-form-43343398 .row-success').show();
+    $('.ml-subscribe-form-43343398 .row-form').hide();
+    return;
+  }
+  document.querySelectorAll('.ml-subscribe-form-43343398 .row-success').forEach(function(el) {
+    el.style.display = 'block';
+  });
+  document.querySelectorAll('.ml-subscribe-form-43343398 .row-form').forEach(function(el) {
+    el.style.display = 'none';
+  });
+};
+</script>
+<script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
+<script>
+fetch("https://assets.mailerlite.com/jsonp/434629/forms/191967208448984323/takel").catch(function() {});
 </script>
 </body>
 </html>

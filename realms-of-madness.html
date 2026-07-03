@@ -424,6 +424,220 @@ body.rom .vignette {
 .rom .steam-note a { color: var(--violet); border-color: rgba(169,143,214,.4); }
 .rom .steam-note a:hover { color: #d8cdec; border-color: #d8cdec; }
 
+/* war dispatches (newsletter) */
+.rom .war-dispatches {
+  background:
+    radial-gradient(ellipse 70% 58% at 50% 34%, rgba(91,67,144,.34), transparent 74%),
+    radial-gradient(ellipse 46% 30% at 50% 78%, rgba(240,160,74,.12), transparent 70%),
+    linear-gradient(rgba(7,5,16,0), rgba(7,5,16,.78));
+}
+.rom .dispatch-frame {
+  width: min(800px, 92vw);
+  margin: 60px auto 0;
+  padding: clamp(24px, 4vw, 44px);
+  position: relative;
+  background:
+    radial-gradient(ellipse 80% 95% at 50% 0%, rgba(169,143,214,.2), transparent 60%),
+    linear-gradient(160deg, rgba(240,160,74,.09), transparent 42%),
+    linear-gradient(#211536, #0d0a1d);
+  border: 1px solid rgba(169,143,214,.62);
+  box-shadow:
+    0 34px 90px rgba(0,0,0,.72),
+    0 0 70px rgba(91,67,144,.24),
+    inset 0 0 0 1px rgba(224,210,252,.055);
+}
+.rom .dispatch-frame::before,
+.rom .dispatch-frame::after {
+  content: '◆';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--violet);
+  font-size: 12px;
+  text-shadow: 0 0 16px rgba(169,143,214,.9);
+}
+.rom .dispatch-frame::before { left: -26px; }
+.rom .dispatch-frame::after { right: -26px; }
+.rom .dispatch-seal {
+  position: absolute;
+  top: -17px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 22px;
+  font-family: var(--display);
+  font-size: 10px;
+  letter-spacing: .36em;
+  text-indent: .36em;
+  text-transform: uppercase;
+  color: #f5ddaa;
+  background:
+    linear-gradient(90deg, rgba(240,160,74,.2), transparent 24%, transparent 76%, rgba(240,160,74,.2)),
+    linear-gradient(#332552, #171026);
+  border: 1px solid rgba(169,143,214,.58);
+  box-shadow: 0 10px 22px rgba(0,0,0,.52), 0 0 24px rgba(91,67,144,.22);
+  white-space: nowrap;
+}
+.rom .dispatch-copy {
+  max-width: 610px;
+  margin: 0 auto 26px;
+  text-align: center;
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.55;
+  color: rgba(238,229,252,.96);
+  text-shadow: 0 2px 12px rgba(0,0,0,.75);
+}
+#mlb2-43343351.ml-form-embedContainer {
+  width: 100%;
+  max-width: 590px;
+  margin: 0 auto;
+}
+#mlb2-43343351 .ml-form-embedWrapper {
+  width: 100%;
+}
+#mlb2-43343351 .ml-form-embedContent {
+  display: none;
+}
+#mlb2-43343351 .ml-block-form,
+#mlb2-43343351 .ml-form-formContent {
+  margin: 0;
+}
+#mlb2-43343351 input[type="email"] {
+  width: 100%;
+  min-height: 56px;
+  padding: 15px 18px;
+  color: #eee5fc;
+  background:
+    radial-gradient(ellipse 90% 140% at 50% 0%, rgba(169,143,214,.08), transparent 64%),
+    #090614;
+  border: 1px solid rgba(169,143,214,.72);
+  border-radius: 2px;
+  box-shadow: inset 0 1px 0 rgba(224,210,252,.08), 0 10px 24px rgba(0,0,0,.34);
+  font-family: var(--serif);
+  font-size: 20px;
+  outline: none;
+  transition: border-color .3s, box-shadow .3s, background .3s;
+}
+#mlb2-43343351 input[type="email"]::placeholder {
+  color: rgba(216,205,236,.66);
+}
+#mlb2-43343351 input[type="email"]:focus {
+  border-color: #d8cdec;
+  box-shadow: inset 0 1px 0 rgba(224,210,252,.12), 0 0 30px rgba(169,143,214,.22);
+  background:
+    radial-gradient(ellipse 90% 140% at 50% 0%, rgba(169,143,214,.13), transparent 64%),
+    #090614;
+}
+#mlb2-43343351 .ml-form-embedSubmit {
+  margin-top: 16px;
+}
+#mlb2-43343351 .ml-form-embedSubmit button {
+  width: 100%;
+  min-height: 52px;
+  border: 1px solid rgba(240,160,74,.62);
+  border-radius: 2px;
+  color: #140c21;
+  background: linear-gradient(#f3c879, #b76b2c);
+  box-shadow: 0 12px 28px rgba(0,0,0,.5), 0 0 26px rgba(240,160,74,.16), inset 0 1px 0 rgba(255,235,182,.55);
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .34em;
+  text-indent: .34em;
+  text-transform: uppercase;
+  transition: transform .3s, box-shadow .3s, filter .3s;
+}
+#mlb2-43343351 .ml-form-embedSubmit button:hover,
+#mlb2-43343351 .ml-form-embedSubmit button:focus-visible {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 16px 36px rgba(0,0,0,.56), 0 0 32px rgba(240,160,74,.24), inset 0 1px 0 rgba(255,235,182,.66);
+}
+#mlb2-43343351 .ml-form-embedSubmit button.loading {
+  display: none;
+}
+#mlb2-43343351 .ml-form-successBody {
+  text-align: center;
+}
+#mlb2-43343351 .ml-form-successContent h4 {
+  font-family: var(--display);
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #d8cdec;
+  text-shadow: 0 0 18px rgba(169,143,214,.26);
+}
+#mlb2-43343351 .ml-form-successContent p,
+.rom .dispatch-note {
+  margin-top: 12px;
+  text-align: center;
+  color: rgba(169,143,214,.66);
+  text-shadow: 0 2px 10px rgba(0,0,0,.75);
+  font-size: 15px;
+  font-style: italic;
+}
+.ml-form-embedSubmitLoad {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+.ml-form-embedSubmitLoad::after {
+  content: " ";
+  display: block;
+  width: 11px;
+  height: 11px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 4px solid #140c21;
+  border-color: #140c21 #140c21 #140c21 transparent;
+  animation: ml-form-embedSubmitLoad 1.2s linear infinite;
+}
+@keyframes ml-form-embedSubmitLoad {
+  to { transform: rotate(360deg); }
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+@media (min-width: 700px) {
+  #mlb2-43343351 .ml-form-formContent {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 190px;
+    gap: 12px;
+    align-items: stretch;
+  }
+  #mlb2-43343351 .ml-form-embedSubmit {
+    margin-top: 0;
+  }
+  #mlb2-43343351 .ml-form-embedSubmit button {
+    height: 100%;
+  }
+}
+@media (max-width: 520px) {
+  .rom .dispatch-frame::before,
+  .rom .dispatch-frame::after {
+    display: none;
+  }
+  .rom .dispatch-seal {
+    max-width: calc(100% - 40px);
+    overflow-wrap: anywhere;
+    white-space: normal;
+    text-align: center;
+  }
+  #mlb2-43343351 .ml-form-embedSubmit button {
+    letter-spacing: .22em;
+    text-indent: .22em;
+  }
+}
+
 .rom .colophon .curator, .rom .colophon .curator a { color: #7a68a8; }
 </style>
 </head>
@@ -519,6 +733,58 @@ body.rom .vignette {
 </section>
 
 <!-- ═══════ RETURN ═══════ -->
+<section class="war-dispatches" id="dispatches">
+  <div class="hall-heading reveal">
+    <span class="over">War Dispatches</span>
+    <h2>Follow Realms of Madness</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="dispatch-frame reveal d1">
+    <span class="dispatch-seal">Royal War Table</span>
+    <p class="dispatch-copy">Receive major updates from the realm: launch news, patch notes, new trailers, festival appearances, and future Advonger Games announcements.</p>
+
+    <div id="mlb2-43343351" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-43343351">
+      <div class="ml-form-align-center">
+        <div class="ml-form-embedWrapper embedForm">
+          <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+            <div class="ml-form-embedContent">
+              <h4>Newsletter</h4>
+              <p>Signup for news and special offers!</p>
+            </div>
+            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/434629/forms/191967124787299743/subscribe" data-code="" method="post" target="_blank">
+              <div class="ml-form-formContent">
+                <div class="ml-form-fieldRow ml-last-item">
+                  <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                    <label class="sr-only" for="rom-dispatch-email">Email address</label>
+                    <input id="rom-dispatch-email" aria-label="email" aria-required="true" type="email" class="form-control" name="fields[email]" placeholder="Email address" autocomplete="email">
+                  </div>
+                </div>
+                <input type="hidden" name="ml-submit" value="1">
+                <div class="ml-form-embedSubmit">
+                  <button type="submit" class="primary">Join</button>
+                  <button disabled="disabled" style="display: none;" type="button" class="loading">
+                    <div class="ml-form-embedSubmitLoad"></div>
+                    <span class="sr-only">Loading...</span>
+                  </button>
+                </div>
+              </div>
+              <input type="hidden" name="anticsrf" value="true">
+            </form>
+          </div>
+          <div class="ml-form-successBody row-success" style="display: none">
+            <div class="ml-form-successContent">
+              <h4>Thank you</h4>
+              <p>You have joined the war dispatch list.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="dispatch-note">Major updates only. Unsubscribe any time.</p>
+  </div>
+</section>
+
 <footer class="colophon">
   <img class="mark" src="Advonger_Games_logo.png" alt="">
   <p class="curator"><a href="index.html">⟵ Return to the Archive</a></p>
@@ -682,6 +948,26 @@ body.rom .vignette {
   lb.addEventListener('click', () => lb.classList.remove('open'));
   addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
 })();
+</script>
+<script>
+window.ml_webform_success_43343351 = function() {
+  var $ = window.ml_jQuery || window.jQuery;
+  if ($) {
+    $('.ml-subscribe-form-43343351 .row-success').show();
+    $('.ml-subscribe-form-43343351 .row-form').hide();
+    return;
+  }
+  document.querySelectorAll('.ml-subscribe-form-43343351 .row-success').forEach(function(el) {
+    el.style.display = 'block';
+  });
+  document.querySelectorAll('.ml-subscribe-form-43343351 .row-form').forEach(function(el) {
+    el.style.display = 'none';
+  });
+};
+</script>
+<script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
+<script>
+fetch("https://assets.mailerlite.com/jsonp/434629/forms/191967124787299743/takel").catch(function() {});
 </script>
 </body>
 </html>
