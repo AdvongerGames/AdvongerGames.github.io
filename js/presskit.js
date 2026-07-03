@@ -1,5 +1,5 @@
 /* ============================================================
-   ADVONGER GAMES — press kit behaviour
+   ADVONGER GAMES - press kit behaviour
    Expects window.PRESSKIT = {
      game:    'Observe',
      zipName: 'observe-presskit',
@@ -106,7 +106,7 @@
       }
 
       zipBtn.textContent = 'Packing ZIP…';
-      /* images are already compressed — store them for speed */
+      /* images are already compressed - store them for speed */
       const blob = await zip.generateAsync({ type: 'blob', compression: 'STORE' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
@@ -115,10 +115,10 @@
       a.click();
       a.remove();
       setTimeout(() => URL.revokeObjectURL(a.href), 30000);
-      zipBtn.textContent = 'Done — check your downloads';
+      zipBtn.textContent = 'Done - check your downloads';
     } catch (err) {
       console.error(err);
-      zipBtn.textContent = 'ZIP failed — use the links below';
+      zipBtn.textContent = 'ZIP failed - use the links below';
     }
     setTimeout(() => { zipBtn.textContent = idleLabel; busy = false; }, 4000);
   });
