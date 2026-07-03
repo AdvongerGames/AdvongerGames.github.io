@@ -116,6 +116,9 @@ a { color: inherit; text-decoration: none; }
 }
 .return-plaque:hover .arrow { transform: translate(-3px, -1px); }
 
+/* ---- the press kit plaque (same brass, fixed top-right) ---- */
+.press-plaque { left: auto; right: 22px; }
+
 /* ---- shared trailer shells ---- */
 .trailer-frame {
   position: relative;
@@ -345,4 +348,5 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 640px) {
   body { font-size: 17px; }
   .return-plaque { top: 12px; left: 12px; padding: 7px 13px 7px 10px; font-size: 10px; }
+  .press-plaque { left: auto; right: 12px; }
 }

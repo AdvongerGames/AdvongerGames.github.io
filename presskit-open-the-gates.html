@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open The Gates! — Press Kit | Advonger Games</title>
+<meta name="description" content="Press kit for Open The Gates!: fact sheet, marketing copy, official trailer, and downloadable logos, key art, screenshots, character art, and concept art.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="css/archive.css">
+<link rel="stylesheet" href="css/presskit.css">
+<style>
+/* ============================================================
+   OPEN THE GATES! — press kit · the storybook, opened for the press
+   ============================================================ */
+body.pk-otg {
+  --wood: #4a3218;
+  --wood-deep: #33220e;
+  --parch: #f1e3c2;
+  --parch-deep: #e2cd9e;
+  --ink-brown: #3c2a14;
+  --banner-red: #a8342a;
+  --acc: #8a3d22;
+  --acc-soft: rgba(138,61,34,.4);
+  background: var(--wood-deep);
+}
+body.pk-otg .vignette {
+  background: radial-gradient(ellipse at 50% 42%, transparent 58%, rgba(30,18,4,.45) 100%);
+}
+
+/* ------------------------------------------------ hero: the diorama */
+.pk-otg .pk-hero {
+  position: relative;
+  min-height: 96vh;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-start;
+  padding: 10vh 24px 0;
+  background: linear-gradient(#8ed4ea 0%, #c8ecf4 46%, #dff2e2 60%, #b8dc8e 72%);
+}
+.pk-otg .pk-hero .sun {
+  position: absolute; top: 9%; right: 13%;
+  width: clamp(70px, 9vw, 120px); aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 42% 38%, #fff7d8, #ffe08a 60%, rgba(255,224,138,0) 72%);
+  box-shadow: 0 0 80px 30px rgba(255,232,150,.55);
+  animation: pk-sun 7s ease-in-out infinite;
+}
+@keyframes pk-sun { 50% { box-shadow: 0 0 100px 44px rgba(255,232,150,.7); } }
+.pk-otg .pk-hero .cloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 100px;
+  opacity: .85;
+  filter: blur(1px);
+  animation: pk-cloud linear infinite;
+}
+.pk-otg .pk-hero .cloud::before, .pk-otg .pk-hero .cloud::after {
+  content: ''; position: absolute; background: #fff; border-radius: 50%;
+  width: 55%; aspect-ratio: 1; top: -38%; left: 12%;
+}
+.pk-otg .pk-hero .cloud::after { width: 42%; left: 52%; top: -24%; }
+@keyframes pk-cloud { from { transform: translateX(-30vw); } to { transform: translateX(115vw); } }
+.pk-otg .pk-hero .mts, .pk-otg .pk-hero .grd {
+  position: absolute; left: -3%; right: -3%; bottom: -2%;
+  pointer-events: none;
+}
+.pk-otg .pk-hero .mts { height: 56%; }
+.pk-otg .pk-hero .grd { height: 30%; z-index: 1; }
+.pk-otg .pk-hero .mts img, .pk-otg .pk-hero .grd img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.pk-otg .pk-hero .mts img { object-position: bottom; }
+.pk-otg .pk-hero .grd img { object-position: top; }
+.pk-otg .pk-hero .castle {
+  position: absolute; left: 50%; bottom: 4%; z-index: 2;
+  width: clamp(230px, 27vw, 400px);
+  transform: translateX(-50%);
+  filter: drop-shadow(0 14px 22px rgba(40,60,20,.35));
+}
+.pk-otg .pk-hero .unit {
+  position: absolute; bottom: 5.5%; z-index: 2;
+  width: clamp(20px, 2.2vw, 32px);
+  filter: drop-shadow(0 6px 6px rgba(40,60,20,.28));
+  animation: pk-step 2.8s ease-in-out infinite;
+}
+.pk-otg .pk-hero .unit.u1 { left: 33%; animation-delay: -.4s; }
+.pk-otg .pk-hero .unit.u2 { right: 33%; animation-delay: -1.3s; transform: scaleX(-1); }
+@keyframes pk-step { 50% { margin-bottom: 5px; } }
+.pk-otg .pk-hero .ledge {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 16px; z-index: 4;
+  background: linear-gradient(#6d4f28, #33220e);
+  box-shadow: 0 -4px 14px rgba(30,18,4,.35);
+}
+.pk-otg .pk-over,
+.pk-otg .pk-pitch,
+.pk-otg .pk-hero h1,
+.pk-otg .pk-actions { position: relative; z-index: 3; }
+.pk-otg .pk-over {
+  color: var(--ink-brown);
+  opacity: 1;
+  font-weight: 600;
+  text-shadow: 0 1px 0 rgba(255,255,255,.55);
+  animation: pk-drop 1.4s .15s both;
+}
+.pk-otg .pk-hero h1 { margin-top: 22px; animation: pk-drop 1.4s .3s both; }
+.pk-otg .pk-hero h1 img {
+  width: min(500px, 84vw);
+  margin: 0 auto;
+  filter: drop-shadow(0 14px 30px rgba(50,30,0,.45));
+}
+@keyframes pk-drop { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: none; } }
+.pk-otg .pk-pitch {
+  max-width: 640px;
+  padding: 12px 30px;
+  color: #2e3f1e;
+  text-shadow: 0 1px 0 rgba(255,255,255,.6);
+  font-weight: 500;
+  background: radial-gradient(ellipse 85% 120% at 50% 50%, rgba(230,243,246,.9), rgba(230,243,246,.45) 62%, transparent 82%);
+  border-radius: 18px;
+  animation: pk-drop 1.4s .5s both;
+}
+.pk-otg .pk-actions { margin-top: 30px; animation: pk-drop 1.4s .7s both; }
+
+/* wooden plank buttons */
+.pk-otg .pk-btn {
+  color: #f5e9c8;
+  text-shadow: 0 1px 0 rgba(40,20,0,.6);
+  font-weight: 700;
+  background:
+    linear-gradient(rgba(255,235,190,.18), transparent 45%, rgba(0,0,0,.22)),
+    repeating-linear-gradient(90deg, #7a5a2e 0 34px, #6b4d25 34px 68px);
+  border: 2px solid #3c2a12;
+  border-radius: 3px;
+  box-shadow: 0 6px 16px rgba(40,50,20,.35);
+}
+.pk-otg .pk-btn:hover {
+  color: #ffe9b8;
+  border-color: #3c2a12;
+  transform: translateY(-3px) rotate(-.6deg);
+  filter: drop-shadow(0 8px 12px rgba(60,35,10,.24));
+}
+.pk-otg .pk-btn.solid {
+  color: #ffe9c9;
+  background:
+    linear-gradient(rgba(255,235,190,.25), transparent 45%, rgba(0,0,0,.25)),
+    linear-gradient(#b0453a, #7e2b22);
+  border-color: #3c2a12;
+  box-shadow: 0 6px 16px rgba(90,30,15,.4), inset 0 0 0 1px rgba(255,220,120,.35);
+}
+.pk-otg .pk-btn.solid:hover { color: #fff3d8; filter: brightness(1.08) drop-shadow(0 8px 12px rgba(60,35,10,.24)); }
+
+@media (max-width: 640px) {
+  .pk-otg .pk-hero { padding-bottom: 30vh; }
+  .pk-otg .pk-hero .castle { width: 190px; }
+  .pk-otg .pk-hero .unit { display: none; }
+}
+
+/* ------------------------------------------------ parchment world */
+.pk-otg .pk-main {
+  max-width: none;
+  padding: 0;
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 0%, rgba(255,248,225,.55), transparent 60%),
+    linear-gradient(var(--parch), var(--parch-deep));
+  color: var(--ink-brown);
+}
+.pk-otg .pk-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 24px 100px;
+}
+
+/* parchment panels with wooden trim */
+.pk-otg .pk-panel {
+  position: relative;
+  background:
+    radial-gradient(ellipse 100% 40% at 50% 0%, rgba(255,250,232,.8), transparent 55%),
+    linear-gradient(#faefd2, #ead7a8);
+  border: 1px solid #c9ad72;
+  box-shadow: 0 18px 40px rgba(60,40,10,.25), inset 0 0 0 1px rgba(255,248,220,.5);
+  margin-top: 34px;
+}
+.pk-otg .pk-panel::before {
+  content: '';
+  position: absolute; top: -8px; left: 4%; right: 4%;
+  height: 12px;
+  background: linear-gradient(90deg, #5a3b1a, #9a743f 18%, #6d4f28 50%, #9a743f 82%, #4a3218);
+  border: 1px solid var(--wood-deep);
+  border-radius: 999px;
+  box-shadow: 0 6px 14px rgba(60,40,10,.24);
+}
+.pk-otg .pk-panel h2 {
+  color: var(--banner-red);
+  border-bottom: 1px solid rgba(138,106,52,.4);
+}
+.pk-otg .pk-note { color: #6d5432; }
+.pk-otg .pk-panel p a,
+.pk-otg .pk-facts a,
+.pk-otg .pk-trailer-link a { color: var(--acc); border-color: var(--acc-soft); }
+.pk-otg .pk-panel p a:hover,
+.pk-otg .pk-facts a:hover,
+.pk-otg .pk-trailer-link a:hover { color: var(--banner-red); border-color: var(--banner-red); }
+
+/* fact sheet: a royal decree with a wax seal */
+.pk-otg .pk-facts dt { color: #8a6a34; }
+.pk-otg .pk-facts dd { color: var(--ink-brown); }
+.pk-otg .pk-seal {
+  position: absolute; top: 20px; right: 22px;
+  width: 62px; height: 62px;
+  border-radius: 48% 52% 50% 50% / 52% 48% 52% 48%;
+  background: radial-gradient(circle at 35% 30%, #c65a4e, #8a2f26 60%, #6e211a);
+  box-shadow: inset 0 0 0 5px rgba(255,235,200,.14), inset 0 -6px 10px rgba(50,10,5,.4), 0 5px 12px rgba(60,40,10,.4);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 19px; font-weight: 700;
+  letter-spacing: .06em;
+  color: #f3cfa8;
+  transform: rotate(-9deg);
+  pointer-events: none;
+}
+@media (max-width: 560px) { .pk-otg .pk-seal { display: none; } }
+
+/* marketing copy: quotes penned on the page */
+.pk-otg .pk-copyhead h3 { color: var(--ink-brown); }
+.pk-otg .pk-copytext {
+  background: rgba(255,252,240,.6);
+  border-left: 3px solid var(--banner-red);
+  box-shadow: inset 0 0 24px rgba(140,100,40,.08);
+}
+.pk-otg .pk-features li::before { color: var(--banner-red); }
+.pk-otg .pk-copybtn {
+  color: #f5e9c8;
+  text-shadow: 0 1px 0 rgba(40,20,0,.6);
+  background: linear-gradient(#7a5a2e, #5d431f);
+  border: 1px solid #3c2a12;
+  box-shadow: 0 3px 8px rgba(60,40,10,.35);
+}
+.pk-otg .pk-copybtn:hover { color: #ffe9b8; border-color: #3c2a12; }
+
+/* trailer: behind the gate timbers */
+.pk-otg .pk-trailer {
+  aspect-ratio: auto;
+  padding: clamp(12px, 1.6vw, 20px);
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.22), transparent 12%, transparent 88%, rgba(0,0,0,.28)),
+    repeating-linear-gradient(90deg, #6d4f28 0 42px, #5d411f 42px 84px);
+  border: 3px solid var(--wood-deep);
+  border-radius: 10px 10px 4px 4px;
+  box-shadow: 0 24px 55px rgba(40,25,5,.4), inset 0 2px 0 rgba(255,235,190,.25);
+}
+.pk-otg .pk-trailer .well {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #0d0903;
+  overflow: hidden;
+  border-radius: 6px 6px 0 0;
+}
+.pk-otg .pk-trailer iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.pk-otg .pk-trailer-link { color: #6d5432; }
+
+/* asset groups: plank labels, parchment cards */
+.pk-otg .pk-group h3 {
+  display: table;
+  padding: 7px 20px;
+  color: #f1e3c2;
+  background: linear-gradient(#6d4f28, #4a3218);
+  border: 1px solid var(--wood-deep);
+  border-radius: 3px;
+  box-shadow: 0 3px 8px rgba(60,40,10,.35);
+}
+.pk-otg .pk-group h3 .pk-count { color: #d8c49a; }
+.pk-otg .pk-asset {
+  background: linear-gradient(#fbf1d6, #ecd9ad);
+  border: 1px solid #c9ad72;
+  box-shadow: 0 10px 22px rgba(60,40,10,.2);
+}
+.pk-otg .pk-asset:hover { border-color: var(--banner-red); box-shadow: 0 16px 30px rgba(60,40,10,.3); }
+.pk-otg .pk-thumb {
+  background:
+    radial-gradient(ellipse 80% 80% at 50% 35%, rgba(255,250,232,.7), transparent 75%),
+    #e6d3a4;
+}
+.pk-otg .pk-asset figcaption { border-top: 1px solid #c9ad72; }
+.pk-otg .pk-fname { color: #6d5432; }
+.pk-otg .pk-dl { color: var(--acc); border-color: var(--acc-soft); }
+.pk-otg .pk-dl:hover { color: var(--banner-red); border-color: var(--banner-red); }
+
+/* the herald's footnote between sections */
+.pk-otg .pk-herald {
+  margin: 44px auto 0;
+  max-width: 560px;
+  text-align: center;
+  font-style: italic; font-size: 18px;
+  color: #8a6a34;
+}
+
+/* dark wood footer */
+.pk-otg .colophon { background: linear-gradient(var(--wood-deep), #201406); }
+</style>
+</head>
+<body class="pk pk-otg">
+
+<div class="grain"></div>
+<div class="vignette"></div>
+
+<a class="return-plaque" href="open-the-gates.html"><span class="arrow">⟵</span> Game Page</a>
+
+<!-- ═══════ HERO: the diorama, opened for the press ═══════ -->
+<header class="pk-hero">
+  <div class="sun"></div>
+  <div class="cloud" style="width:130px;height:34px;top:14%;animation-duration:85s;"></div>
+  <div class="cloud" style="width:90px;height:26px;top:26%;animation-duration:110s;animation-delay:-40s;"></div>
+  <div class="cloud" style="width:160px;height:40px;top:7%;left:-10%;animation-duration:140s;animation-delay:-70s;"></div>
+  <div class="mts"><img src="Open%20The%20Gates!/Random%20Items%20From%20The%20Game/Backgrounds/mountains_green_1.png" alt=""></div>
+  <div class="grd"><img src="Open%20The%20Gates!/Random%20Items%20From%20The%20Game/Backgrounds/ground_green.png" alt=""></div>
+  <img class="castle" src="Open%20The%20Gates!/Random%20Items%20From%20The%20Game/castle.png" alt="">
+  <img class="unit u1" src="Open%20The%20Gates!/Random%20Items%20From%20The%20Game/Units/archer_idle.png" alt="">
+  <img class="unit u2" src="Open%20The%20Gates!/Random%20Items%20From%20The%20Game/Units/knight_idle.png" alt="">
+
+  <p class="pk-over">Advonger Games — Press Kit</p>
+  <h1><img src="Open%20The%20Gates!/Cover%20Art/Logo.png" alt="Open The Gates!"></h1>
+  <p class="pk-pitch">A sidescrolling castlebuilder RTS: raise a medieval castle, keep its people happy, survive the siege — then bring one of your own to the enemy's walls.</p>
+  <div class="pk-actions">
+    <button class="pk-btn solid" id="pk-zip">Download all assets (.zip, ~36 MB)</button>
+    <a class="pk-btn" href="https://www.youtube.com/watch?v=AzQaa2pc1uk" target="_blank" rel="noopener">Watch the trailer</a>
+    <a class="pk-btn" href="https://store.steampowered.com/app/1332450/Open_The_Gates/" target="_blank" rel="noopener">Steam page</a>
+  </div>
+  <div class="ledge"></div>
+</header>
+
+<main class="pk-main">
+<div class="pk-inner">
+
+  <!-- ═══════ FACT SHEET + STUDIO ═══════ -->
+  <div class="pk-grid2">
+    <section class="pk-panel">
+      <span class="pk-seal" aria-hidden="true">AG</span>
+      <h2>Fact Sheet</h2>
+      <dl class="pk-facts">
+        <dt>Title</dt><dd>Open The Gates!</dd>
+        <dt>Developer</dt><dd>Advonger Games</dd>
+        <dt>Genre</dt><dd>Sidescrolling castlebuilder RTS</dd>
+        <dt>Platform</dt><dd>PC (Steam)</dd>
+        <dt>Availability</dt><dd><a href="https://store.steampowered.com/app/1332450/Open_The_Gates/" target="_blank" rel="noopener">Available on Steam</a>, with a free demo</dd>
+        <dt>Campaign</dt><dd>Linear single-player campaign, 26+ levels, plus extra siege mode levels</dd>
+        <dt>Trailer</dt><dd><a href="https://www.youtube.com/watch?v=AzQaa2pc1uk" target="_blank" rel="noopener">youtube.com/watch?v=AzQaa2pc1uk</a></dd>
+        <dt>Website</dt><dd><a href="https://advongergames.com" target="_blank" rel="noopener">advongergames.com</a></dd>
+        <dt>Press contact</dt><dd><a href="mailto:advongergames@outlook.com">advongergames@outlook.com</a></dd>
+      </dl>
+    </section>
+    <section class="pk-panel">
+      <h2>About Advonger Games</h2>
+      <p>Advonger Games is an independent studio making handcrafted single-player games, including <em>Open The Gates!</em>, <em>Realms of Madness</em>, <em>Observe</em>, and <em>The Great Exhibition</em>.</p>
+      <p>For interviews, keys, or additional materials, email <a href="mailto:advongergames@outlook.com">advongergames@outlook.com</a>.</p>
+      <p class="pk-note">Everything in this press kit — text, art, and footage — may be used freely in articles, videos, streams, and social posts covering the game.</p>
+    </section>
+  </div>
+
+  <!-- ═══════ TRAILER ═══════ -->
+  <section class="pk-panel">
+    <h2>Official Trailer</h2>
+    <div class="pk-trailer">
+      <div class="well">
+        <iframe src="https://www.youtube-nocookie.com/embed/AzQaa2pc1uk" title="Open The Gates! — official trailer"
+                loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+    </div>
+    <p class="pk-trailer-link">Direct link for embedding or download: <a href="https://www.youtube.com/watch?v=AzQaa2pc1uk" target="_blank" rel="noopener">https://www.youtube.com/watch?v=AzQaa2pc1uk</a></p>
+  </section>
+
+  <!-- ═══════ MARKETING COPY ═══════ -->
+  <section class="pk-panel">
+    <h2>Marketing Copy</h2>
+    <p class="pk-note" style="margin-bottom:22px;">Ready-to-use descriptions, free to quote in whole or in part.</p>
+
+    <div class="pk-copyblock">
+      <div class="pk-copyhead"><h3>One-liner</h3><button class="pk-copybtn" data-copy="copy-oneliner">Copy</button></div>
+      <div class="pk-copytext" id="copy-oneliner">
+        <p>Open The Gates! is a sidescrolling castlebuilder RTS about building, managing, defending, and attacking medieval castles across a 26+ level single-player campaign.</p>
+      </div>
+    </div>
+
+    <div class="pk-copyblock">
+      <div class="pk-copyhead"><h3>Short description</h3><button class="pk-copybtn" data-copy="copy-short">Copy</button></div>
+      <div class="pk-copytext" id="copy-short">
+        <p>Open The Gates! is a sidescrolling castlebuilder RTS. Construct houses and resource buildings, keep your citizens happy, and fortify your walls with towers and traps. Survive enemy sieges, then counterattack with units and powerful siege weapons across a fully voice-acted campaign of more than 26 levels.</p>
+      </div>
+    </div>
+
+    <div class="pk-copyblock">
+      <div class="pk-copyhead"><h3>Long description</h3><button class="pk-copybtn" data-copy="copy-long">Copy</button></div>
+      <div class="pk-copytext" id="copy-long">
+        <p>Open The Gates! is a sidescrolling castlebuilder RTS where every castle is both a home and a fortress. Build houses and resource buildings, manage your economy, and keep your citizens fed and happy — because when the enemy army appears on the horizon, everything you've built is what stands between them and the keep.</p>
+        <p>Raise walls, place towers and traps, and command your units through desperate defenses. Then take the fight back: march on enemy fortresses with soldiers and siege weapons and tear their gates down. A linear single-player campaign of more than 26 levels — plus extra siege mode levels — is carried by a fully voice-acted cast of nobles, jesters, thieves, and monsters, each with their own part to play in the kingdom's story.</p>
+      </div>
+    </div>
+
+    <div class="pk-copyblock">
+      <div class="pk-copyhead"><h3>Key features</h3><button class="pk-copybtn" data-copy="copy-features">Copy</button></div>
+      <div class="pk-copytext" id="copy-features">
+        <ul class="pk-features">
+          <li>Build and manage a living medieval castle: houses, resource buildings, and citizens with needs.</li>
+          <li>Defend your walls with units, towers, and traps — then counterattack with siege weapons.</li>
+          <li>Linear single-player campaign with more than 26 levels, plus extra siege mode levels.</li>
+          <li>A fully voice-acted cast of campaign characters.</li>
+          <li>Free demo available on Steam.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ ASSETS ═══════ -->
+  <section class="pk-panel">
+    <h2>Downloadable Assets</h2>
+    <p class="pk-note">Click a thumbnail to view it full size, or use the download links. The button at the top of the page bundles everything into a single ZIP.</p>
+    <div id="pk-asset-groups"></div>
+  </section>
+
+  <p class="pk-herald">— thus proclaimed, sealed, and nailed to the gate for all heralds, scribes, and town criers to take freely.</p>
+
+</div>
+</main>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="colophon">
+  <img class="mark" src="Advonger_Games_logo.png" alt="">
+  <p class="curator"><a href="open-the-gates.html">⟵ Back to the Open The Gates! page</a> · <a href="index.html">The Archive</a></p>
+  <p class="quiet">Open The Gates! — press kit · Advonger Games</p>
+</footer>
+
+<script>
+window.PRESSKIT = {
+  game: 'Open The Gates!',
+  zipName: 'open-the-gates-presskit',
+  groups: [
+    {
+      title: 'Logo & Key Art',
+      files: [
+        'Open The Gates!/Cover Art/Logo.png',
+        'Open The Gates!/Cover Art/Thumbnail_Full.png',
+        'Open The Gates!/Cover Art/Thumbnail_No_Logo.png',
+        'Open The Gates!/Cover Art/Vertical_Capsule.png',
+        'Open The Gates!/Cover Art/Earliest_Concept_Art.jpg',
+      ],
+    },
+    {
+      title: 'Screenshots & World Map',
+      files: [
+        'Open The Gates!/Screenshot1.jpg', 'Open The Gates!/Screenshot2.jpg',
+        'Open The Gates!/Screenshot3.jpg', 'Open The Gates!/Screenshot4.jpg',
+        'Open The Gates!/Screenshot5.jpg', 'Open The Gates!/Screenshot6.jpg',
+        'Open The Gates!/Screenshot7.jpg', 'Open The Gates!/Screenshot8.jpg',
+        'Open The Gates!/world_map.jpg',
+      ],
+    },
+    {
+      title: 'Character Art',
+      files: [
+        'Open The Gates!/Components & Characters/character_ava.png',
+        'Open The Gates!/Components & Characters/character_emperor.png',
+        'Open The Gates!/Components & Characters/character_advisor.png',
+        'Open The Gates!/Components & Characters/character_jester.png',
+        'Open The Gates!/Components & Characters/character_bullgruf.png',
+        'Open The Gates!/Components & Characters/character_aeries.png',
+        'Open The Gates!/Components & Characters/character_krea.png',
+        'Open The Gates!/Components & Characters/character_krea_ghost.png',
+        'Open The Gates!/Components & Characters/character_ekram.png',
+        'Open The Gates!/Components & Characters/character_ekram_posessed.png',
+        'Open The Gates!/Components & Characters/character_feeble_regular.png',
+        'Open The Gates!/Components & Characters/character_feeble_buff.png',
+      ],
+    },
+    {
+      title: 'Game Art',
+      files: [
+        'Open The Gates!/Random Items From The Game/castle.png',
+        'Open The Gates!/Random Items From The Game/tower_archery.png',
+        'Open The Gates!/Random Items From The Game/tower_catapult.png',
+        'Open The Gates!/Random Items From The Game/house_large.png',
+        'Open The Gates!/Random Items From The Game/Units/archer_idle.png',
+        'Open The Gates!/Random Items From The Game/Units/knight_idle.png',
+      ],
+    },
+    {
+      title: 'Concept & Development Art',
+      files: [
+        'Behind the Scenes/Open The Gates!/sketch_1.png',
+        'Behind the Scenes/Open The Gates!/sketch_2.png',
+        'Behind the Scenes/Open The Gates!/sketch_3.png',
+        'Behind the Scenes/Open The Gates!/sketch_4.jpg',
+        'Behind the Scenes/Open The Gates!/sketch_5.png',
+        'Behind the Scenes/Open The Gates!/animating.png',
+        'Behind the Scenes/Open The Gates!/old_menu.png',
+        'Behind the Scenes/Open The Gates!/image_1.png',
+        'Behind the Scenes/Open The Gates!/image_2.png',
+        'Behind the Scenes/Open The Gates!/image_3.png',
+        'Behind the Scenes/Open The Gates!/image_4.png',
+        'Behind the Scenes/Open The Gates!/image_6.png',
+      ],
+    },
+  ],
+};
+</script>
+<script src="js/presskit.js" defer></script>
+</body>
+</html>
