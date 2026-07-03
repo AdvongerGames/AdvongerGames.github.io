@@ -91,6 +91,17 @@ body.rom .vignette {
   color: rgba(226,216,240,.92);
   text-shadow: 0 2px 14px rgba(0,0,0,.9);
 }
+.rom-hero .devs {
+  margin-top: 14px;
+  font-family: var(--display);
+  font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(226,216,240,.55);
+  text-shadow: 0 2px 14px rgba(0,0,0,.9);
+}
+.rom-hero .devs .devs-label {
+  color: var(--violet);
+  letter-spacing: .3em;
+}
 .rom-hero .descend {
   margin-top: 30px;
   display: inline-flex; flex-direction: column; align-items: center; gap: 10px;
@@ -659,6 +670,7 @@ body.rom .vignette {
   <div class="plaque-row">
     <p class="field-tag">Fantasy Castlebuilder RTS</p>
     <p class="field-note">Build a medieval fantasy castle, expand your economy and upgrades, then lead mythical sea, ground, and sky forces against the enemy stronghold.</p>
+    <p class="devs"><span class="devs-label">Developed by</span> Robin van der Horst</p>
     <a class="descend" href="#scrying">
       <svg viewBox="0 0 20 40" fill="none" stroke="#a98fd6" stroke-width="1.5" aria-hidden="true">
         <path d="M10 2v30M10 38l-3.5-6h7L10 38ZM3 10h14M10 2l-2 4h4l-2-4Z"/>

@@ -99,6 +99,17 @@ body.tge {
   font-style: italic; font-size: 20px; color: rgba(240,225,190,.85);
   animation: logo-settle 1.8s .8s both;
 }
+.tge-hero .devs {
+  margin-top: 14px;
+  font-family: var(--display);
+  font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(240,225,190,.5);
+  animation: logo-settle 1.8s .95s both;
+}
+.tge-hero .devs .devs-label {
+  color: var(--sand);
+  letter-spacing: .3em;
+}
 .tge-hero .descend {
   margin-top: 44px;
   display: inline-flex; flex-direction: column; align-items: center; gap: 8px;
@@ -521,6 +532,7 @@ body.tge {
   <img class="logo" src="The%20Great%20Exhibition/logo.png" alt="The Great Exhibition">
   <p class="field-tag">Museum Curator Adventure</p>
   <p class="field-note">Lead a museum, raid temples of long-lost civilizations, arrange prestigious artifact displays, fund expeditions, and uncover the mystery of Silas Vane.</p>
+  <p class="devs"><span class="devs-label">Developed by</span> Jelle Pahlplatz · Robin van der Horst</p>
   <a class="descend" href="#projection">
     <svg viewBox="0 0 24 34" fill="none" stroke="#e2c98f" stroke-width="1.6" aria-hidden="true">
       <ellipse cx="12" cy="8" rx="5.5" ry="6.5"/><path d="M12 14.5V32M4 20.5h16"/>
