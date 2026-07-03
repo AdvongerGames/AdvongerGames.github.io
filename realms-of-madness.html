@@ -114,6 +114,37 @@ body.rom .vignette {
 .rom-hero .descend svg { width: 15px; animation: sword-sink 2.6s ease-in-out infinite; }
 @keyframes sword-sink { 50% { transform: translateY(8px); } }
 
+/* mobile: the title is baked into the cover art, so on narrow screens
+   show the full 16:9 art as a top banner and drop the text onto a solid
+   panel below instead of letting the two overlap */
+@media (max-width: 680px) {
+  .rom-hero {
+    min-height: auto;
+    justify-content: flex-start;
+    padding: 74px 20px 44px;
+    background: #0d0a1c;
+  }
+  .rom-hero .bg {
+    position: relative;
+    inset: auto; z-index: 0;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-position: center;
+    animation: none;
+    margin-bottom: 22px;
+    border: 1px solid rgba(169,143,214,.28);
+    box-shadow: 0 18px 44px rgba(0,0,0,.6);
+  }
+  .rom-hero .water,
+  .rom-hero .tint { display: none; }
+  .rom-hero .plaque-row {
+    margin-bottom: 0;
+    padding: 0;
+    background: none;
+  }
+  .rom-hero .field-note { font-size: 18px; }
+}
+
 /* ------------------------------------------------ sections */
 .rom section { padding: 15vh 24px; position: relative; }
 
