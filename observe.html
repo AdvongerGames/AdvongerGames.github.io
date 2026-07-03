@@ -149,6 +149,24 @@ body.obs main, body.obs header { animation: station-jump 14s steps(1) infinite; 
 .obs-hero .descend .chevrons { animation: chev-drop 2s ease-in-out infinite; display: inline-block; }
 @keyframes chev-drop { 50% { transform: translateY(6px); } }
 
+/* mobile: the bright pixel-art feed collides with the copy, so dim it and
+   sink the lower half into near-solid dark where the text sits */
+@media (max-width: 680px) {
+  .obs-hero {
+    min-height: 92vh;
+    padding: 84px 20px 8vh;
+  }
+  .obs-hero .feed { filter: brightness(.72) saturate(.92); }
+  .obs-hero .feed-shade {
+    background:
+      linear-gradient(rgba(6,4,4,.4), rgba(6,4,4,.18) 24%, rgba(6,4,4,.86) 48%, rgba(6,4,4,.98) 74%);
+  }
+  .obs-hero .osd-top { top: 78px; font-size: 15px; letter-spacing: .1em; }
+  .obs-hero .subject .line1 { font-size: 15px; letter-spacing: .22em; }
+  .obs-hero .subject .brief { font-size: 17px; margin-top: 14px; }
+  .obs-hero .descend { margin-top: 30px; font-size: 15px; }
+}
+
 /* ------------------------------------------------ sections */
 .obs section { padding: 14vh 24px; position: relative; }
 
