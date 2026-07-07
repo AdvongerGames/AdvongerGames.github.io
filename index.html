@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advonger Games</title>
+<title>Advonger Games | Independent Game Studio</title>
 <meta name="description" content="Advonger Games is an independent game studio creating handcrafted strategy, puzzle, and adventure games for Steam, including Realms of Madness and Open The Gates!.">
 <meta name="author" content="Advonger Games">
 <meta name="application-name" content="Advonger Games">
+<meta name="theme-color" content="#0c0a08">
 <link rel="canonical" href="https://advongergames.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Advonger Games">
@@ -32,6 +33,8 @@
 }
 </script>
 <link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="css/archive.css">
 <script src="js/archive-transitions.js" defer></script>
 <style>
@@ -230,6 +233,11 @@ body.home {
   padding: 54px clamp(22px, 5vw, 60px);
   cursor: pointer;
   outline: none;
+}
+/* keyboard visitors get a faint brass frame around the exhibit under focus */
+.exhibit:focus-visible {
+  outline: 1px solid rgba(201,163,92,.5);
+  outline-offset: -14px;
 }
 /* engraved divider between exhibits */
 .exhibit + .exhibit::after {
@@ -1114,7 +1122,7 @@ body.home {
 <header class="entrance">
   <div class="shaft"></div>
   <div class="floorglow"></div>
-  <img class="mark" src="Advonger_Games_logo.png" alt="Advonger Games">
+  <img class="mark" src="Advonger_Games_logo.png" alt="Advonger Games" fetchpriority="high">
   <p class="studio">The Advonger Archive</p>
   <h1>Advonger<br>Games</h1>
   <p class="creed">Four Steam games from the independent studio:<br>
@@ -1138,7 +1146,7 @@ body.home {
       <div class="ex-object" data-depth="14">
         <div class="case">
           <div class="glass">
-            <img src="The%20Great%20Exhibition/shortcut_icon.png" alt="A lost-temple entrance from The Great Exhibition">
+            <img src="The%20Great%20Exhibition/shortcut_icon.png" alt="A lost-temple entrance from The Great Exhibition" loading="lazy" decoding="async">
             <canvas class="sand" id="sand-canvas" aria-hidden="true"></canvas>
           </div>
           <div class="sill"></div>
@@ -1163,14 +1171,14 @@ body.home {
         <div class="painting">
           <div class="frame">
             <div class="canvas-wrap">
-              <img src="Realms%20of%20Madness/Cover%20Art/Realms-1920x1080.jpg" alt="A fantasy castle battle scene from Realms of Madness">
+              <img src="Realms%20of%20Madness/Cover%20Art/Realms-1920x1080.jpg" alt="A fantasy castle battle scene from Realms of Madness" loading="lazy" decoding="async">
               <svg class="dragon" viewBox="0 0 100 60" aria-hidden="true">
                 <path fill="rgba(8,4,16,.85)" d="M50 34c-4-2-7-6-8-11-3 4-9 6-15 5 5 3 8 6 9 9-8-1-9-1-10 0-8-4-16-4-24-1 10 1 17 4 22 9 4 4 9 6 15 5l4 8 3-8c6 0 11-2 14-6 5 5 12 8 21 8-7-3-12-7-14-12-1-1-9-4-13-4-1 0-3-1-4-2z"/>
               </svg>
             </div>
           </div>
           <div class="pool" aria-hidden="true">
-            <img src="Realms%20of%20Madness/Cover%20Art/Realms-1920x1080.jpg" alt="">
+            <img src="Realms%20of%20Madness/Cover%20Art/Realms-1920x1080.jpg" alt="" loading="lazy" decoding="async">
           </div>
         </div>
       </div>
@@ -1219,13 +1227,13 @@ body.home {
     <div class="ex-stage">
       <div class="ex-object" data-depth="9">
         <div class="diorama">
-          <img class="banner" src="Open%20The%20Gates!/Cover%20Art/Logo.png" alt="">
+          <img class="banner" src="Open%20The%20Gates!/Cover%20Art/Logo.png" alt="" loading="lazy" decoding="async">
           <div class="box">
-            <div class="layer mts"><img src="Open%20The%20Gates!/Random%20Items%20From%20The%20Game/Backgrounds/mountains_green_1.png" alt=""></div>
-            <div class="layer grd"><img src="Open%20The%20Gates!/Random%20Items%20From%20The%20Game/Backgrounds/ground_green.png" alt=""></div>
-            <img class="castle" src="Open%20The%20Gates!/Random%20Items%20From%20The%20Game/castle.png" alt="A castle from the sidescrolling RTS Open The Gates!">
-            <img class="peek" src="Open%20The%20Gates!/Components%20%26%20Characters/character_jester.png" alt="">
-            <img class="peek2" src="Open%20The%20Gates!/Components%20%26%20Characters/character_bullgruf.png" alt="">
+            <div class="layer mts"><img src="Open%20The%20Gates!/Random%20Items%20From%20The%20Game/Backgrounds/mountains_green_1.png" alt="" loading="lazy" decoding="async"></div>
+            <div class="layer grd"><img src="Open%20The%20Gates!/Random%20Items%20From%20The%20Game/Backgrounds/ground_green.png" alt="" loading="lazy" decoding="async"></div>
+            <img class="castle" src="Open%20The%20Gates!/Random%20Items%20From%20The%20Game/castle.png" alt="A castle from the sidescrolling RTS Open The Gates!" loading="lazy" decoding="async">
+            <img class="peek" src="Open%20The%20Gates!/Components%20%26%20Characters/character_jester.png" alt="" loading="lazy" decoding="async">
+            <img class="peek2" src="Open%20The%20Gates!/Components%20%26%20Characters/character_bullgruf.png" alt="" loading="lazy" decoding="async">
           </div>
           <div class="stand"></div>
           <svg class="windkey" id="windkey" viewBox="0 0 44 44" role="button" tabindex="0" aria-label="Wind the castle siege diorama">
@@ -1336,7 +1344,7 @@ body.home {
 
 <!-- ═══════════════════ COLOPHON ═══════════════════ -->
 <footer class="colophon">
-  <img class="mark" src="Advonger_Games_logo.png" alt="">
+  <img class="mark" src="Advonger_Games_logo.png" alt="" loading="lazy">
   <p class="curator">Advonger Games - Strategy, Puzzle, and Adventure</p>
   <p class="quiet">Explore the Steam lineup: Realms of Madness, Open The Gates!, Observe, and The Great Exhibition.</p>
 </footer>
