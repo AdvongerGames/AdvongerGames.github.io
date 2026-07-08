@@ -70,6 +70,12 @@ body.rom .vignette {
   animation: rom-drift 30s ease-in-out infinite alternate;
 }
 @keyframes rom-drift { from { transform: scale(1.03); } to { transform: scale(1.1) translateY(1%); } }
+/* The title is baked into the key art. On screens wider than 16:9 the cover-crop
+   zooms the art enough to drop that title onto the caption below; lift the art in
+   graded steps so the baked title always clears the text. */
+@media (min-aspect-ratio: 1.85/1) { .rom-hero .bg { background-position: center 40%; } }
+@media (min-aspect-ratio: 2.1/1)  { .rom-hero .bg { background-position: center 46%; } }
+@media (min-aspect-ratio: 2.3/1)  { .rom-hero .bg { background-position: center 50%; } }
 /* the water: the same sky, drowned */
 .rom-hero .water {
   position: absolute; left: 0; right: 0; bottom: 0; height: 20%; z-index: -1;
