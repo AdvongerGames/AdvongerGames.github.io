@@ -138,6 +138,13 @@ body.rom .vignette {
   color: var(--violet);
   letter-spacing: .3em;
 }
+.rom-hero .devs .credit-line {
+  display: block;
+  margin-top: 6px;
+}
+.rom-hero .devs .credit-line:first-child {
+  margin-top: 0;
+}
 .rom-hero .descend {
   margin-top: 30px;
   display: inline-flex; flex-direction: column; align-items: center; gap: 10px;
@@ -737,7 +744,11 @@ body.rom .vignette {
   <div class="plaque-row">
     <p class="field-tag">Fantasy Castlebuilder RTS</p>
     <p class="field-note">Build a medieval fantasy castle, expand your economy and upgrades, then lead mythical sea, ground, and sky forces against the enemy stronghold.</p>
-    <p class="devs"><span class="devs-label">Developed by</span> Robin van der Horst</p>
+    <p class="devs">
+      <span class="credit-line"><span class="devs-label">Developed by</span> Robin van der Horst</span>
+      <span class="credit-line"><span class="devs-label">Art by</span> Hanna Habela</span>
+      <span class="credit-line"><span class="devs-label">Music by</span> Geraint Downing</span>
+    </p>
     <a class="descend" href="#scrying">
       <svg viewBox="0 0 20 40" fill="none" stroke="#a98fd6" stroke-width="1.5" aria-hidden="true">
         <path d="M10 2v30M10 38l-3.5-6h7L10 38ZM3 10h14M10 2l-2 4h4l-2-4Z"/>
