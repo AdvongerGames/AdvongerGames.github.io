@@ -319,6 +319,60 @@ body.obs main, body.obs header { animation: station-jump 14s steps(1) infinite; 
   white-space: nowrap;
 }
 
+/* walkthrough transmission */
+.obs .walkthrough-terminal {
+  width: min(760px, 92vw);
+  margin: 60px auto 0;
+  padding: clamp(24px, 4vw, 42px);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  background:
+    repeating-linear-gradient(rgba(255,255,255,0) 0 3px, rgba(255,255,255,.025) 3px 5px),
+    radial-gradient(ellipse 80% 120% at 50% 0%, rgba(179,36,29,.16), transparent 65%),
+    #090404;
+  border: 1px solid rgba(179,36,29,.55);
+  box-shadow: 0 26px 70px rgba(0,0,0,.7), inset 0 0 40px rgba(179,36,29,.06);
+}
+.obs .walkthrough-terminal::before {
+  content: 'ASSISTANCE TRANSMISSION';
+  display: block;
+  margin-bottom: 20px;
+  color: rgba(255,74,60,.75);
+  font-family: var(--mono);
+  font-size: 15px;
+  letter-spacing: .24em;
+}
+.obs .walkthrough-terminal p {
+  max-width: 590px;
+  margin: 0 auto;
+  color: rgba(233,223,210,.72);
+  font-family: var(--mono);
+  font-size: clamp(17px, 2vw, 20px);
+  line-height: 1.55;
+}
+.obs .walkthrough-link {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 13px 22px;
+  color: var(--phos);
+  background: rgba(179,36,29,.16);
+  border: 1px solid rgba(255,74,60,.72);
+  font-family: var(--mono);
+  font-size: 17px;
+  letter-spacing: .1em;
+  text-decoration: none;
+  box-shadow: 0 0 20px rgba(179,36,29,.12);
+  transition: color .25s, background .25s, box-shadow .25s, transform .25s;
+}
+.obs .walkthrough-link:hover,
+.obs .walkthrough-link:focus-visible {
+  color: #fff;
+  background: rgba(179,36,29,.34);
+  box-shadow: 0 0 28px rgba(255,74,60,.24);
+  transform: translateY(-2px);
+}
+
 /* requisition terminal (steam) */
 .obs .terminal {
   margin-top: 60px;
@@ -617,6 +671,19 @@ body.obs main, body.obs header { animation: station-jump 14s steps(1) infinite; 
     </div>
   </div>
   <p class="trailer-link reveal d2"><a href="https://www.youtube.com/watch?v=1S4LxchTAlQ" target="_blank" rel="noopener">Watch trailer on YouTube</a></p>
+</section>
+
+<!-- ═══════ WALKTHROUGH ═══════ -->
+<section>
+  <div class="hall-heading reveal">
+    <span class="over">Full Game Walkthrough</span>
+    <h2>Stuck in a Puzzle Room?</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="walkthrough-terminal reveal d1">
+    <p>Watch a complete playthrough of Observe, room by room. Use it as a walkthrough whenever you need a hint or want to see the rest of the game.</p>
+    <a class="walkthrough-link" href="https://www.youtube.com/playlist?list=PL6DpC2yJS6hTD8Lh5-PtcC6pcZ2iwl_j3" target="_blank" rel="noopener">OPEN WALKTHROUGH ON YOUTUBE &#8599;</a>
+  </div>
 </section>
 
 <!-- ═══════ STEAM ═══════ -->
